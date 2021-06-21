@@ -1,0 +1,12 @@
+C:\laragon\www\outro-quarto  
+λ php artisan passport:install
+
+Encryption keys generated successfully.
+
+Personal access client created successfully.
+
+Client ID: 1
+Client secret: brznLFcC0Fmvvw66YmNSj6QoizzB0J8zREKv0akG
+Password grant client created successfully.
+Client ID: 2
+Client secret: cNK6MTo7xV3XkMibzFm2HTTIeqgmx6PEuTFFo6DH

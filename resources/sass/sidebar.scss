@@ -1,0 +1,96 @@
+body {
+    background: $background-color;
+    transition: background .5s;
+  }
+  //Troquei o ID de #app para #my-panel
+  /* #app {
+    margin-left: 300px;
+    transition: margin-left .5s;
+    transition: margin-right .5s;
+    //padding: 20px;
+  } */
+  #my-navBar{    
+    z-index: 1;
+  }
+  #my-panel {
+    margin-left: 300px;
+    transition: margin-left .5s;
+    transition: margin-right .5s;
+    //padding: 20px; //estava a criar um padding para todos elementos
+  }
+  .navMenu {
+    font-family: $font-family-sans-serif;
+    height: 100%;
+    //width: 0; // tirei porq queria comecar ela ja vista 
+    width: 300px;
+    position: fixed;
+    z-index: -1; //Este serve para colocar a posicao dos elementos, tipo no ms word Bring in front, order in back... O problema eh que os links nao funcionam porque estao por detras. 
+    z-index: 0;
+    top: 0; // Estava colocar 0 top ate ao menu
+    background: $menu-background;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    .listner {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+        border-radius: 0.125rem;
+    }
+    .list-group {
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        background-color: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: $menu-text;
+      display: block;
+      transition: 0.3s;
+      &:hover {
+        color: $menu-text-hover;
+      }
+    }
+    .iconImage{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      padding: 0 5px;
+    }
+    .closebtn {
+      color: #ffffff!important;
+      margin-left: 28px;
+    }
+    .avatar{
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+    }
+    /* .avatar-div{
+      display: flex;
+      justify-content: start;
+      align-items: center!important;
+    } */
+   /*  .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    } */
+  }
+  @media screen and (max-height: 450px) {
+    .navMenu {
+      padding-top: 15px;
+      a {
+        font-size: 18px;
+      }
+    }
+  } 

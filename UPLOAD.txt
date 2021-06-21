@@ -1,0 +1,13 @@
+- Verificar no servidor se o usuario tem todos acessos (Hostgator)
+- Instalar o Manifest (para isso eu apenas fiz o "npm run production ou npm run build) mais aqui https://stackoverflow.com/questions/45153738/the-mix-manifest-does-not-exist-when-it-does-exist
+- Aplicar o php artisan config:clear depois de configurar o shared database no cpanel
+- Criar um arquivo htaccess no ponto principal para buscar a paste public com index.php vrja mais:https://www.youtube.com/watch?v=WN2hHvxMHTI
+
+Arquivo htaccess https://codeconia.com/2020/11/17/host-laravel-8-project-on-cpanel-easiest-way/
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+Espero que funcione!
