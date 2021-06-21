@@ -361,6 +361,7 @@
   "schedulEmail": "Email",
   "schedulLink": "Link da casa",
   "schedulCreatedAt": "Criado em",
+  "schedulpayment": "Data de pagamento",
   "schedulStatus": "Estado",
   "schedulStatus_resolved": "Resolvido",
   "schedulStatus_pending": "Pendente",
@@ -425,6 +426,7 @@
   "mypanel_f": "M",
   "mypanel_s": "V",
   "mypanel_action": "Acção",
+  "mypanel_Download": "Baixar",
 
 
   "mypanel_verification_1": "Valor fixo por dia",
@@ -465,7 +467,7 @@
 
   "mypanel_assestment_link": "Id da Casa",
   "mypanel_assestment_assessment": "Avaliação",
-  "mypanel_assestment_number": "Número",
+  "mypanel_assestment_number": "Valor",
 
   "myadmin": "Painel de administração",
   "myadmin_verify_payments": "Pagamentos",

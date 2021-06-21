@@ -70,7 +70,8 @@ class ScheduleServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = ScheduleService::findOrFail($id);
+        $delete->delete();
     }
 
 

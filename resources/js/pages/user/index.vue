@@ -9,7 +9,7 @@
         {'id': 2, 'text': $t('home_payment'), 'name': 'user.payments', 'icon': 'money bill alternate outline icon'},
         {'id': 3, 'text': $t('home_assessment'), 'name': 'user.assessments', 'icon': 'star outline icon'},
         {'id': 4, 'text': $t('home_favorite'), 'name': 'user.favourites', 'icon': 'heart icon'},
-        {'id': 5, 'text': $t('home_history'), 'name': 'user.histories', 'icon': 'history icon'},        
+        {'id': 5, 'text': $t('home_history'), 'name': 'user.histories', 'icon': 'history icon'},
       ]"
       :avatar="user.photo"
       :username="user.name"
@@ -45,7 +45,7 @@
                     <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;<router-link :to="{  name: 'user.welcome' }">{{ $t('mypanel_menu_dashboard') }}</router-link>&nbsp;/&nbsp;</p>
                     <p class="text-primary mb-0 hover-cursor text-capitalize" v-for="(tag, index) in $route.name.split('.')" :key="tag"> <span v-if="index == 1">{{ tag }}</span></p>
                   </div>
-                </div>                
+                </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
                     <form action="" class="form-inline">
                       <input class="form-control mr-sm-2 " type="search" :placeholder="$t('search_for')" aria-label="Search">
