@@ -365,6 +365,7 @@
   "schedulEmail": "Email",
   "schedulLink": "House Link",
   "schedulCreatedAt": "Created at",
+  "schedulpayment": "Date of payment",
   "schedulStatus": "Status",
   "schedulStatus_resolved": "Resolved",
   "schedulStatus_pending": "Pending",
@@ -429,6 +430,7 @@
   "mypanel_f": "F",
   "mypanel_s": "S",
   "mypanel_action": "Action",
+  "mypanel_Download": "Download",
   
   "mypanel_verification_1": "Amount per day",
   "mypanel_verification_2": "Required days",
@@ -468,7 +470,7 @@
   
   "mypanel_assestment_link": "House ID",
   "mypanel_assestment_assessment": "Assessments",
-  "mypanel_assestment_number": "Number",
+  "mypanel_assestment_number": "Value",
 
 
   

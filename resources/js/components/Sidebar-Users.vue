@@ -2,27 +2,21 @@
   <div>
     <!-- Nav Links -->
     <nav class="navMenu" :style="[userStyles.navMenu, menuDirection, menuWidth]">
-        <div class="iconImage">          
+        <div class="iconImage">
             <img src="/images/logo/200x48W.png" alt="Logo" class="image">
             <a href="javscript:void(0)" class="closebtn" @click.prevent="closeMenu"><i class="window close icon"></i></a>
         </div>
         <hr>
       <template v-if="links.length">
             <div class="container">
-                <div class="d-flex justify-content-lg-start align-items-center avatar-div">
-                  <router-link  :to="{ name: 'user.profile' }" class="p-0 m-0">
-                    <img src="/images/profile/user-default.png" alt="Avatar" class="avatar" v-if="!avatar">
-                    <img :src="avatar" alt="Avatar" class="avatar"   v-else >
+              <div class="m-4">
+                  <router-link :to="{ name: 'settings.profile' }" class="p-0 m-0">
+                    <h3 v-text="username" class="text-uppercase text-white my-0 py-0"></h3>
                   </router-link>
-                    <div class="mx-2">
-                        <router-link  :to="{ name: 'user.profile' }" class="p-0 m-0">
-                          <h4 v-text="username" class="text-uppercase text-white my-0 py-0"></h4>
-                        </router-link>
-                        <p class="p-0 m-0 font-weight-bold text-capitalize" v-if="city != ''">{{ city }}, {{ country }}</p>
-                        <p class="p-0 m-0 font-weight-bold" v-else>Luanda, Angola</p>
-                        <span class="badge badge-pill badge-light" v-text="status"></span>
-                    </div>
-                </div>
+                  <p class="p-0 m-0 font-weight-bold text-capitalize" v-if="city != ''">{{ city }}, {{ country }}</p>
+                  <p v-else class="p-0 m-0 font-weight-bold"> Luanda, Angola</p>
+                  <span class="badge badge-pill badge-light" v-text="status"></span>
+              </div>
             </div>
                 <hr>
             <div class="container">
@@ -73,7 +67,7 @@
     </nav>
     <!-- Hamburger Menu -->
     <nav class="navIcon" :style="[userStyles.navIcon, iconDirection]">
-         <sui-button icon="bars"  @click.prevent="toggleMenu" data-test-ref="navMenuLink"/>
+         <sui-button icon="bars" @click.prevent="toggleMenu" data-test-ref="navMenuLink"/>
          
             
       <!-- <a href="javscript:void(0)" @click.prevent="toggleMenu" data-test-ref="navMenuLink">
