@@ -12,6 +12,20 @@
     </div>
   <div class="row justify-content-md-center">
   <div class="col-10">
+    <div class="d-flex justify-content-center" v-if="histories.length <= 0">                 
+        <transition name="fade">
+        <sui-message
+            v-if="visible"
+            header="Welcome back!"
+            content="This is a special notification which you can dismiss."
+            dismissable
+            @dismiss="handleDismiss"
+        />
+        </transition>
+        <p v-if="!visible">
+        Message will come back in 2s
+        </p>
+    </div>
   <sui-table basic="very">
     <sui-table-header>
       <sui-table-row>
@@ -37,22 +51,6 @@
     </sui-table-body>
   </sui-table>
   </div>
-    <div class="col-md-8">
-    <div class="d-flex justify-content-center" v-if="histories.length <= 0">                 
-        <transition name="fade">
-        <sui-message
-            v-if="visible"
-            header="Welcome back!"
-            content="This is a special notification which you can dismiss."
-            dismissable
-            @dismiss="handleDismiss"
-        />
-        </transition>
-        <p v-if="!visible">
-        Message will come back in 2s
-        </p>
-    </div>
-    </div>
   </div>
   </div>
 </template>
