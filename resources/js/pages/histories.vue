@@ -1,15 +1,13 @@
 <template>
   <div class="container">
     <div class="row mb-3 justify-content-between align-items-center px-3">
-      <h3 class="text-muted">{{ $t("schedulVisits") }}</h3>
-      
+      <h3 class="text-muted">
+        {{ $t("userpanel_history") }}
+      </h3>
       <sui-menu compact>
-      <router-link  is="sui-menu-item" :to="{ name: 'my-panel.scheduling' }" size="tiny">
-          <sui-icon name="bell outline" /> {{ $t('scheduled') }}
-          <sui-label color="red" floating>
-            {{ schedules }}
-          </sui-label>
-      </router-link>
+        <router-link is="sui-menu-item" :to="{ name: 'user.welcome' }" size="tiny">
+          {{ $t('mypanel_back') }}
+        </router-link>
       </sui-menu>
     </div>
   <div class="row justify-content-md-center">
@@ -61,40 +59,53 @@
 
 <script>
 export default {
-  name: 'my-panel.schedules',
+  name: 'user.histories',
   data(){
         return{
             histories: {},
             visible: true 
         }
     }, 
-    methods:{
-        viewHouse(house_code)
-        {
-            this.$router.push('view/' + house_code)
-            axios.post('api/create-history/' + house_code).then(() => {
-                console.log("added to history")
-            })
-        },
-        //IF THERE IS NOTHING 
-        handleDismiss() {
-            this.visible = false;
-            setTimeout(() => {
-                this.visible = true;
-            }, 2000);
-        },
-        async loadHouses() {
-            try {
-                const response = await fetch('api/favourites-houses')
-                const result = await response.json()
-                this.favourites = result
-            }catch (error){
-                console.log(error)
-            }             
-        },
+    mounted () {
+    this.loadHouses()
+    Fire.$on('AfterCreated', () => {
+      this.loadHouses()
+    })
+  },
+  methods: {
+    viewHouse (houseCode) {
+      this.$router.push('view/' + houseCode)
+      axios.post('api/create-history/' + houseCode).then(() => {
+        console.log('added to history')
+      })
     },
-    mounted(){
-        this.loadHouses();
+    // IF THERE IS NOTHING
+    handleDismiss () {
+      this.visible = false
+      setTimeout(() => {
+        this.visible = true
+      }, 2000)
+    },
+    async loadHouses () {
+      try {
+        const response = await fetch('/api/histories-houses')
+        const result = await response.json()
+        this.histories = result
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    getResults (page = 1) {
+      axios.get('/api/histories-houses/?page=' + page).then((response) => {
+        this.histories = response.data
+      })
+    },
+    deleteHistory (id) {
+      Fire.$emit('AfterCreated')
+      axios.post('/api/delete-history/' + id).then(() => {
+        console.log('Deleted')
+      })
     }
+  }
 };
 </script>
