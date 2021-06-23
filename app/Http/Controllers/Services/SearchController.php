@@ -23,9 +23,7 @@ class SearchController extends Controller
         }elseif($request->type)
         {
             return Announce::where('city', $request->city)->get();
-        } */
-
-        
+        } */        
     }
     public function findHouse($houseKey)
     {

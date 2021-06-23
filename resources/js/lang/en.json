@@ -385,6 +385,7 @@
 
   "search_for": "Search for: houses, apartments, hotels, rooms, lodges",
   "search_uncheck": "Uncheck all",
+  "search_filter": "Filter the search:",
   "search_house_state": "Property status",
   "search_province": "Province",
   "search_house_period": "Period",

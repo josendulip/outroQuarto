@@ -5,7 +5,7 @@ function page (path) {
 export default [
   { path: '/', name: 'welcome', component: page('welcome.vue') },
 
-  {path: '/search', name: 'search.house', component: page('search.vue') },
+  { path: '/search', name: 'search.house', component: page('search.vue') },
   { path: '/find/:houseKey', name: 'find.houser', component: page('find.vue') },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
@@ -16,19 +16,18 @@ export default [
   { path: '/email/verify/:id', name: 'verification.verify', component: page('auth/verification/verify.vue') },
   { path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue') },
 
-  
   { path: '/services', name: 'services', component: page('services.vue') },
   { path: '/collaborate', name: 'collaborate', component: page('collaborate.vue') },
-  //{ path: '/announce', name: 'announce', component: page('announce.vue') },
+  // { path: '/announce', name: 'announce', component: page('announce.vue') },
   { path: '/my-panel', name: 'my-panel', component: page('myPanel.vue') },
-  //{ path: '/edit/:house_code', name: 'edit.my.house', component: page('editMyHouse.vue') },
+  // { path: '/edit/:house_code', name: 'edit.my.house', component: page('editMyHouse.vue') },
 
   { path: '/home', name: 'home', component: page('home.vue') },
   { path: '/view/:house_code', name: 'view.houser', component: page('view.vue') },
   /* {path: '/search', name: 'search.home', component: page('search-home.vue') }, */
-  {path: '/favourites', name: 'favourites', component: page('favourites.vue') },
-  {path: '/histories', name: 'histories', component: page('histories.vue') },
-  
+  { path: '/favourites', name: 'favourites', component: page('favourites.vue') },
+  { path: '/histories', name: 'histories', component: page('histories.vue') },
+
   {
     path: '/settings',
     component: page('settings/index.vue'),
@@ -103,6 +102,6 @@ export default [
 
   { path: '/work-with-us', name: 'user.workwithus', component: page('user/workwithus.vue') },
   { path: '/announce', name: 'user.announce', component: page('user/announce.vue') },
-  
+
   { path: '*', component: page('errors/404.vue')}
 ]
