@@ -18,11 +18,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link :to="{ name: 'services' }" class="nav-link">{{
-              $t("services")
-            }}</router-link>
+            <router-link :to="{ name: 'services' }" class="nav-link">
+              {{ $t("services") }}
+            </router-link>
           </li>
-          <li class="nav-item">
+          <li v-if="user.role === 'user'" class="nav-item">
             <router-link :to="{ name: 'user.workwithus' }" class="nav-link">{{
               $t("collaborate")
             }}</router-link>
@@ -37,12 +37,12 @@
               $t("myadmin")
             }}</router-link>
           </li>
-          <li class="nav-item"  v-if="user.role === 'user'">
+          <li class="nav-item" v-if="user.role === 'user'">
             <router-link :to="{ name: 'user.announce' }" class="nav-link">{{
               $t("home_announce")
             }}</router-link>
           </li>
-          <li class="nav-item"  v-if="user.role === 'user'">
+          <li class="nav-item" v-if="user.role === 'user'">
             <sui-dropdown :text="$t('activities')" item class="simple nav-link">
               <sui-dropdown-menu>
                 <template>
