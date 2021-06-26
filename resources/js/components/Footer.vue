@@ -40,7 +40,9 @@
           </div>
 
           <div class=" col-sm-4 col-md  col-12 col">
-            <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu3_footer') }}</h5>
+            <h5 class="headin5_amrc col_white_amrc pt2">
+              {{ $t('menu3_footer') }}
+            </h5>
 
             <ul class="footer_ul2_amrc">
               <li><a href="https://www.facebook.com/outroquarto/" target="_blank"><i class="mdi mdi-facebook-box fleft padding-right" /> </a><p>{{ $t('facebook_footer') }} <a href="https://www.facebook.com/outroquarto/" target="_blank">www.facebook.com/outroquarto/</a></p></li>
@@ -69,6 +71,7 @@
 </template>
 <script>
 export default {
+  // eslint-disable-next-line vue/component-definition-name-casing
   name: 'footer_name'
 }
 </script>
@@ -110,5 +113,4 @@ export default {
     .social_footer_ul li { padding-left:20px; padding-top:10px; float:left; }
     .social_footer_ul li a { color:#CCC; border:1px solid #CCC; padding:8px;border-radius:50%;}
     .social_footer_ul li i {  width:20px; height:20px; text-align:center;}
-
 </style>

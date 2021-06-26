@@ -81,7 +81,6 @@
         </div>
       </div>
     </div>
-    
     <!-- Header -->
     <div class="container">
       <p class="h2 text-center py-5">
@@ -169,7 +168,7 @@
       </div>
       <!-- <Complement></Complement> -->
     </div>
-    <div class="container-fluid p-5 text-center" style="background-color: #ced4da">
+    <div class="container-fluid p-5 text-center gr-1">
       <div class="text-center">
         <p class="display-4">
           {{ $t('welcome_suggest') }}
@@ -181,7 +180,7 @@
     </div>
     <div class="container-fluid backgroundImage">
       <div class="row">
-        <div class="col-lg-5 d-flex justify-content-center align-items-center shadow card-transform">
+        <div class="col-lg-5 d-flex justify-content-center align-items-center shadow card-transform  hidden-xs-down hidden-sm-down">
           <div class="text-white">
             <h4 class="display-3">
               {{ $t('collaborate_head2') }}
@@ -192,66 +191,91 @@
           </div>
         </div>
         <div class="col-lg-7 ml-0 pl-0 d-flex justify-content-center align-items-center">
-          <!-- <div class="text-white">
-            <h4 class="h1">
-              {{ $t('collaborate_head1') }}
-            </h4>
-            <p class="h3  bd-highlight">
-              {{ $t('collaborate_phrase1') }}
-            </p>
-          </div> -->
+          <div class="row align-middle d-md-none mb-5">
+            <div class="col-md-6 col-lg-4 column">
+              <div class="card myCard rounded-radius gr-1">
+                <div class="txt">
+                  <h1>
+                    {{ $t('collaborate_head1') }} <br>
+                    {{ $t('collaborate_head1-2') }}
+                  </h1>
+                  <p>{{ $t('collaborate_phrase1') }}</p>
+                </div>
+                <a href="/login">{{ $t('collaborate_form_more') }}</a>
+                <div class="ico-card">
+                  <i class="clone outline icon" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 column">
+              <div class="card myCard rounded-radius gr-2">
+                <div class="txt">
+                  <h1>{{ $t('collaborate_head3') }} <br> {{ $t('collaborate_head3-1') }}</h1>
+                  <p>{{ $t('collaborate_phrase3') }}</p>
+                </div>
+                <a href="/login">{{ $t('collaborate_form_more') }}</a>
+                <div class="ico-card">
+                  <i class="folder open outline icon" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4 column">
+              <div class="card myCard rounded-radius gr-3">
+                <div class="txt">
+                  <h1>{{ $t('collaborate_head4') }} <br> {{ $t('collaborate_head4-1') }}</h1>
+                  <p>{{ $t('collaborate_phrase4') }}</p>
+                </div>
+                <a href="/login">{{ $t('collaborate_form_more') }}</a>
+                <div class="ico-card">
+                  <i class="folder outline icon" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="container my-5">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="row">
-            <div class="col-lg-6 mb-4">
-              <sui-card class=" rounded-radius py-5 shadow main-red text-white">
-                <sui-card-content>
-                  <sui-container text-align="justified">
-                    <p class="h3">{{ $t('collaborate_head1') }}</p>
-                    <p>{{ $t('collaborate_phrase1') }}</p>
-                  </sui-container>
-                </sui-card-content>
-              </sui-card>
+    <div class="container">
+      <div class="row align-middle hidden-xs-down hidden-sm-down">
+        <div class="col-md-6 col-lg-4 column">
+          <div class="card myCard rounded-radius gr-1">
+            <div class="txt">
+              <h1>
+                {{ $t('collaborate_head1') }} <br>
+                {{ $t('collaborate_head1-2') }}
+              </h1>
+              <p>{{ $t('collaborate_phrase1') }}</p>
             </div>
-            <div class="col-lg-6 mb-4">
-              <sui-card class=" rounded-radius py-5 shadow">
-                <sui-card-content>
-                  <sui-container text-align="justified">
-                    <p class="h3">{{ $t('collaborate_head2') }}</p>
-                    <p>{{ $t('collaborate_phrase2') }}</p>
-                  </sui-container>
-                </sui-card-content>
-              </sui-card>
-            </div>
-            <div class="col-lg-6">
-              <sui-card class=" rounded-radius py-5 shadow">
-                <sui-card-content>
-                  <sui-container text-align="justified">
-                    <p class="h3">{{ $t('collaborate_head3') }}</p>
-                    <p>{{ $t('collaborate_phrase3') }}</p>
-                  </sui-container>
-                </sui-card-content>
-              </sui-card>
-            </div>
-            <div class="col-lg-6">
-              <sui-card class="rounded-radius py-5 shadow main-red text-white">
-                <sui-card-content>
-                  <sui-container text-align="justified">
-                    <p class="h3">{{ $t('collaborate_head4') }}</p>
-                    <p>{{ $t('collaborate_phrase4') }}</p>
-                  </sui-container>
-                </sui-card-content>
-              </sui-card>
+            <a href="/login">{{ $t('collaborate_form_more') }}</a>
+            <div class="ico-card">
+              <i class="clone outline icon" />
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <img src="images/vendor/announce.jpg" alt="" class="img-fluid rounded-radius">
+        <div class="col-md-6 col-lg-4 column">
+          <div class="card myCard rounded-radius gr-2">
+            <div class="txt">
+              <h1>{{ $t('collaborate_head3') }} <br> {{ $t('collaborate_head3-1') }}</h1>
+              <p>{{ $t('collaborate_phrase3') }}</p>
+            </div>
+            <a href="/login">{{ $t('collaborate_form_more') }}</a>
+            <div class="ico-card">
+              <i class="folder open outline icon" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 column">
+          <div class="card myCard rounded-radius gr-3">
+            <div class="txt">
+              <h1>{{ $t('collaborate_head4') }} <br> {{ $t('collaborate_head4-1') }}</h1>
+              <p>{{ $t('collaborate_phrase4') }}</p>
+            </div>
+            <a href="/login">{{ $t('collaborate_form_more') }}</a>
+            <div class="ico-card">
+              <i class="folder outline icon" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -453,11 +477,7 @@ export default {
 .bg-main {
   background-color: #ff5859;
 }
-.baseble{
-  background: #ECE9E6;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
+
 .min-width-auto {
   /* cursor: pointer;
     word-wrap: break-word;
@@ -512,4 +532,113 @@ background: linear-gradient(to left, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Fi
     padding-right: 0;
     padding-left: 0;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,700');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+$gr-1:linear-gradient(170deg, #c2c2c2 0%, #ddd7d7 100%);
+$gr-2:linear-gradient(170deg, #ddd7d7 0%, #c2c2c2 100%);
+$gr-3:linear-gradient(170deg, #c2c2c2 0%, #ddd7d7 100%);
+
+.gr-1{background: $gr-1;}
+.gr-2{background: $gr-2;}
+.gr-3{background: $gr-3;}
+
+*{transition: .5s;}
+
+.h-100{height: 100vh !important;}
+.align-middle{
+  position: relative;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.column{
+  margin-top:3rem;
+  padding-left:3rem;
+  &:hover{
+    padding-left:0;
+    .card .txt{
+      margin-left:1rem;
+      h1, p{
+        color:rgba(255,255,255,1);
+        opacity:1;
+      }
+    }
+    a{
+      color:rgba(255,255,255,1);
+      &:after{
+      width: 10%;
+      }
+    }
+  }
+}
+  .myCard{
+    min-height:170px;
+    margin: 0;
+    padding: 1.7rem 1.2rem;
+    border: none;
+    border-radius: 0;
+    color:rgba(0,0,0,1);
+    letter-spacing: .05rem;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 0 0 21px rgba(0,0,0,.27);
+    .txt{
+      margin-left:-3rem;
+      z-index: 1;
+      h1{
+        font-size:1.5rem;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+      p{
+        font-size:.7rem;
+        font-family: 'Open Sans', sans-serif;
+        letter-spacing: 0rem;
+        margin-top:33px;
+        opacity:0;
+        color:rgba(255,255,255,1);
+      }
+    }
+    a{
+      z-index:3;
+      font-size: .7rem;
+      color:rgba(0,0,0,1);
+      margin-left:1rem;
+      position:relative;
+      bottom: -.5rem;
+      text-transform: uppercase;
+      &:after {
+        content:"";
+        display: inline-block;
+        height: 0.5em;
+        width: 0;
+        margin-right: -100%;
+        margin-left: 10px;
+        border-top: 1px solid rgba(255,255,255,1);
+        transition: .5s;
+      }
+    }
+    .ico-card{
+      position:absolute;
+      top: 0;
+      left:0;
+      bottom:0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    i{
+      position: relative;
+      right: -50%;
+      top:60%;
+      font-size: 12rem;
+      line-height: 0;
+      opacity: .2;
+      color:rgba(255,255,255,1);
+      z-index: 0;
+    }
+  }
 </style>

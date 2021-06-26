@@ -179,15 +179,19 @@
   "colaborate_error": "Algo aconteceu enquanto você sugere. \n <font color='green'> Por favor, tente novamente ou entre em contato com nosso suporte </font>",
 
   "collaborate_head1": "SIMPLICIDADE",
+  "collaborate_head1-2": "DESIGN INCORPORADO",
   "collaborate_phrase1": "A nossa plataforma permite que de forma rápida os hospedes encontrem seus serviços através de um processo optimizado de busca ",
   "collaborate_head2": "FLEXIBILIDADE",
   "collaborate_phrase2": "A plataforma te conecta com clientes tudo feito pela plataforma, chamada de voz ou sms e sem grandes custos adicionais ",
   "collaborate_head3": "ALCANCE",
+  "collaborate_head3-1": "SOLUÇÕES",
   "collaborate_phrase3": "Aumentamos o seu alcance e a tua base de clientes através dos nossos recursos e o fluxo de usuários da nossa plataforma",
   "collaborate_head4": "RENDIMENTO",
+  "collaborate_head4-1": "EXPERIÊNCIA",
   "collaborate_phrase4": "Ajudamos-lhe a optimizar o teu processo, melhor os serviços, reduzir custos e atingir os seus objectivos ",
   "collaborate_form_title": "Colaboração",
   "collaborate_form_btn": "Enviar a sugestação",
+  "collaborate_form_more": "mais",
 
   "announce_head" : "Proprietário, alugue seu imóvel de forma rápida, simples e fácil. ",
   "announce_list1_1" : "Anuncie o seu imóvel gratuitamente  ",
@@ -561,7 +565,7 @@
   "mission_footer": "Missão",  
   "vision_footer": "Visão", 
   "career_footer": "Carreira",
-  "history_footer": "Somos uma plataforma agregadora de serviços habitacionais, que conecta directamente pessoas que buscam por casas  para arrendar ou comprar ao proprietários com casas disponíveis",
+  "history_footer": "Somos uma plataforma agregadora de serviços habitacionais, que conecta directamente pessoas que buscam por casas  para arrendar ou comprar com proprietários com casas disponíveis",
 
   "menu2_footer": "Recursos & Serviços",
   "ads_footer": "Anunciar",  
