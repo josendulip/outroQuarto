@@ -2235,7 +2235,7 @@ export default {
           .filter((value, index, self) => self.indexOf(value) === index);
       }
     },
-    roomFilters() {
+    roomFilter() {
       if (this.houses.data)
         //return uniq(this.jobs.data.map(({ experience }) => experience))
         return this.houses.data

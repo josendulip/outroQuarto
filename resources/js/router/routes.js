@@ -49,17 +49,17 @@ export default [
       { path: '/schedules', name: 'my-panel.schedules', component: page('my-panel/schedules.vue') },
       { path: '/new/scheduling', name: 'my-panel.scheduling', component: page('my-panel/scheduleMessage.vue') },
       { path: '/view-schedule-message/:id', name: 'my-panel.message', component: page('my-panel/schedule.vue') },
-      { path: '/promote', name: 'my-panel.promote', component: page('my-panel/promote.vue') },  
-      { path: '/promotion/:house_code', name: 'my-panel.promotion', component: page('my-panel/promotion.vue') }, 
-      { path: '/verificate', name: 'my-panel.verificate', component: page('my-panel/verificate.vue') }, 
-      { path: '/verification/:house_code', name: 'my-panel.verification', component: page('my-panel/verification.vue') }, 
+      { path: '/promote', name: 'my-panel.promote', component: page('my-panel/promote.vue') },
+      { path: '/promotion/:house_code', name: 'my-panel.promotion', component: page('my-panel/promotion.vue') },
+      { path: '/verificate', name: 'my-panel.verificate', component: page('my-panel/verificate.vue') },
+      { path: '/verification/:house_code', name: 'my-panel.verification', component: page('my-panel/verification.vue') },
       { path: '/payments', name: 'my-panel.payments', component: page('my-panel/payments.vue') },
       { path: '/assessments', name: 'my-panel.assessments', component: page('my-panel/assessments.vue') },
       { path: '/new', name: 'my-panel.new.home', component: page('my-panel/newHome.vue') },
       { path: '/edit/:house_code', name: 'my-panel.edit.home', component: page('my-panel/editHome.vue') },
       { path: '/add-images/:house_code', name: 'my-panel.add.images', component: page('my-panel/add-images.vue') },
       { path: '/profile', name: 'my-panel.profile', component: page('my-panel/profile.vue') },
-      { path: '/profile/password', name: 'my-panel.password', component: page('my-panel/password.vue') },
+      { path: '/profile/password', name: 'my-panel.password', component: page('my-panel/password.vue') }
     ]
   },
   {
@@ -76,14 +76,14 @@ export default [
       { path: 'histories', name: 'user.histories', component: page('user/histories.vue') },
       { path: '/profile', name: 'user.profile', component: page('user/profile.vue') },
       { path: '/view/owner-profile/:slug', name: 'user.owner.profile', component: page('user/owner-profile.vue') },
-      { path: '/profile/password', name: 'user.password', component: page('my-panel/password.vue') },
+      { path: '/profile/password', name: 'user.password', component: page('my-panel/password.vue') }
     ]
   },
   {
     path: '/admin',
     component: page('admin/index.vue'),
     children: [
-      { path: '', redirect: { name: 'admin.dashboard'}},
+      { path: '', redirect: { name: 'admin.dashboard' } },
       { path: '/admin/dashboard', name: 'admin.dashboard', component: page('admin/dashboard.vue') },
       { path: '/admin/schedule-services', name: 'admin.schedule-services', component: page('admin/schedule-services.vue') },
       { path: '/admin/view-schedule-payment/:id', name: 'admin.payment-schedule-services', component: page('admin/payment-schedule-services.vue') },
@@ -96,12 +96,12 @@ export default [
       { path: '/admin/users', name: 'admin.users', component: page('admin/users.vue') },
       { path: '/admin/user', name: 'admin.see.user', component: page('admin/user.vue') },
       { path: '/profile', name: 'admin.profile', component: page('admin/profile.vue') },
-      { path: '/profile/password', name: 'admin.password', component: page('admin/password.vue') },
+      { path: '/profile/password', name: 'admin.password', component: page('admin/password.vue') }
     ]
   },
 
   { path: '/work-with-us', name: 'user.workwithus', component: page('user/workwithus.vue') },
   { path: '/announce', name: 'user.announce', component: page('user/announce.vue') },
 
-  { path: '*', component: page('errors/404.vue')}
+  { path: '*', component: page('errors/404.vue') }
 ]

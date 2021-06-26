@@ -2,18 +2,14 @@
   <div class="container-fluid m-0 pl-0 pr-0">
     <Navout />
 
-    <nav class="navbar navbar-expand navbar-light shadow-none  my-3">
+    <nav class="navbar navbar-expand navbar-light shadow-none  my-3 hidden-xs-down hidden-sm-down">
       <div class="container">
-        <ul class="navbar-nav mr-auto my-2 my-lg-0 hidden-xs-down hidden-sm-down">
-          <li class="nav-item d-md-none">
-            <a href="javascript:void(0)" data-toggle="canvas" data-target="#bs-canvas-left" aria-expanded="false" aria-controls="bs-canvas-left" class="nav-link"><i class="bars icon" />
-            </a>
-          </li>
-          <li class="nav-item">
+        <ul class="navbar-nav mr-auto my-2 my-lg-0">
+          <li class="nav-item hidden-md-down">
             <a href="javascript:void(0)" class="nav-link text-uppercase"><i class="mix icon" /> {{ $t("search_filter") }}</a>
           </li>
           <!-- CITIES -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ $t("search_province") }}
             </a>
@@ -30,7 +26,7 @@
             </div>
           </li>
           <!-- COUNTIES -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
             <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ $t("announce_form_county") }}
             </a>
@@ -47,7 +43,7 @@
             </div>
           </li>
           <!-- HOUSE TYPE -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
             <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
               {{ $t("announce_form_type") }}
             </a>
@@ -138,37 +134,27 @@
             </div>
           </li>
           <!-- PRICES -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ $t('home_form_payment') }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <div class="pricing-slider center-content">
                 <label class="form-slider">
-                  <span>How many users do you have?</span>
-                  <input ref="slider" v-model="priceInputValue" type="range" @input="handleSliderValuePosition($event.target)">
+                  <span>{{ $t('Type_price_you_need_to_se') }}</span>
+                  <input v-model="range" type="range" min="0" max="9999999999" step="2">
                 </label>
-                <div ref="sliderValue" class="pricing-slider-value">
-                  {{ getPricingData(priceInput) }}
+                <div class="pricing-slider-value small px-2">
+                  <small>{{ range | currency("AKZ", 2, { spaceBetweenAmountAndSymbol: true }) }}</small>
                 </div>
               </div>
-              <div class="pricing-item-price">
-                <span class="pricing-item-price-currency">
-                  {{ getPricingData(this.priceOutput.plan1, 0) }}
-                </span>
-                <span class="pricing-item-price-amount">
-                  {{ getPricingData(this.priceOutput.plan1, 1) }}
-                </span>
-                {{ getPricingData(this.priceOutput.plan1, 2) }}
+              <div class="pricing-item-price px-2">
+                <input v-model="range" type="number" class="form-control" :run="!range ? range = 2 : true" :placeholder="$t('Type_price')">
               </div>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider" />
-              <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
           <!-- ROOM -->
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
             <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ $t("announce_form_room") }}
             </a>
@@ -209,6 +195,11 @@
                   <div class="custom-control-label">6</div>
                 </label>
               </a>
+              <a class="dropdown-item" href="javascript:void(0)">
+                <div class="form-group">
+                  <input v-model="customRoom" type="number" class="form-control" :run="!customRoom ? customRoom = 1 : true" min="1" max="99">
+                </div>
+              </a>
               <div v-if="roomFilter" class="dropdown-divider" />
               <a v-show="roomFilter" href="javascript:(0)" class="dropdown-item" @click.prevent="UncheckAllRoom()"> <i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
             </div>
@@ -226,14 +217,222 @@
         </div>
       </div>
     </nav>
-    <div class="container my-5">
+    <!-- Responsive Menu  -->
+    <nav class="navbar navbar-expand navbar-light shadow-none my-3 d-md-none">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <input v-model="searches" type="text" auto-complete="off" class="form-control w-100 mr-2" :placeholder="$t('search_for')" @keyup.prevent="searchinger">
+          <button class="btn btn-sm" type="button" :class="[showMenu ? 'bg-main' : 'bg-light']" @click="showMenu = ! showMenu">
+            <i class="mdi mdi-menu" :class="{ 'text-white': showMenu }" />
+          </button>
+        </div>
+      </div>
+    </nav>
+    <transition name="fade">
+      <div v-if="showMenu" class="container shadow-none  my-3 d-md-none">
+        <sui-accordion is="sui-menu" :active-index="1" vertical exclusive styled>
+          <!-- CITIES -->
+          <sui-accordion-title is="sui-menu-header" active>
+            <sui-icon name="dropdown" />
+            {{ $t("search_province") }}
+          </sui-accordion-title>
+          <sui-accordion-content active>
+            <sui-form>
+              <sui-form-field v-for="(city, index) in Object.keys(cities)" :key="index">
+                <sui-checkbox v-model="province" radio :value="city" :label="city" class="city" />
+              </sui-form-field>
+              <sui-form-field v-if="counties">
+                <div class="dropdown-divider" />
+                <a v-if="counties" href="javascript:(0)" class="dropdown-item" @click.prevent="uncheckCC()">
+                  <i class="check square outline icon" />
+                  {{ $t("search_uncheck") }}
+                </a>
+              </sui-form-field>
+            </sui-form>
+          </sui-accordion-content>
+          <!-- COUNTIES -->
+          <sui-accordion-title is="sui-menu-header">
+            <sui-icon name="dropdown" />
+            {{ $t("announce_form_county") }}
+          </sui-accordion-title>
+          <sui-accordion-content>
+            <sui-form>
+              <sui-form-field v-for="(county, index) in counties" :key="index">
+                <sui-checkbox :label="county" :checked="countyFilter.includes(county)" @change="toggleCountyFilter(county)" />
+              </sui-form-field>
+              <sui-form-field v-if="!counties">
+                {{ $t("search_choose_first_city") }}
+              </sui-form-field>
+              <div v-if="counties" class="dropdown-divider" />
+              <sui-form-field v-if="counties">
+                <a href="javascript:(0)" class="dropdown-item" @click.prevent="UncheckAllCount()"><i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
+              </sui-form-field>
+            </sui-form>
+          </sui-accordion-content>
+
+          <!-- HOUSE TYPE -->
+          <sui-accordion-title is="sui-menu-header">
+            <sui-icon name="dropdown" />
+            {{ $t("announce_form_type") }}
+          </sui-accordion-title>
+          <sui-accordion-content>
+            <sui-form>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_outhouse')" value="outhouse" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_apart')" value="Apartamento" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_house')" value="Vivenda" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_albergue')" value="Albergue" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_Hospedaria')" value="guesthouse" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_hotel')" value="Hotel" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_hostel')" value="Hostel" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_motel')" value="Motel" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_pousada')" value="Lodge" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_pension')" value="Pension" />
+              </sui-form-field>
+              <sui-form-field v-if="houseTypeFilter">
+                <div class="dropdown-divider" />
+                <a class="dropdown-item" href="javascript:(0)" @click.prevent="UncheckAllType()"><i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
+              </sui-form-field>
+            </sui-form>
+          </sui-accordion-content>
+          <!-- PRICES -->
+          <sui-accordion-title is="sui-menu-header">
+            <sui-icon name="dropdown" />
+            {{ $t('home_form_payment') }}
+          </sui-accordion-title>
+          <sui-accordion-content>
+            <sui-form>
+              <sui-form-field>
+                <label class="form-slider">
+                  <span>{{ $t('Type_price_you_need_to_se') }}</span>
+                  <input v-model="range" type="range" min="0" max="9999999999" step="2">
+                </label>
+                <div class="pricing-slider-value small px-2">
+                  <small>{{ range | currency("AKZ", 2, { spaceBetweenAmountAndSymbol: true }) }}</small>
+                </div>
+              </sui-form-field>
+              <sui-form-field>
+                <input v-model="range" type="number" class="form-control" :placeholder="$t('Type_price')">
+              </sui-form-field>
+            </sui-form>
+          </sui-accordion-content>
+
+          <sui-accordion-title is="sui-menu-header">
+            <sui-icon name="dropdown" />
+            {{ $t("announce_form_room") }}
+          </sui-accordion-title>
+          <sui-accordion-content>
+            <sui-form>
+              <sui-form-field>
+                <sui-checkbox v-model="roomFilter" :label="'1 - ' + $t('announce_form_room')" value="1" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="roomFilter" :label="'2 - ' + $t('announce_form_rooms')" value="2" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="roomFilter" :label="'3 - ' + $t('announce_form_rooms')" value="3" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="roomFilter" :label="'4 - ' + $t('announce_form_rooms')" value="4" />
+              </sui-form-field>
+              <sui-form-field>
+                <sui-checkbox v-model="roomFilter" :label="'5 - ' + $t('announce_form_rooms')" value="5" />
+              </sui-form-field>
+              <sui-form-field>
+                <input v-model="customRoom" type="number" class="form-control" :run="!customRoom ? customRoom = 1 : true" min="1" max="99">
+              </sui-form-field>
+              <sui-form-field v-if="roomFilter">
+                <a href="javascript:(0)" class="dropdown-item" @click.prevent="UncheckAllRoom()"> <i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
+              </sui-form-field>
+            </sui-form>
+          </sui-accordion-content>
+        </sui-accordion>
+      </div>
+    </transition>
+
+    <div class="container mt-2">
+      <!-- Order button -->
+      <div class="row my-0 py-0">
+        <div class="col-md-12 grid-margin">
+          <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex align-items-end flex-wrap">
+              <div class="mr-md-3">
+                <h2>{{ $t("search_filter") }},</h2>
+                <p class="mb-md-0">
+                  {{ $t('search_search_precision') }}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-end flex-wrap">
+              <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" :class="{ 'bg-danger': recent }" @click="recent = !recent">
+                <i class="mdi mdi-minus text-muted" />
+              </button>
+              <button type="button" class="btn btn-light bg-white btn-icon mt-2 mt-xl-0" :class="{ 'bg-danger': recent }" @click="recent = !recent">
+                <i class="mdi mdi-plus text-muted" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Implemented filter -->
+      <div class="row p-2 mb-2">
+        <div class="">
+          <span v-if="province" class="font-weight-bold">
+            <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="uncheckCC" /></a></small>
+            <strong>{{ province }}</strong>
+          </span>
+          <span v-if="countyFilter != ''">:
+            <span v-for="county in countyFilter" :key="county" class="d-inline text-muted"><em>{{ county }}, </em></span></span>
+        </div>
+        <div class="">
+          <span v-if="houseTypeFilter != ''">
+            <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="UncheckAllType" /></a></small>
+            <strong>{{ $t("announce_form_type") }}:</strong>
+            <span v-for="house_type in houseTypeFilter" :key="house_type" class="d-inline text-muted"><em> {{ house_type }}, </em></span>
+          </span>
+        </div>
+        <div class="">
+          <span v-if="roomFilter != ''">
+            <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="UncheckAllRoom" /></a></small>
+            <strong><i class="caret right icon" />{{ $t("announce_form_room") }}<small>(Qtd)</small></strong>
+            <span v-for="room in roomFilter" :key="room" class="d-inline text-muted"><em>{{ room }}, </em></span>
+          </span>
+        </div>
+        <!-- <div class="">
+          <span v-if="customRoom != ''">
+            <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="UncheckCostRoom" /></a></small>
+            <strong><i class="caret right icon" />{{ $t("announce_form_room") }}<small>(Qtd)</small></strong>
+            <span class="d-inline text-muted"><em>{{ customRoom }}, </em></span>
+          </span>
+        </div> -->
+        <hr>
+      </div>
+      <!-- Print houses -->
       <div class="row">
-        <div v-for="(house, index) in FeedOfHouse" :key="index" class="col-md-3 mb-4">
-          <sui-card class="content-house rounded-radius">
+        <div v-for="(house, index) in FeedOfHouse" :key="index" class="col-md-3 col-sm-6 mb-4">
+          <sui-card class="content-house rounded-radius w-100">
             <sui-image :src="house.profile" class="rounded-top image-house" />
-            <p class="title-house">
+            <!-- <p class="title-house">
               {{ house.created_at | OnlyDate }}
-            </p>
+            </p> -->
             <div class="overlay-house" />
             <div class="button-house">
               <a href="javascript:void(0)" @click.prevent="findHouse(house.house_code)">
@@ -261,29 +460,6 @@
           </sui-card>
         </div>
       </div>
-
-
-      <h5>List of Products</h5>
-      <!-- <div v-for="casa in casas" :key="casa.id">{{casa.price}}</div> -->
-      <h3>Filter</h3>
-
-      <select v-model="category">
-        <option valeu="Accessories">Accessories</option>
-        <option valeu="Laptop">Laptop</option>
-        <option valeu="Stationary">Stationary</option>
-      </select>
-
-      <input type="text" v-model="name" placeholder="Filter By Name">
-      <input type="text" v-model="range" placeholder="Filter By Range">
-
-      <label for="vol">Price (between 0 and 1000000000):</label>
-      <input type="range" v-model="range" min="0" max="1000000000" step="100">
-      
-      <ul>
-        <li v-for="casa in filterProducts" :key="casa.id">
-          <!-- casa Name : {{ casa.house_code }} -  -->Price : {{ casa.price }} <!-- ({{casa.street}}) -->
-        </li>
-      </ul>
       <!-- /.card-body -->
       <div class="row">
         <pagination :data="houses" @pagination-change-page="getResults" />
@@ -1000,9 +1176,9 @@ export default {
   components: {
     Navout
   },
+  mixins: [Vue2Filters.mixin],
   layout: 'basic',
   middleware: 'guest',
-  mixins: [Vue2Filters.mixin],
 
   metaInfo () {
     return { title: this.$t('home') }
@@ -1021,15 +1197,14 @@ export default {
       order: ''
     }),
     houses: {},
-    src: 'images/announce/1.jpg',
     selectedValue: null,
     cities: cities,
-    casas: {},
     province: '',
     countyFilter: [],
     houseTypeFilter: [],
     filters: [],
     roomFilter: [],
+    customRoom: 99,
     stateFilter: [],
     execution: [],
     FreeStateOrBusy: '',
@@ -1040,50 +1215,8 @@ export default {
     recent: false,
     checkboxes: false,
     expanded: false,
-    priceInputValue: 0, // initial input value
-    priceInput: {
-      // slider values
-      0: "1,000",
-      1: "1,250",
-      2: "1,500",
-      3: "2,000",
-      4: "2,500",
-      5: "3,500",
-      6: "6,000",
-      7: "15,000",
-      8: "50,000",
-      9: "50,000+",
-    },
-    priceOutput: {
-      // output values
-      plan1: {
-        0: ['', "Free", ""],
-        1: ["$", "13", "/m"],
-        2: ["$", "17", "/m"],
-        3: ["$", "21", "/m"],
-        4: ["$", "25", "/m"],
-        5: ["$", "42", "/m"],
-        6: ["$", "58", "/m"],
-        7: ["$", "117", "/m"],
-        8: ["$", "208", "/m"],
-        9: ["", "Contact Us", ""],
-      },
-    },
-    category: '',
-    name: '',
-    range: '1000000000',
-    products: [
-      { name: "Keyboard", price: 4046755, category: "Accessories" },
-      { name: "Mouse", price: 2007895, category: "Accessories" },
-      { name: "Monitor", price: 399, category: "Accessories" },
-      { name: "Dell XPS", price: 59932, category: "Laptop" },
-      { name: "MacBook Pro", price: 8999056, category: "Laptop" },
-      { name: "Pencil Box", price: 60, category: "Stationary" },
-      { name: "Pen", price: 100890, category: "Stationary" },
-      { name: "USB Cable", price: 70078, category: "Accessories" },
-      { name: "Eraser", price: 2098, category: "Stationary" },
-      { name: "Highlighter", price: 5, category: "Stationary" },
-    ]
+    range: 9999999999,
+    showMenu: false
   }),
 
   computed: {
@@ -1101,148 +1234,56 @@ export default {
     matchedhouse () {
       if (this.countyFilter.length) {
         return this.countyFilter.length
-          ? this.houses.data.filter((house) =>
-              this.countyFilter.some((filter) => house.county.match(filter))
-            )
+          ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data.filter((house) => this.countyFilter.some((filter) => house.county.match(filter)))))
           : this.houses.data
       } else if (this.province.length) {
         return this.province.length
-          ? this.houses.data.filter((house) => house.city.match(this.province))
+          ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data.filter((house) => house.city.match(this.province))))
           : this.houses.data
-      } else if (this.filters.length) {
-        return this.filters.length
-          ? this.houses.data.filter((house) =>
-              this.filters.some((filter) => house.period.match(filter))
-            )
-          : this.houses.data
-      } else if (this.execution.length) {
-        return this.execution.length
-          ? this.houses.data.filter((example) =>
-              this.execution.some((filter) => example.state.match(filter))
-            )
-          : this.houses.data
-      } else if (this.FreeStateOrBusy.length) {
-        return this.FreeStateOrBusy.length
-          ? this.houses.data.filter((house) => house.state.match(this.FreeStateOrBusy))
-          : this.houses.data
+      } else if (this.roomFilter.length) {
+        return this.roomFilter.length ? this.filterHouseByRange(this.houses.data.filter((house) => this.roomFilter.some((filter) => house.room.match(filter)))) : this.houses.data
       } else if (this.houseTypeFilter.length) {
         return this.houseTypeFilter.length
-          ? this.houses.data.filter((house) =>
-              this.houseTypeFilter.some((filter) => house.type.match(filter))
-            )
+          ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data.filter((house) => this.houseTypeFilter.some((filter) => house.type.match(filter)))))
           : this.houses
       } else {
-        if (this.houses.data) return this.orderBy(this.houses.data, 'created_at', -1);
+        // if (this.houses.data) //return this.orderBy(this.houses.data, 'created_at', -1);
+        return this.houses.data ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data)) : this.houses.data
       }
     },
+    // eslint-disable-next-line vue/return-in-computed-property
     FeedOfHouse () {
       if (this.recent) {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.hasMainFeed = false
         if (this.matchedhouse) return this.orderBy(this.matchedhouse, 'created_at', -1)
       } else {
-        if (this.matchedhouse) return this.orderBy(this.matchedhouse, 'created_at');
+        if (this.matchedhouse) return this.orderBy(this.matchedhouse, 'created_at')
       }
-      //return this.matchedhouse.sort(/* something here */);
-    },
-    /* filterProducts: function () {
-      return this.filterProductsByRange(
-        this.filterProductsByName(this.filterProductsByCategory(this.casas))
-      )
-    } */
-    filterProducts: function () {
-      // return this.filterProductsByRange(this.casas)
-      return this.casas.filter((casa) => casa.price > 0 && casa.price < this.range ? casa : '')
     }
   },
   created () {
     this.loadHouses()
-    this.getHouses()
-  },
-  mounted () {
-   /*  this.$refs.slider.setAttribute("min", 0);
-    this.$refs.slider.setAttribute("max", Object.keys(this.priceInput).length - 1);
-    this.thumbSize = parseInt(
-      window.getComputedStyle(this.$refs.sliderValue).getPropertyValue("--thumb-size"),
-      10
-    );
-    this.handleSliderValuePosition(this.$refs.slider); */
   },
   methods: {
-    /* filterProductsByCategory: function (houses) {
-      return houses.filter((house) => !house.city.indexOf(this.city))
+    filterCustomRoom: function (houses) {
+      return houses.filter((house) => house.room > 0 && house.room <= this.customRoom ? house : 0)
     },
-
-    filterProductsByName: function (houses) {
-      return houses.filter((house) => !house.county.indexOf(this.county))
-    }, */
-
-    filterProductsByRange: function (houses) {
-      return houses.filter((product) =>
-        product.price > 0 && product.price < this.range ? product : ''
-      )
+    filterHouseByRange: function (houses) {
+      return houses.filter((house) => house.price > 0 && house.price <= this.range ? house : 0)
     },
-    handleSliderValuePosition (input) {
-      const multiplier = input.value / input.max
-      const thumbOffset = this.thumbSize * multiplier
-      const priceInputOffset = (this.thumbSize - this.$refs.sliderValue.clientWidth) / 2
-      this.$refs.sliderValue.style.left =
-        input.clientWidth * multiplier - thumbOffset + priceInputOffset + 'px'
-    },
-    getPricingData (obj, pos) {
-      return pos !== undefined
-        ? obj[this.priceInputValue][pos]
-        : obj[this.priceInputValue]
-    },
-    // Retirei do computed to methoo
-    orderByItem () {
-      if (this.recent) {
-        this.hasMainFeed = false
-        if (this.houses.data) return this.orderBy(this.houses.data, 'created_at', -1)
-      } else {
-        if (this.houses.data) return this.orderBy(this.houses.data, 'created_at')
-      }
-    },
-    ExecFilters () {
-      if (this.houses.data) {
-        return this.houses.data
-
-          .map(({ state }) => state)
-          .filter((value, index, self) => self.indexOf(value) === index)
-      }
-    },
-    periodFilters () {
-      if (this.houses.data) {
-        return this.houses.data
-          .map(({ period }) => period)
-          .filter((value, index, self) => self.indexOf(value) === index)
-      }
-    },
-    roomFilters () {
-      if (this.houses.data) {
-        // return uniq(this.jobs.data.map(({ experience }) => experience))
-        return this.houses.data
-          .map(({ room }) => room)
-          .filter((value, index, self) => self.indexOf(value) === index)
-      }
-    },
-    stateFilters () {
-      if (this.houses.data) {
-        // return uniq(this.jobs.data.map(({ experience }) => experience))
-        return this.houses.data
-          .map(({ state }) => state)
-          .filter((value, index, self) => self.indexOf(value) === index)
-      }
-    },
-    // end from compute to method
 
     UncheckAllType: function () {
       this.houseTypeFilter = []
     },
     UncheckAllCount: function () {
-      this.countyFilter = ''
+      this.countyFilter = []
     },
     UncheckAllRoom: function () {
       this.roomFilter = []
+    },
+    UncheckCostRoom: function () {
+      this.customRoom = 1
     },
     UncheckAllState: function () {
       this.FreeStateOrBusy = false
@@ -1253,11 +1294,6 @@ export default {
     uncheckCC: function () {
       this.countyFilter = ''
       this.province = false
-    },
-    toggleExecFilter: function (newExec) {
-      this.execution = !this.execution.includes(newExec)
-        ? [...this.execution, newExec]
-        : this.execution.filter((filter) => filter !== newExec)
     },
     toggleStateFilter: function (newState) {
       this.stateFilter = !this.stateFilter.includes(newState)
@@ -1312,32 +1348,7 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    },
-    getHouses () {
-      axios.get('api/searched-houses').then(({ data }) => (this.casas = data))
-    },
-    showCheckboxes () {
-      if (!this.expanded) {
-        this.checkboxes = true
-        this.expanded = true
-      } else {
-        this.checkboxes = false
-        this.expanded = false
-      }
     }
-    /* filterProductsByCategory: function (products) {
-      return products.filter((product) => !product.category.indexOf(this.category))
-    },
-
-    filterProductsByName: function (products) {
-      return products.filter((product) => !product.name.indexOf(this.name))
-    },
-
-    filterProductsByRange: function (products) {
-      return products.filter((product) =>
-        product.price > 0 && product.price < this.range ? product : ''
-      )
-    } */
   }
 }
 </script>
@@ -1359,5 +1370,8 @@ export default {
 }
 .input-group-prepend .btn, .input-group-append .btn {
     z-index: -1;
+}
+.light-bg{
+  background: #f3f3f3;
 }
 </style>

@@ -128,7 +128,9 @@
 
   "head_form_title": "O que procuras?",
   "room": "Quartos",
-  "head_form_city": "City",
+  "head_form_city": "Selecione a cidade",
+  "head_form_state": "Cidade",
+  "head_form_find_house": "ENCOTRAR IMOVEL",
 
 
 
@@ -205,6 +207,7 @@
   "announce_form_payment": "Metodo de Pagamento",
   "announce_form_price": "Preço",
   "announce_form_room": "Quarto",
+  "announce_form_rooms": "Quartos",
   "announce_form_living_room": "Sala",
   "announce_form_kitchen": "Cozinha",
   "announce_form_bathroom": "Banheiro",
@@ -280,6 +283,8 @@
   "home_form_type_short": "Período Curto",
   "home_form_room": "Quartos",
   "home_form_payment": "Preço",
+  "Type_price":"Digite o Preço",
+  "Type_price_you_need_to_se": "Digite o preço de que você precisa",
   "home_form_button": "Deixe-nos ajudá-lo a encontrar uma casa",
   "home_scheduled_visits": "Visitas Agendadas",
   "home_reservation": "Reservas",
@@ -380,11 +385,12 @@
 
   "search_for": "Procure por: casas, apartamentos, hotéis, quartos, pousadas",
   "search_uncheck": "Desmarque todos",
-  "search_filter": "Filtra a busca:",
+  "search_filter": "Filtra a busca",
   "search_province": "Província",
   "search_house_state": "Estado do imovel",
   "search_house_period": "Periódo",
   "search_choose_first_city": "É necessário escolher a província",
+  "search_search_precision": "Resultados com maior precisao...",
 
   "mypanel_mgs": "Oops! Este caminho não é autorizado para usuários",
   "mypanel": "Meu Painel",
@@ -540,6 +546,14 @@
   "welcome_or": "ou",
   "welcome_log": "Entrar",
   "welcome_reg": "Registar-se",
+  "welcome_visit": "Visita",
+  "welcome_search": "Busca",
+  "welcome_propus": "Proposta",
+  "welcome_service": "Serviço",
+  "welcome_search_msg": "Enconntrar melhores opções de imóveis para alugar no nosso site, com poucos cliques e agendar a sua visita de forma facilitada",
+  "welcome_visit_msg": "Conhecer as casas e fazer a sua própria avaliação na presença do proprietário ou solicitar que colaboradores façam por ti",
+  "welcome_propus_msg": "Envia a sua oferta online, por email, mensagm de texto ou ligar para número. Receber um contacto redigido e verificado",
+  "welcome_service_msg": "Solicitar serviços que facilitam e tornam o processo de procura e mudança de residência mais simples, rápida, agradável",
 
 
 
@@ -547,20 +561,23 @@
   "mission_footer": "Missão",  
   "vision_footer": "Visão", 
   "career_footer": "Carreira",
-  "history_footer": "Somos uma Agência de Viagens creditada pelo Turismo de Angola. Todas as casas são cuidadosamente verificadas de modo a tornar a sua reserva no Top Gerês absolutamente segura.",
+  "history_footer": "Somos uma plataforma agregadora de serviços habitacionais, que conecta directamente pessoas que buscam por casas  para arrendar ou comprar ao proprietários com casas disponíveis",
 
   "menu2_footer": "Recursos & Serviços",
   "ads_footer": "Anunciar",  
   "collaborate_footer": "Colaborar", 
   "solicitation_footer": "Solicitar serviços ",
+  "facebook_footer": "Estamos nas redes sociais, curta nossa página no Facebook.", 
+  "twitter_footer": "Curta nossa página no Twitter e fique por dentro de tudo!",
+  "instagram_footer": "Estamos também com Instagram, siga-nos por lá.", 
 
   "privacy_footer": "Políticas de Privacidade",  
   "terms_footer": "Termos e Condições de Uso", 
   
   "menu4_footer": "Contacte-nos",
-  "phone_footer": "(+244) 926 45-25-25",  
+  "phone_footer": "Tel:",  
   "email_footer": "Email:", 
-  "address_footer": "Address: Hochimi street, 45, Luanda - Angola",
+  "address_footer": "Address:",
 
   "menu3_footer": "Siga-nos", 
 

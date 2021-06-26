@@ -1,104 +1,83 @@
 <template>
-    <div>
-        <footer class="footer">
-            <div class="container bottom_border">
-                <div class="row">
-                    <div class=" col-sm-4 col-md col-sm-4  col-12 col">
-                        <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu1_footer') }}</h5>
-                        <!--headin5_amrc-->
-                        <p class="mb10">{{ $t('history_footer') }}</p>
-                        <p><i class="fa fa-location-arrow"></i> {{ $t('address_footer') }} </p>
-                        <p><i class="fa fa-phone"></i>  {{ $t('phone_footer') }}  </p>
-                        <p><i class="fa fa fa-envelope"></i> {{ $t('email_footer') }}   </p>
-                    </div>
+  <div style="background: url('/images/vendor/2.jpg') no-repeat center center; background-size: cover;">
+    <footer class="footer">
+      <div class="container bottom_border">
+        <div class="row">
+          <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+            <h5 class="headin5_amrc col_white_amrc pt2">
+              {{ $t('menu1_footer') }}
+            </h5>
+            <p class="mb10">
+              {{ $t('history_footer') }}
+            </p>
+            <p><i class="fa fa-location-arrow" /> {{ $t('address_footer') }} Luanda - Angola</p>
+            <p><i class="fa fa-phone" />  {{ $t('phone_footer') }} +244 (936) 09-02-38</p>
+            <p><i class="fa fa fa-envelope" /> {{ $t('email_footer') }} info@outroquarto.com </p>
+          </div>
+          <div class=" col-sm-4 col-md  col-6 col">
+            <h5 class="headin5_amrc col_white_amrc pt2">
+              {{ $t('menu1_footer') }}
+            </h5>
+            <ul class="footer_ul_amrc">
+              <li><a href="#">{{ $t('mission_footer') }}</a></li>
+              <li><a href="#">{{ $t('vision_footer') }}</a></li>
+              <li><a href="#">{{ $t('career_footer') }}</a></li>
+              <li><a href="#">{{ $t('privacy_footer') }}</a></li>
+              <li><a href="#">{{ $t('terms_footer') }}</a></li>
+              <li><a href="#">Image Cropping</a></li>
+            </ul>
+          </div>
+          <div class=" col-sm-4 col-md  col-6 col">
+            <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu2_footer') }}</h5>
+            <ul class="footer_ul_amrc">
+              <li><a href="#">{{ $t('ads_footer') }}</a></li>
+              <li><a href="#">{{ $t('collaborate_footer') }}</a></li>
+              <li><a href="#">{{ $t('solicitation_footer') }}</a></li>
+              <li><a href="#">{{ $t('privacy_footer') }}</a></li>
+              <li><a href="#">{{ $t('terms_footer') }}</a></li>
+              <li><a href="#">Image Cropping</a></li>
+            </ul>
+          </div>
 
+          <div class=" col-sm-4 col-md  col-12 col">
+            <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu3_footer') }}</h5>
 
-                    <div class=" col-sm-4 col-md  col-6 col">
-                        <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu1_footer') }}</h5>
-                        <!--headin5_amrc-->
-                        <ul class="footer_ul_amrc">
-                        <li><a href="#">{{ $t('mission_footer') }}</a></li>
-                        <li><a href="#">{{ $t('vision_footer') }}</a></li>
-                        <li><a href="#">{{ $t('career_footer') }}</a></li>
-                        <li><a href="#">{{ $t('privacy_footer') }}</a></li>
-                        <li><a href="#">{{ $t('terms_footer') }}</a></li>
-                        <li><a href="#">Image Cropping</a></li>
-                        </ul>
-                        <!--footer_ul_amrc ends here-->
-                    </div>
-
-
-                    <div class=" col-sm-4 col-md  col-6 col">
-                        <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu2_footer') }}</h5>
-                        <!--headin5_amrc-->
-                        <ul class="footer_ul_amrc">
-                        <li><a href="#">{{ $t('ads_footer') }}</a></li>
-                        <li><a href="#">{{ $t('collaborate_footer') }}</a></li>
-                        <li><a href="#">{{ $t('solicitation_footer') }}</a></li>
-                        <li><a href="#">{{ $t('privacy_footer') }}</a></li>
-                        <li><a href="#">{{ $t('terms_footer') }}</a></li>
-                        <li><a href="#">Image Cropping</a></li>
-                        </ul>
-                        <!--footer_ul_amrc ends here-->
-                    </div>
-
-
-                    <div class=" col-sm-4 col-md  col-12 col">
-                        <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu3_footer') }}</h5>
-                        <!--headin5_amrc ends here-->
-
-                        <ul class="footer_ul2_amrc">
-                        <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.outroquarto.com/</a></p></li>
-                        <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.outroquarto.com/</a></p></li>
-                        <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.outroquarto.com/</a></p></li>
-                        </ul>
-                        <!--footer_ul2_amrc ends here-->
-                    </div>
-                </div>
-            </div>
-            
-            <div class="container">
-                <ul class="foote_bottom_ul_amrc">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">{{ $t('menu1_footer') }}</a></li>
-                <li><a href="#">{{ $t('services') }}</a></li>
-                <li><a href="#">{{ $t('cooperate') }}</a></li>
-                <li><a href="#">{{ $t('announce') }}</a></li>
-                <li><a href="#">{{ $t('menu4_footer') }}</a></li>
-                </ul>
-                <!--foote_bottom_ul_amrc ends here-->
-                <p class="text-center">Copyright @2020 | Designed With by <a href="#">Outro Quarto</a></p>
-
-                <ul class="social_footer_ul">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                </ul>
-                <!--social_footer_ul ends here-->
-            </div>
-
-        </footer>
-    </div>
+            <ul class="footer_ul2_amrc">
+              <li><a href="https://www.facebook.com/outroquarto/" target="_blank"><i class="mdi mdi-facebook-box fleft padding-right" /> </a><p>{{ $t('facebook_footer') }} <a href="https://www.facebook.com/outroquarto/" target="_blank">www.facebook.com/outroquarto/</a></p></li>
+              <li><a href="#"><i class="mdi mdi-twitter-box fleft padding-right" /> </a><p>{{ $t('twitter_footer') }} <a href="#"> www.outroquarto.com/</a></p></li>
+              <li><a href="https://www.instagram.com/outroquarto/" target="_blank"><i class="mdi mdi-instagram fleft padding-right" /> </a><p>{{ $t('instagram_footer') }}<a href="https://www.instagram.com/outroquarto/" target="_blank">www.instagram.com/outroquarto/</a></p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <ul class="foote_bottom_ul_amrc">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">{{ $t('menu1_footer') }}</a></li>
+          <li><a href="#">{{ $t('services') }}</a></li>
+          <li><a href="#">{{ $t('cooperate') }}</a></li>
+          <li><a href="#">{{ $t('announce') }}</a></li>
+          <li><a href="#">{{ $t('menu4_footer') }}</a></li>
+        </ul>
+        <!--foote_bottom_ul_amrc ends here-->
+        <p class="text-center">
+          Copyright @2020 | Designed With by <strong> <em>OutroQuarto</em></strong>
+        </p>
+      </div>
+    </footer>
+  </div>
 </template>
 <script>
-    export default {
-        name: 'footer_name'
-    }
+export default {
+  name: 'footer_name'
+}
 </script>
 
 <style lang="scss">
-    /* .footer{ 
-        position:absolute; 
-        bottom:0; 
-        width:100%; 
-        height:100px; 
-    } */
-
-
+    .footer{ width:100%; background-color:rgba(14, 18, 20, 0.925); min-height:250px; padding:10px 0px 25px 0px ; }
     /*footer*/
-    .col_white_amrc { color:#FFF;}
-    footer {width:100%; background-color:#263238; min-height:250px; padding:10px 0px 25px 0px ;}
+    .col_white_amrc { color:#FF5859;}
+    /* footer {width:100%; background-color:#263238; min-height:250px; padding:10px 0px 25px 0px ;} */
     .pt2 { padding-top:40px ; margin-bottom:20px ;}
     footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
     .mb10 { padding-bottom:15px ;}

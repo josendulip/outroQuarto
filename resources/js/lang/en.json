@@ -131,7 +131,9 @@
 
   "head_form_title": "What are you looking for?",
   "head_form_rooms": "Room",
-  "head_form_city": "City",
+  "head_form_city": "Select the city",
+  "head_form_state": "State",
+  "head_form_find_house": "FIND HOUSE",
 
 
   "card1_head_complent": "SEARCHERS",
@@ -205,6 +207,7 @@
   "announce_form_payment": "Payment Method",
   "announce_form_price": "Price",
   "announce_form_room": "Room",
+  "announce_form_rooms": "Rooms",
   "announce_form_living_room": "Living room",
   "announce_form_kitchen": "Kitchen",
   "announce_form_bathroom": "Bathroom",
@@ -284,6 +287,8 @@
   "home_form_type_short": "Short Period",
   "home_form_room": "Rooms",
   "home_form_payment":"Price",
+  "Type_price":"Type the price",
+  "Type_price_you_need_to_se": "Type price you need to search",
   "home_form_button":"Let us help you to find a home",
   "home_scheduled_visits": "Scheduled visits",
   "home_reservation": "Reservation",
@@ -385,11 +390,12 @@
 
   "search_for": "Search for: houses, apartments, hotels, rooms, lodges",
   "search_uncheck": "Uncheck all",
-  "search_filter": "Filter the search:",
+  "search_filter": "Filter the search",
   "search_house_state": "Property status",
   "search_province": "Province",
   "search_house_period": "Period",
   "search_choose_first_city": "It is necessary to choose the province",
+  "search_search_precision": "Results with greater precision...",
 
   "mypanel_mgs": "Oops! This path is not authorized for users",
   "mypanel": "My panel",
@@ -544,25 +550,36 @@
   "welcome_or": "or",
   "welcome_log": "Log in",
   "welcome_reg": "Register",
+  "welcome_visit": "Visit",
+  "welcome_search": "Search",
+  "welcome_propus": "Proposal",
+  "welcome_service": "Service",
+  "welcome_search_msg": "Find better options for rental properties on our website, with a few clicks and schedule your visit in an easy way",
+  "welcome_visit_msg": "Get to know the houses and make your own assessment in the presence of the owner or ask collaborators to do it for you",
+  "welcome_propus_msg": "Send your offer online, by email, text message or call number. Receive a written and verified contact. We are happy to contact you",
+  "welcome_service_msg": "Request services that facilitate and make the process of finding and relocating simpler, faster, more pleasant",
 
   "menu1_footer": "About Us",
   "mission_footer": "Mission",  
   "vision_footer": "Vision", 
   "career_footer": "Career",
-  "history_footer": "We are a Travel Agency accredited by Turismo de Angola. All houses are carefully checked to make your reservation at Top Gerês absolutely safe.",
+  "history_footer": "We are an aggregating platform for housing services, which directly connects people looking for homes to rent or buy from homeowners with available homes",
 
   "menu2_footer": "Resources & Services",
   "ads_footer": "Advertise",  
   "collaborate_footer": "Collaborate", 
   "solicitation_footer": "Solicitation of services",
+  "facebook_footer": "We are on social media, like our Facebook page.",
+  "twitter_footer": "Like our Twitter page and stay on top of everything!",
+  "instagram_footer": "We are also with Instagram, follow us there.",
   
   "privacy_footer": "Privacy Policy",  
   "terms_footer": "Terms and conditions of use", 
 
   "menu4_footer": "Find Us",
-  "phone_footer": "(+244) 926 45-25-25",  
+  "phone_footer": "Tel:",  
   "email_footer": "Email:", 
-  "address_footer": "Address: Hochimi street, 45, Luanda - Angola",
+  "address_footer": "Address:",
 
   "menu3_footer": "Follow us",
 
