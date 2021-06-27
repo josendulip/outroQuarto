@@ -290,7 +290,6 @@ import Navout from '~/components/Navout'
 
 // LOGIN
 import Form from 'vform'
-import axios from 'axios'
 
 export default {
   components: {
@@ -354,106 +353,10 @@ export default {
   methods: {
     async searching () {
       this.$router.push({ name: 'search.house' })
-      // Submit the form.
-      // const { data } = await this.form.get('/api/search')
-
-      // Save the token.
-      /* this.$store.dispatch('auth/saveToken', {
-                token: data.token,
-                remember: this.remember
-            })
-
-            // Fetch the user.
-            await this.$store.dispatch('auth/fetchUser') */
-
-      // Redirect search.
-      //this.$router.push({ name: 'search.house' })
-    },
-    /* signIn() {
-      (this.loginCard = true), (this.registerCard = false), (this.searchCard = false);
-    },
-    signUp() {
-      (this.loginCard = false), (this.registerCard = true), (this.searchCard = false);
-    }, */
-    searchinger () {
-      const query = this.searches
-
-      axios
-        .get('api/searchHouser?q=' + query)
-        .then((data) => {
-          this.houses = data.data
-          if (this.houses.length === '') {
-            this.SearchedResult = 'Nao existes'
-            console.log(this.result)
-          }
-        })
-        .catch(() => {
-          // eslint-disable-next-line no-undef
-          Swal.fire(
-            'Failed',
-            'There was something wrong, while you where searching.',
-            'error'
-          )
-        })
-    },
-    search () {
-      (this.loginCard = false), (this.registerCard = false), (this.searchCard = true);
     }
-    // JA NAO EH NECESSARIO
-    /* async login() {
-      // Submit the form.
-      const { data } = await this.form.post("/api/login");
-
-      // Save the token.
-      this.$store.dispatch("auth/saveToken", {
-        token: data.token,
-        remember: this.remember,
-      });
-
-      // Fetch the user.
-      await this.$store.dispatch("auth/fetchUser");
-
-      // Redirect home.
-      this.redirect();
-    },
-
-    redirect() {
-      const intendedUrl = Cookies.get("intended_url");
-
-      if (intendedUrl) {
-        Cookies.remove("intended_url");
-        this.$router.push({ path: intendedUrl });
-      } else {
-        location.reload();
-        this.$router.push({ name: "home" });
-      }
-    },
-
-    async register() {
-      // Register the user.
-      const { data } = await this.form.post("/api/register");
-
-      // Must verify email fist.
-      if (data.status) {
-        this.mustVerifyEmail = true;
-      } else {
-        location.reload();
-        // Log in the user.
-        const {
-          data: { token },
-        } = await this.form.post("/api/login");
-
-        // Save the token.
-        this.$store.dispatch("auth/saveToken", { token });
-
-        // Update the user.
-        await this.$store.dispatch("auth/updateUser", { user: data });
-
-        // Redirect home.
-        location.reload();
-        this.$router.push({ name: "home" });
-      }
-    }, */
+    /* search () {
+      (this.loginCard = false), (this.registerCard = false) (this.searchCard = true)
+    } */
   }
 }
 </script>
@@ -525,7 +428,7 @@ export default {
   -moz-border-radius: 0 100% 0 0;
   -webkit-border-radius: 0 100% 0 0;
   border-radius: 0 100% 0 0;
-  background: #ff5859;
+  background: rgb(255, 88, 89);
 }
 .backgroundImage{
   background: url('/images/vendor/1.jpg') no-repeat center center; background-size: cover;

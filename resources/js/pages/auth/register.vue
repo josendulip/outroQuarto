@@ -5,7 +5,7 @@
                 <div class="h-100">
                     <div class="h-100 no-gutters row">
                         <div class="h-100 d-md-flex d-sm-block bg-white justify-content-center align-items-center col-md-12 col-lg-7">
-                            <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
+                            <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9 px-5">
                                 <div class="app-logo my-5">
                                 <router-link to="/" class="navbar-brand">
                                     <img src="images/logo/200x48.png" :alt="appName" class="img-fluid">                                    
@@ -61,9 +61,9 @@
                                         </div>
                                         <div class="divider row"></div>
                                         <div class="mt-4 d-flex align-items-center">
-                                            <h5 class="mb-0">{{ $t('register_has_acount') }} <router-link :to="{ name: 'login' }"  active-class="active" class="text-primary">{{ $t('goTo__login_link') }} </router-link></h5>
+                                            <h5 class="mb-0">{{ $t('register_has_acount') }} <router-link :to="{ name: 'login' }" active-class="active" class="text-primary">{{ $t('goTo__login_link') }} </router-link></h5>
                                             <div class="ml-auto">
-                                                <v-button :loading="form.busy" class="badge-pill btn-shadow btn-hover-shine btn btn-primary">
+                                                <v-button :loading="form.busy" class="badge-pill btn-shadow btn-hover-shine btn btn-primary px-5">
                                                     {{ $t('register') }}
                                                 </v-button>
                                             </div>
@@ -75,10 +75,8 @@
                         <div class="d-lg-flex d-xs-none col-lg-5">
                             <div class="position-relative h-100 d-flex justify-content-center align-items-center" style="background: url('images/register_login/4.jpg') no-repeat center center; background-size: cover;">
                                 <div class="text-white mx-auto px-5">
-                                    <h3>Scalable, Modular, Consistent</h3>
-                                    <p>Easily exclude the components you don't require. Lightweight, consistent
-                                        Bootstrap based styles across all elements and components
-                                    </p>
+                                    <h3 class="h2">{{ $t('text_register_title') }}</h3>
+                                    <p class="lead"> {{ $t('text_register') }} </p>
                                 </div>
                             </div>
                         </div>
@@ -209,6 +207,13 @@ export default {
 </script>
 
 <style lang="scss">    
+    .app-container {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        margin: 0;
+        width: 100%;
+    }
     .divider {
         margin-top: 1rem;
         margin-bottom: 1rem;

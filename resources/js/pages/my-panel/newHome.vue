@@ -125,7 +125,7 @@
                     <option value="Vivenda">
                         {{ $t("annou_form_type_house") }}
                     </option>
-                    <option value="Albergue">
+                   <!--  <option value="Albergue">
                         {{ $t("annou_form_type_albergue") }}
                     </option>
                     <option value="Hospedaria">
@@ -145,7 +145,7 @@
                     </option>
                     <option value="Pensão">
                         {{ $t("annou_form_type_pension") }}
-                    </option>
+                    </option> -->
                     </select>
                     <has-error :form="form" field="type" class="text-white" />
                 </sui-table-cell>

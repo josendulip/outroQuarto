@@ -5,7 +5,7 @@
         <div class="row">
           <div class=" col-sm-4 col-md col-sm-4  col-12 col">
             <h5 class="headin5_amrc col_white_amrc pt2">
-              {{ $t('menu1_footer') }}
+              <img class="mr-3 rounded-circle" src="/images/logo/200x48W.png" alt="OutroQuarto">
             </h5>
             <p class="mb10">
               {{ $t('history_footer') }}
@@ -19,22 +19,64 @@
               {{ $t('menu1_footer') }}
             </h5>
             <ul class="footer_ul_amrc">
-              <li><a href="#">{{ $t('mission_footer') }}</a></li>
-              <li><a href="#">{{ $t('vision_footer') }}</a></li>
-              <li><a href="#">{{ $t('career_footer') }}</a></li>
-              <li><a href="#">{{ $t('privacy_footer') }}</a></li>
-              <li><a href="#">{{ $t('terms_footer') }}</a></li>
+              <li>
+                <router-link :to="{'name': 'about'}">
+                  {{ $t('mission_footer') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{'name': 'about'}">
+                  {{ $t('vision_footer') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{'name': 'about'}">
+                  {{ $t('career_footer') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{'name':'policy'}">
+                  {{ $t('privacy_footer') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{'name':'term-condition'}">
+                  {{ $t('terms_footer') }}
+                </router-link>
+              </li>
               <li><a href="#">Image Cropping</a></li>
             </ul>
           </div>
           <div class=" col-sm-4 col-md  col-6 col">
-            <h5 class="headin5_amrc col_white_amrc pt2">{{ $t('menu2_footer') }}</h5>
+            <h5 class="headin5_amrc col_white_amrc pt2">
+              {{ $t('menu2_footer') }}
+            </h5>
             <ul class="footer_ul_amrc">
-              <li><a href="#">{{ $t('ads_footer') }}</a></li>
-              <li><a href="#">{{ $t('collaborate_footer') }}</a></li>
-              <li><a href="#">{{ $t('solicitation_footer') }}</a></li>
-              <li><a href="#">{{ $t('privacy_footer') }}</a></li>
-              <li><a href="#">{{ $t('terms_footer') }}</a></li>
+              <li>
+                <router-link :to="{ name: 'advertiser' }">
+                  {{ $t('ads_footer') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'collaborate' }">
+                  {{ $t("collaborate_footer") }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'advertiser' }">
+                  {{ $t("solicitation_footer") }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{'name':'policy'}">
+                  {{ $t('privacy_footer') }}
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="{'name':'term-condition'}">
+                  {{ $t('terms_footer') }}
+                </router-link>
+              </li>
               <li><a href="#">Image Cropping</a></li>
             </ul>
           </div>

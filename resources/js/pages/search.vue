@@ -440,7 +440,7 @@
               </a>
             </div>
             <sui-card-content>
-              <sui-card-header>{{ house.price | currency("AKZ", 2, { spaceBetweenAmountAndSymbol: true }) }} / {{ house.payment_METHOD }}</sui-card-header>
+              <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} / {{ house.payment_METHOD }}</sui-card-header>
               <sui-card-meta>{{ $t("announce_public_at") }} {{ house.created_at | OnlyDate }}</sui-card-meta>
               <sui-card-description class="text-lowercase">
                 {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
@@ -451,11 +451,12 @@
             </sui-card-content>
             <sui-card-content extra>
               <sui-icon name="home" />
-              {{ $t("home_form_type") }}:
+              <!-- {{ $t("home_form_type") }}:
               <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
               <span v-else class="font-weight-bold text-lowercase">
                 {{ $t("home_form_type_short") }}
-              </span>
+              </span> -->
+              {{ house.county }} - {{ house.city }}
             </sui-card-content>
           </sui-card>
         </div>
