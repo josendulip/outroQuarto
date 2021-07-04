@@ -48,8 +48,8 @@
                     <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;<router-link :to="{  name: 'my-panel.welcome' }">{{ $t('mypanel_menu_dashboard') }}</router-link>&nbsp;/&nbsp;</p>
                     <p class="text-primary mb-0 hover-cursor text-capitalize" v-for="(tag, index) in $route.name.split('.')" :key="tag"> <span v-if="index == 1">{{ tag }}</span></p>
                   </div>
-                </div>                
-                <div class="d-flex justify-content-between align-items-end flex-wrap">
+                </div>
+                <div class="d-flex justify-content-between align-items-end flex-wrap hidden-xs-down hidden-sm-down">
                     <form action="" class="form-inline">
                       <input class="form-control mr-sm-2 " type="search" :placeholder="$t('search_for')" aria-label="Search">
                     </form>

@@ -2290,3 +2290,788 @@ export default {
   height: 200px;
 }
 </style>
+
+
+
+
+FILTER DE HOME SEARCH /////
+
+
+      <div class="row">
+        <!-- Filter  Menu -->
+        <div v-show="filtering" class="col-md-12 my-4">
+          <nav class="navbar navbar-expand navbar-light shadow-none  my-3 hidden-xs-down hidden-sm-down">
+            <div class="container">
+              <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                <li class="nav-item hidden-md-down">
+                  <a href="javascript:void(0)" class="nav-link text-uppercase"><i class="mix icon" /> {{ $t("search_filter") }}</a>
+                </li>
+                <!-- CITIES -->
+                <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ $t("search_province") }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <label v-for="(city, index) in Object.keys(cities)" :key="index" class="dropdown-item cities">
+                      <input v-model="province" :value="city" type="radio" class="custom-control-input">
+                      <span class="city"><i class="angle double right icon" />{{ city }}</span>
+                    </label>
+                    <div v-if="counties" class="dropdown-divider" />
+                    <a v-if="counties" href="javascript:(0)" class="dropdown-item" @click.prevent="uncheckCC()">
+                      <i class="check square outline icon" />
+                      {{ $t("search_uncheck") }}
+                    </a>
+                  </div>
+                </li>
+                <!-- COUNTIES -->
+                <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
+                  <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ $t("announce_form_county") }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div v-for="(county, index) in counties" :key="index" class="dropdown-item">
+                      <label class="custom-control">
+                        <input type="checkbox" :checked="countyFilter.includes(county)" class="custom-control-input" @change="toggleCountyFilter(county)">
+                        <div class="custom-control-label">{{ county }}</div>
+                      </label>
+                    </div>
+                    <a v-if="!counties" class="dropdown-item">{{ $t("search_choose_first_city") }}</a>
+                    <div v-if="counties" class="dropdown-divider" />
+                    <a v-if="counties" href="javascript:(0)" class="dropdown-item" @click.prevent="UncheckAllCount()"><i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
+                  </div>
+                </li>
+                <!-- HOUSE TYPE -->
+                <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
+                  <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    {{ $t("announce_form_type") }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="outhouse">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_outhouse") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Apartamento">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_apart") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Vivenda">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_house") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Albergue">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_albergue") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="guesthouse">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_Hospedaria") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Hotel">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_hotel") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Hostel">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_hostel") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Motel">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_motel") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Lodge">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_pousada") }}
+                        </div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Pension">
+                        <div class="custom-control-label">
+                          {{ $t("annou_form_type_pension") }}
+                        </div>
+                      </label>
+                    </a>
+
+                    <div v-if="houseTypeFilter" class="dropdown-divider" />
+                    <a v-if="houseTypeFilter" class="dropdown-item" href="javascript:(0)" @click.prevent="UncheckAllType()"><i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
+                  </div>
+                </li>
+                <!-- PRICES -->
+                <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ $t('home_form_payment') }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="pricing-slider center-content">
+                      <label class="form-slider">
+                        <span>{{ $t('Type_price_you_need_to_se') }}</span>
+                        <input v-model="range" type="range" min="0" max="9999999999" step="2">
+                      </label>
+                      <div class="pricing-slider-value small px-2">
+                        <small>{{ range | currency("AKZ", 2, { spaceBetweenAmountAndSymbol: true }) }}</small>
+                      </div>
+                    </div>
+                    <div class="pricing-item-price px-2">
+                      <input v-model="range" type="number" class="form-control" :run="!range ? range = 2 : true" :placeholder="$t('Type_price')">
+                    </div>
+                  </div>
+                </li>
+                <!-- ROOM -->
+                <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
+                  <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ $t("announce_form_room") }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="roomFilter" type="checkbox" value="1" class="custom-control-input">
+                        <div class="custom-control-label">1</div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="roomFilter" type="checkbox" value="2" class="custom-control-input">
+                        <div class="custom-control-label">2</div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="roomFilter" type="checkbox" value="3" class="custom-control-input">
+                        <div class="custom-control-label">3</div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="roomFilter" type="checkbox" value="4" class="custom-control-input">
+                        <div class="custom-control-label">4</div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="roomFilter" type="checkbox" value="5" class="custom-control-input">
+                        <div class="custom-control-label">5</div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <label class="custom-control">
+                        <input v-model="roomFilter" type="checkbox" value="6" class="custom-control-input">
+                        <div class="custom-control-label">6</div>
+                      </label>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)">
+                      <div class="form-group">
+                        <input v-model="customRoom" type="number" class="form-control" :run="!customRoom ? customRoom = 1 : true" min="1" max="99">
+                      </div>
+                    </a>
+                    <div v-if="roomFilter" class="dropdown-divider" />
+                    <a v-show="roomFilter" href="javascript:(0)" class="dropdown-item" @click.prevent="UncheckAllRoom()"> <i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
+                  </div>
+                </li>
+              </ul>
+              <div class="my-2 w-50 position-relative">
+                <div class="input-group">
+                  <input id="job" v-model="searches" type="text" auto-complete="off" class="form-control badge-pill" :placeholder="$t('search_for')" aria-describedby="button-addon2" @keyup.prevent="searchinger">
+                  <div class="input-group-append">
+                    <button id="button-addon2" type="button" class="btn bg-main badge-pill px-5">
+                      <i class="search icon" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+
+          <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-radius">
+            <div class="container-fluid">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#filterMenu"
+                aria-controls="filterMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="filterMenu">
+                <!-- SEARCH FORM -->
+                <form class="form-inline ml-3">
+                  <div class="input-group">
+                    <input
+                      class="form-control form-control-navbar"
+                      type="search"
+                      :placeholder="$t('search_for')"
+                      aria-label="Search"
+                      v-model="searches"
+                      @keyup="searchinger"
+                      aria-describedby="button-addon2"
+                    />
+                    <div class="input-group-append">
+                      <button class="btn btn-light" @click.prevent="searchinger">
+                        <i class="search icon"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <!-- CITIES -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      >{{ $t("search_province") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <label
+                        class="dropdown-item cities"
+                        v-for="(city, index) in Object.keys(cities)"
+                        :key="index"
+                      >
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          :value="city"
+                          v-model="province"
+                        />
+                        <span class="city"
+                          ><i class="angle double right icon"></i>{{ city }}</span
+                        >
+                      </label>
+                      <div class="dropdown-divider" v-if="counties"></div>
+                      <a
+                        class="dropdown-item"
+                        href="javascript:(0)"
+                        v-if="counties"
+                        @click.prevent="uncheckCC()"
+                        ><i class="check square outline icon"></i>
+                        {{ $t("search_uncheck") }}</a
+                      >
+                    </div>
+                  </li>
+                  <!-- COUNTIES -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ $t("announce_form_county") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <!-- <label class="dropdown-item cities" v-for="(county, index) in counties" :key="index">
+                                        <input
+                                        type="checkbox"
+                                        class="custom-control-input" v-model="form.county" :value="county"/>
+                                        <span class="city"><i class="angle double right icon"></i>{{county}}</span> 
+                                    </label>  -->
+                      <div
+                        class="dropdown-item"
+                        v-for="(county, index) in counties"
+                        :key="index"
+                      >
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            @change="toggleCountyFilter(county)"
+                            :checked="countyFilter.includes(county)"
+                          />
+                          <div class="custom-control-label">{{ county }}</div>
+                        </label>
+                      </div>
+                      <a class="dropdown-item" v-if="!counties">{{
+                        $t("search_choose_first_city")
+                      }}</a>
+                      <div class="dropdown-divider" v-if="counties"></div>
+                      <a
+                        class="dropdown-item"
+                        href="javascript:(0)"
+                        v-if="counties"
+                        @click.prevent="UncheckAllCount()"
+                        ><i class="check square outline icon"></i>
+                        {{ $t("search_uncheck") }}</a
+                      >
+                    </div>
+                  </li>
+                  <!-- PRICES -->
+                 <!--  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ $t("home_form_payment") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <div class="pricing-slider center-content">
+                        <label class="form-slider">
+                          <span>How many users do you have?</span>
+                          <input
+                            type="range"
+                            ref="slider"
+                            v-model="priceInputValue"
+                            @input="handleSliderValuePosition($event.target)"
+                          />
+                        </label>
+                        <div ref="sliderValue" class="pricing-slider-value">
+                          {{ getPricingData(priceInput) }}
+                        </div>
+                      </div>
+                      <div class="pricing-item-price">
+                        <span class="pricing-item-price-currency">
+                          {{ getPricingData(this.priceOutput.plan1, 0) }}
+                        </span>
+                        <span class="pricing-item-price-amount">
+                          {{ getPricingData(this.priceOutput.plan1, 1) }}
+                        </span>
+                        {{ getPricingData(this.priceOutput.plan1, 2) }}
+                      </div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li> -->
+                  <!-- ROOM -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ $t("announce_form_room") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="1"
+                            v-model="roomFilter"
+                          />
+                          <div class="custom-control-label">1</div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="2"
+                            v-model="roomFilter"
+                          />
+                          <div class="custom-control-label">2</div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="3"
+                            v-model="roomFilter"
+                          />
+                          <div class="custom-control-label">3</div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="4"
+                            v-model="roomFilter"
+                          />
+                          <div class="custom-control-label">4</div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="5"
+                            v-model="roomFilter"
+                          />
+                          <div class="custom-control-label">5</div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="6"
+                            v-model="roomFilter"
+                          />
+                          <div class="custom-control-label">6</div>
+                        </label>
+                      </a>
+                      <div class="dropdown-divider" v-if="roomFilter"></div>
+                      <a
+                        class="dropdown-item"
+                        href="javascript:(0)"
+                        v-show="roomFilter"
+                        @click.prevent="UncheckAllRoom()"
+                        ><i class="check square outline icon"></i>
+                        {{ $t("search_uncheck") }}</a
+                      >
+                    </div>
+                  </li>
+                  <!-- PERIOD -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ $t("home_form_type") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <label class="dropdown-item cities">
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          value="short"
+                          v-model="shortAndLongPeriod"
+                        />
+                        <span class="city"
+                          ><i class="angle double right icon"></i>
+                          {{ $t("home_form_type_short") }}</span
+                        >
+                      </label>
+                      <label class="dropdown-item cities">
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          value="long"
+                          v-model="shortAndLongPeriod"
+                        />
+                        <span class="city"
+                          ><i class="angle double right icon"></i>
+                          {{ $t("home_form_type_long") }}</span
+                        >
+                      </label>
+                      <div class="dropdown-divider" v-if="shortAndLongPeriod"></div>
+                      <a
+                        class="dropdown-item"
+                        href="javascript:(0)"
+                        v-if="shortAndLongPeriod"
+                        @click.prevent="UncheckAllPeriod()"
+                        ><i class="check square outline icon"></i>
+                        {{ $t("search_uncheck") }}</a
+                      >
+                    </div>
+                  </li>
+                  <!-- STATE -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ $t("view_house_availability") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <label class="dropdown-item cities">
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          value="available"
+                          v-model="FreeStateOrBusy"
+                        />
+                        <span class="city"
+                          ><i class="angle double right icon"></i
+                          >{{ $t("view_house_details_stateUp") }}</span
+                        >
+                      </label>
+                      <label class="dropdown-item cities">
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          value="occupied"
+                          v-model="FreeStateOrBusy"
+                        />
+                        <span class="city"
+                          ><i class="angle double right icon"></i
+                          >{{ $t("view_house_details_stateDown") }}</span
+                        >
+                      </label>
+                      <div class="dropdown-divider" v-if="FreeStateOrBusy"></div>
+                      <a
+                        class="dropdown-item"
+                        href="javascript:(0)"
+                        v-if="FreeStateOrBusy"
+                        @click.prevent="UncheckAllState()"
+                        ><i class="check square outline icon"></i>
+                        {{ $t("search_uncheck") }}</a
+                      >
+                    </div>
+                  </li>
+                  <!-- HOUSE TYPE -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ $t("announce_form_type") }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="outhouse"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_outhouse") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Apartamento"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_apart") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Vivenda"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_house") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Albergue"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_albergue") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="guesthouse"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_Hospedaria") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Hotel"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_hotel") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Hostel"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_hostel") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Motel"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_motel") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Lodge"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_pousada") }}
+                          </div>
+                        </label>
+                      </a>
+                      <a class="dropdown-item" href="javascript:void(0)">
+                        <label class="custom-control">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            value="Pension"
+                            v-model="houseTypeFilter"
+                          />
+                          <div class="custom-control-label">
+                            {{ $t("annou_form_type_pension") }}
+                          </div>
+                        </label>
+                      </a>
+
+                      <div class="dropdown-divider" v-if="houseTypeFilter"></div>
+                      <a
+                        class="dropdown-item"
+                        href="javascript:(0)"
+                        v-if="houseTypeFilter"
+                        @click.prevent="UncheckAllType()"
+                        ><i class="check square outline icon"></i>
+                        {{ $t("search_uncheck") }}</a
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="col-md-12 my-5">
+          <div class="row">
+            <div v-for="(house, index) in FeedOfHouse" :key="index" class="col-md-3 mb-4">
+              <sui-card class="content-house rounded-radius">
+                <sui-image :src="house.profile" class="image-house rounded-top" />
+                <p class="title-house">
+                  <!-- {{ house.created_at | OnlyDate }} -->
+                </p>
+                <div class="overlay-house" />
+                <div class="button-house">
+                  <a
+                    href="javascript:void(0)"
+                    @click.prevent="viewHouse(house.house_code)"
+                  >
+                    {{ $t("myPanel_card_footer_view") }}
+                  </a>
+                </div>
+                <sui-card-content>
+                  <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} /{{ house.payment_METHOD }} </sui-card-header>
+                  <sui-card-meta>
+                    {{ $t("announce_public_at") }}
+                    {{ house.created_at | OnlyDate }}
+                  </sui-card-meta>
+                  <sui-card-description class="text-lowercase">
+                    {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+                    {{ house.living_room }} {{ $t("announce_form_living_room") }},
+                    {{ house.bathroom }}
+                    {{ $t("announce_form_bathroom") }}.
+                  </sui-card-description>
+                </sui-card-content>
+                <sui-card-content extra>
+                  <sui-icon name="home" />
+                  <!-- {{ $t("home_form_type") }}:
+                  <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
+                  <span v-else class="font-weight-bold text-lowercase">{{
+                    $t("home_form_type_short")
+                  }}</span> -->
+                  {{ house.county }} - {{ house.city }}
+                </sui-card-content>
+              </sui-card>
+            </div>
+          </div>
+        </div>
+      </div>

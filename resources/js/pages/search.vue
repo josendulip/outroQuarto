@@ -394,29 +394,35 @@
       </div>
       <!-- Implemented filter -->
       <div class="row p-2 mb-2">
-        <div class="">
-          <span v-if="province" class="font-weight-bold">
+        <div class="mr-2">
+          <a is="sui-label" v-if="province" size="tiny">
+            {{ province }}
+            <sui-icon name="delete" @click="uncheckCC" />
+          </a>
+          <!-- <span v-if="province" class="font-weight-bold">
             <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="uncheckCC" /></a></small>
             <strong>{{ province }}</strong>
-          </span>
-          <span v-if="countyFilter != ''">:
-            <span v-for="county in countyFilter" :key="county" class="d-inline text-muted"><em>{{ county }}, </em></span></span>
-        </div>
-        <div class="">
-          <span v-if="houseTypeFilter != ''">
-            <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="UncheckAllType" /></a></small>
-            <strong>{{ $t("announce_form_type") }}:</strong>
-            <span v-for="house_type in houseTypeFilter" :key="house_type" class="d-inline text-muted"><em> {{ house_type }}, </em></span>
+          </span> -->
+          <span v-if="countyFilter != '' || province != false">
+            <a is="sui-label" v-for="county in countyFilter" :key="county" size="tiny">
+              {{ county }}
+              <sui-icon name="delete" @click="uncheckCounty(county)" />
+            </a>
           </span>
         </div>
-        <div class="">
-          <span v-if="roomFilter != ''">
-            <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="UncheckAllRoom" /></a></small>
-            <strong><i class="caret right icon" />{{ $t("announce_form_room") }}<small>(Qtd)</small></strong>
-            <span v-for="room in roomFilter" :key="room" class="d-inline text-muted"><em>{{ room }}, </em></span>
-          </span>
+        <div class="mr-2">
+          <a is="sui-label" v-for="house_type in houseTypeFilter" :key="house_type" color="grey" size="tiny">
+            {{ house_type }}
+            <sui-icon name="delete" @click="uncheckTypesHouse(house_type)" />
+          </a>
         </div>
-        <!-- <div class="">
+        <div class="mr-2">
+          <a is="sui-label" v-for="room in roomFilter" :key="room" color="grey" size="tiny">
+            {{ room }} - {{ $t('announce_form_rooms') }}
+            <sui-icon name="delete" @click="uncheckRoom(room)" />
+          </a>
+        </div>
+        <!-- <div class="mr-2">
           <span v-if="customRoom != ''">
             <small><a href="javascript:void(0)"><i class="close icon text-muted" @click="UncheckCostRoom" /></a></small>
             <strong><i class="caret right icon" />{{ $t("announce_form_room") }}<small>(Qtd)</small></strong>
@@ -474,704 +480,705 @@ import Form from 'vform'
 import axios from 'axios'
 import Vue2Filters from 'vue2-filters'
 import Navout from '~/components/Navout'
+
 const cities = {
   Benguela: [
     {
-      name: "Benguela",
-      key: 1,
+      name: 'Benguela',
+      key: 1
     },
     {
-      name: "Baia Farta",
-      key: 2,
+      name: 'Baia Farta',
+      key: 2
     },
     {
-      name: "Catumbela",
-      key: 3,
+      name: 'Catumbela',
+      key: 3
     },
     {
-      name: "Lobito",
-      key: 4,
+      name: 'Lobito',
+      key: 4
     },
     {
-      name: "Ganda",
-      key: 5,
+      name: 'Ganda',
+      key: 5
     },
     {
-      name: "Bocoio ",
-      key: 6,
+      name: 'Bocoio',
+      key: 6
     },
 
     {
-      name: "Balombo",
-      key: 7,
+      name: 'Balombo',
+      key: 7
     },
     {
-      name: "Chongoroi",
-      key: 8,
+      name: 'Chongoroi',
+      key: 8
     },
 
     {
-      name: "Caimbambo",
-      key: 9,
+      name: 'Caimbambo',
+      key: 9
     },
     {
-      name: "Cubal",
-      key: 9,
-    },
+      name: 'Cubal',
+      key: 10
+    }
   ],
   Bengo: [
     {
-      name: "Caxito",
-      key: 1,
+      name: 'Caxito',
+      key: 1
     },
     {
-      name: "Dande",
-      key: 2,
+      name: 'Dande',
+      key: 2
     },
     {
-      name: "Bula",
-      key: 3,
+      name: 'Bula',
+      key: 3
     },
     {
-      name: "Atumba",
-      key: 4,
+      name: 'Atumba',
+      key: 4
     },
     {
-      name: "Dembos",
-      key: 5,
+      name: 'Dembos',
+      key: 5
     },
     {
-      name: "Nambuangongo",
-      key: 6,
+      name: 'Nambuangongo',
+      key: 6
     },
     {
-      name: "Pango Aluquém",
-      key: 7,
-    },
+      name: 'Pango Aluquém',
+      key: 7
+    }
   ],
   Bié: [
     {
-      name: "Cuito",
-      key: 1,
+      name: 'Cuito',
+      key: 1
     },
     {
-      name: "Andulo",
-      key: 2,
+      name: 'Andulo',
+      key: 2
     },
     {
-      name: "Chitembo",
-      key: 3,
+      name: 'Chitembo',
+      key: 3
     },
     {
-      name: "Camacupa",
-      key: 4,
+      name: 'Camacupa',
+      key: 4
     },
     {
-      name: "Chinguar",
-      key: 5,
+      name: 'Chinguar',
+      key: 5
     },
     {
-      name: "Catabola",
-      key: 6,
+      name: 'Catabola',
+      key: 6
     },
     {
-      name: "Cunhinga",
-      key: 7,
+      name: 'Cunhinga',
+      key: 7
     },
     {
-      name: "Cuemba",
-      key: 8,
+      name: 'Cuemba',
+      key: 8
     },
     {
-      name: "Nharêa",
-      key: 9,
-    },
+      name: 'Nharêa',
+      key: 9
+    }
   ],
   Cabinda: [
     {
-      name: "Cabinda",
-      key: 1,
+      name: 'Cabinda',
+      key: 1
     },
 
     {
-      name: "Cacongo",
-      key: 2,
+      name: 'Cacongo',
+      key: 2
     },
     {
-      name: "Belize",
-      key: 2,
+      name: 'Belize',
+      key: 2
     },
     {
-      name: "Buco Zau",
-      key: 2,
-    },
+      name: 'Buco Zau',
+      key: 2
+    }
   ],
-  "Cuando Cubango": [
+  'Cuando Cubango': [
     {
-      name: "Menongue",
-      key: 1,
+      name: 'Menongue',
+      key: 1
     },
     {
-      name: "Mavinga",
-      key: 2,
+      name: 'Mavinga',
+      key: 2
     },
     {
-      name: "Dirico",
-      key: 3,
+      name: 'Dirico',
+      key: 3
     },
     {
-      name: "Cuito Cuanavale",
-      key: 4,
+      name: 'Cuito Cuanavale',
+      key: 4
     },
     {
-      name: "Cuchi",
-      key: 5,
+      name: 'Cuchi',
+      key: 5
     },
     {
-      name: "Rivungo",
-      key: 6,
+      name: 'Rivungo',
+      key: 6
     },
     {
-      name: "Calai",
-      key: 7,
+      name: 'Calai',
+      key: 7
     },
     {
-      name: "Changar",
-      key: 8,
+      name: 'Changar',
+      key: 8
     },
     {
-      name: "Nancova",
-      key: 9,
-    },
+      name: 'Nancova',
+      key: 9
+    }
   ],
-  "Cuanza Norte": [
+  'Cuanza Norte': [
     {
-      name: "Ndalatando",
-      key: 1,
+      name: 'Ndalatando',
+      key: 1
     },
     {
-      name: "Cazengo",
-      key: 2,
+      name: 'Cazengo',
+      key: 2
     },
     {
-      name: "Golungo Alto",
-      key: 3,
+      name: 'Golungo Alto',
+      key: 3
     },
     {
-      name: "Cambambe",
-      key: 4,
+      name: 'Cambambe',
+      key: 4
     },
     {
-      name: "Samba Cajú",
-      key: 5,
+      name: 'Samba Cajú',
+      key: 5
     },
     {
-      name: "Ambaca",
-      key: 6,
+      name: 'Ambaca',
+      key: 6
     },
     {
-      name: "Lucala",
-      key: 7,
+      name: 'Lucala',
+      key: 7
     },
     {
-      name: "Banga",
-      key: 8,
+      name: 'Banga',
+      key: 8
     },
     {
-      name: "Bolongongo",
-      key: 9,
+      name: 'Bolongongo',
+      key: 9
     },
     {
-      name: "Quiculungo",
-      key: 10,
+      name: 'Quiculungo',
+      key: 10
     },
     {
-      name: "Ngonguembo",
-      key: 11,
-    },
+      name: 'Ngonguembo',
+      key: 11
+    }
   ],
-  "Cuanza Sul": [
+  'Cuanza Sul': [
     {
-      name: "Sumbe",
-      key: 1,
+      name: 'Sumbe',
+      key: 1
     },
     {
-      name: "Libolo",
-      key: 2,
+      name: 'Libolo',
+      key: 2
     },
     {
-      name: "Amboim",
-      key: 3,
+      name: 'Amboim',
+      key: 3
     },
     {
-      name: "Quibala",
-      key: 4,
+      name: 'Quibala',
+      key: 4
     },
     {
-      name: "Seles",
-      key: 5,
+      name: 'Seles',
+      key: 5
     },
     {
-      name: "Cela",
-      key: 6,
+      name: 'Cela',
+      key: 6
     },
     {
-      name: "Mussende",
-      key: 7,
+      name: 'Mussende',
+      key: 7
     },
     {
-      name: "Quilenda",
-      key: 8,
+      name: 'Quilenda',
+      key: 8
     },
     {
-      name: "Ebo",
-      key: 9,
+      name: 'Ebo',
+      key: 9
     },
     {
-      name: "Conda",
-      key: 10,
-    },
+      name: 'Conda',
+      key: 10
+    }
   ],
   Cunene: [
     {
-      name: "Ombadja",
-      key: 1,
+      name: 'Ombadja',
+      key: 1
     },
     {
-      name: "Cuanhama",
-      key: 2,
+      name: 'Cuanhama',
+      key: 2
     },
     {
-      name: "Curoca",
-      key: 3,
+      name: 'Curoca',
+      key: 3
     },
     {
-      name: "Cahama",
-      key: 4,
+      name: 'Cahama',
+      key: 4
     },
     {
-      name: "Cuvelai",
-      key: 5,
+      name: 'Cuvelai',
+      key: 5
     },
     {
-      name: "Namacunde",
-      key: 6,
-    },
+      name: 'Namacunde',
+      key: 6
+    }
   ],
   Huambo: [
     {
-      name: "Huambo",
-      key: 1,
+      name: 'Huambo',
+      key: 1
     },
     {
-      name: "Cáala",
-      key: 2,
+      name: 'Cáala',
+      key: 2
     },
     {
-      name: "Tchikala Tcholohanga",
-      key: 3,
+      name: 'Tchikala Tcholohanga',
+      key: 3
     },
     {
-      name: "Bailundo",
-      key: 4,
+      name: 'Bailundo',
+      key: 4
     },
     {
-      name: "Ecunha",
-      key: 5,
+      name: 'Ecunha',
+      key: 5
     },
     {
-      name: "Ukuma",
-      key: 6,
+      name: 'Ukuma',
+      key: 6
     },
     {
-      name: "Longonjo",
-      key: 7,
+      name: 'Longonjo',
+      key: 7
     },
     {
-      name: "Mungo",
-      key: 8,
+      name: 'Mungo',
+      key: 8
     },
     {
-      name: "Londouimbale",
-      key: 9,
+      name: 'Londouimbale',
+      key: 9
     },
     {
-      name: "Tchinjenje",
-      key: 10,
-    },
+      name: 'Tchinjenje',
+      key: 10
+    }
   ],
 
   Huila: [
     {
-      name: "Lubango",
-      key: 1,
+      name: 'Lubango',
+      key: 1
     },
     {
-      name: "Cacula",
-      key: 2,
+      name: 'Cacula',
+      key: 2
     },
     {
-      name: "Chibia",
-      key: 3,
+      name: 'Chibia',
+      key: 3
     },
     {
-      name: "Caconda",
-      key: 4,
+      name: 'Caconda',
+      key: 4
     },
     {
-      name: "Caluquembe",
-      key: 5,
+      name: 'Caluquembe',
+      key: 5
     },
     {
-      name: "Quilengues",
-      key: 5,
+      name: 'Quilengues',
+      key: 5
     },
     {
-      name: "Cuvango",
-      key: 6,
+      name: 'Cuvango',
+      key: 6
     },
     {
-      name: "Quipungo",
-      key: 7,
+      name: 'Quipungo',
+      key: 7
     },
     {
-      name: "Matala",
-      key: 8,
+      name: 'Matala',
+      key: 8
     },
     {
-      name: "Chicomba",
-      key: 9,
+      name: 'Chicomba',
+      key: 9
     },
     {
-      name: "Jamba",
-      key: 10,
+      name: 'Jamba',
+      key: 10
     },
     {
-      name: "Chipindo",
-      key: 11,
+      name: 'Chipindo',
+      key: 11
     },
     {
-      name: "Gambos",
-      key: 12,
+      name: 'Gambos',
+      key: 12
     },
     {
-      name: "Chipindo",
-      key: 13,
+      name: 'Chipindo',
+      key: 13
     },
     {
-      name: "Humpata",
-      key: 14,
-    },
+      name: 'Humpata',
+      key: 14
+    }
   ],
   Luanda: [
     {
-      name: "Belas",
-      key: 1,
+      name: 'Belas',
+      key: 1
     },
     {
-      name: "Cacuaco",
-      key: 2,
+      name: 'Cacuaco',
+      key: 2
     },
     {
-      name: "Cazenga",
-      key: 3,
+      name: 'Cazenga',
+      key: 3
     },
     {
-      name: "Icolo e Bengo ",
-      key: 4,
+      name: 'Icolo e Bengo ',
+      key: 4
     },
     {
-      name: "Luanda",
-      key: 5,
+      name: 'Luanda',
+      key: 5
     },
     {
-      name: "Kilamba Kiaxi",
-      key: 6,
+      name: 'Kilamba Kiaxi',
+      key: 6
     },
     {
-      name: "Quissama",
-      key: 7,
+      name: 'Quissama',
+      key: 7
     },
     {
-      name: "Talatona",
-      key: 8,
+      name: 'Talatona',
+      key: 8
     },
     {
-      name: "Viana",
-      key: 9,
-    },
+      name: 'Viana',
+      key: 9
+    }
   ],
-  "Lunda Norte": [
+  'Lunda Norte': [
     {
-      name: "Cuilo",
-      key: 1,
+      name: 'Cuilo',
+      key: 1
     },
     {
-      name: "Caungula",
-      key: 2,
+      name: 'Caungula',
+      key: 2
     },
     {
-      name: "Chitato",
-      key: 3,
+      name: 'Chitato',
+      key: 3
     },
     {
-      name: "Lubalo",
-      key: 4,
+      name: 'Lubalo',
+      key: 4
     },
     {
-      name: "Capenda Camulemba",
-      key: 5,
+      name: 'Capenda Camulemba',
+      key: 5
     },
     {
-      name: "Cuango",
-      key: 6,
+      name: 'Cuango',
+      key: 6
     },
     {
-      name: "Lucapa",
-      key: 7,
+      name: 'Lucapa',
+      key: 7
     },
     {
-      name: "Cambulo",
-      key: 8,
+      name: 'Cambulo',
+      key: 8
     },
     {
-      name: "Xá Muteba",
-      key: 9,
+      name: 'Xá Muteba',
+      key: 9
     },
     {
-      name: "Lóvua",
-      key: 10,
-    },
+      name: 'Lóvua',
+      key: 10
+    }
   ],
-  "Lunda Sul": [
+  'Lunda Sul': [
     {
-      name: "Saurimo",
-      key: 1,
+      name: 'Saurimo',
+      key: 1
     },
     {
-      name: "Muconda",
-      key: 2,
+      name: 'Muconda',
+      key: 2
     },
     {
-      name: "Cocolo",
-      key: 3,
+      name: 'Cocolo',
+      key: 3
     },
     {
-      name: "Dala",
-      key: 4,
-    },
+      name: 'Dala',
+      key: 4
+    }
   ],
   Malanje: [
     {
-      name: "Malanje",
-      key: 1,
+      name: 'Malanje',
+      key: 1
     },
     {
-      name: "Calandula",
-      key: 2,
+      name: 'Calandula',
+      key: 2
     },
     {
-      name: "Cacuso",
-      key: 3,
+      name: 'Cacuso',
+      key: 3
     },
     {
-      name: "Massango",
-      key: 4,
+      name: 'Massango',
+      key: 4
     },
     {
-      name: "Marimba",
-      key: 5,
+      name: 'Marimba',
+      key: 5
     },
     {
-      name: "Quiela",
-      key: 6,
+      name: 'Quiela',
+      key: 6
     },
     {
-      name: "Quirima",
-      key: 7,
+      name: 'Quirima',
+      key: 7
     },
     {
-      name: "Cangandala",
-      key: 8,
+      name: 'Cangandala',
+      key: 8
     },
     {
-      name: "Cahombo",
-      key: 9,
+      name: 'Cahombo',
+      key: 9
     },
     {
-      name: "Kunda dya Baze",
-      key: 10,
+      name: 'Kunda dya Baze',
+      key: 10
     },
     {
-      name: "Cambundi Catembo",
-      key: 11,
+      name: 'Cambundi Catembo',
+      key: 11
     },
     {
-      name: "Mucari",
-      key: 12,
+      name: 'Mucari',
+      key: 12
     },
     {
-      name: "Kiwaba Nzoji",
-      key: 13,
+      name: 'Kiwaba Nzoji',
+      key: 13
     },
     {
-      name: "Luquembo",
-      key: 14,
-    },
+      name: 'Luquembo',
+      key: 14
+    }
   ],
   Moxico: [
     {
-      name: "Moxico",
-      key: 1,
+      name: 'Moxico',
+      key: 1
     },
     {
-      name: "Luchazes",
-      key: 2,
+      name: 'Luchazes',
+      key: 2
     },
     {
-      name: "Alto Zambeze",
-      key: 3,
+      name: 'Alto Zambeze',
+      key: 3
     },
     {
-      name: "Bundas",
-      key: 4,
+      name: 'Bundas',
+      key: 4
     },
     {
-      name: "Luacano",
-      key: 5,
+      name: 'Luacano',
+      key: 5
     },
     {
-      name: "Cameia",
-      key: 6,
+      name: 'Cameia',
+      key: 6
     },
     {
-      name: "Camanongue",
-      key: 7,
+      name: 'Camanongue',
+      key: 7
     },
     {
-      name: "Luau",
-      key: 8,
+      name: 'Luau',
+      key: 8
     },
     {
-      name: "Léua",
-      key: 9,
-    },
+      name: 'Léua',
+      key: 9
+    }
   ],
   Namibe: [
     {
-      name: "Namibe",
-      key: 1,
+      name: 'Namibe',
+      key: 1
     },
     {
-      name: "Tombwa",
-      key: 2,
+      name: 'Tombwa',
+      key: 2
     },
     {
-      name: "Virei",
-      key: 3,
+      name: 'Virei',
+      key: 3
     },
     {
-      name: "Bibala",
-      key: 4,
+      name: 'Bibala',
+      key: 4
     },
     {
-      name: "Camucoio",
-      key: 2,
-    },
+      name: 'Camucoio',
+      key: 2
+    }
   ],
   Uíge: [
     {
-      name: "Uíge",
-      key: 1,
+      name: 'Uíge',
+      key: 1
     },
     {
-      name: "Dange - Quitexe",
-      key: 2,
+      name: 'Dange - Quitexe',
+      key: 2
     },
     {
-      name: "Bungo",
-      key: 3,
+      name: 'Bungo',
+      key: 3
     },
     {
-      name: "Ambuíla",
-      key: 4,
+      name: 'Ambuíla',
+      key: 4
     },
     {
-      name: "Negage",
-      key: 5,
+      name: 'Negage',
+      key: 5
     },
     {
-      name: "Púri",
-      key: 6,
+      name: 'Púri',
+      key: 6
     },
     {
-      name: "Maquela do Zombo",
-      key: 7,
+      name: 'Maquela do Zombo',
+      key: 7
     },
     {
-      name: "Damba",
-      key: 8,
+      name: 'Damba',
+      key: 8
     },
     {
-      name: "Pombo",
-      key: 9,
+      name: 'Pombo',
+      key: 9
     },
     {
-      name: "Bembe",
-      key: 10,
+      name: 'Bembe',
+      key: 10
     },
     {
-      name: "Milunga",
-      key: 11,
+      name: 'Milunga',
+      key: 11
     },
     {
-      name: "Songo",
-      key: 12,
+      name: 'Songo',
+      key: 12
     },
     {
-      name: "Quimbele",
-      key: 13,
+      name: 'Quimbele',
+      key: 13
     },
     {
-      name: "Alto Cauale",
-      key: 14,
+      name: 'Alto Cauale',
+      key: 14
     },
 
     {
-      name: "Mucaba",
-      key: 15,
+      name: 'Mucaba',
+      key: 15
     },
     {
-      name: "Buengas",
-      key: 16,
-    },
+      name: 'Buengas',
+      key: 16
+    }
   ],
   Zaire: [
     {
-      name: "Mbanza Congo",
-      key: 1,
+      name: 'Mbanza Congo',
+      key: 1
     },
     {
-      name: "Soyo",
-      key: 2,
+      name: 'Soyo',
+      key: 2
     },
     {
-      name: "Nzeto",
-      key: 3,
+      name: 'Nzeto',
+      key: 3
     },
     {
-      name: "Tomboco",
-      key: 4,
+      name: 'Tomboco',
+      key: 4
     },
     {
-      name: "Cuimba",
-      key: 5,
+      name: 'Cuimba',
+      key: 5
     },
     {
-      name: "Nóqui",
-      key: 6,
-    },
-  ],
+      name: 'Nóqui',
+      key: 6
+    }
+  ]
 }
 export default {
   components: {
@@ -1273,7 +1280,17 @@ export default {
     filterHouseByRange: function (houses) {
       return houses.filter((house) => house.price > 0 && house.price <= this.range ? house : 0)
     },
+    uncheckTypesHouse: function (houseType) {
+      this.houseTypeFilter = this.houseTypeFilter.filter(name => name !== houseType)
+    },
 
+    uncheckRoom: function (room) {
+      this.roomFilter = this.roomFilter.filter(name => name !== room)
+    },
+
+    uncheckCounty: function (checkedCounty) {
+      this.countyFilter = this.countyFilter.filter(name => name !== checkedCounty)
+    },
     UncheckAllType: function () {
       this.houseTypeFilter = []
     },

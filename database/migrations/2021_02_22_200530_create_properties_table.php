@@ -26,11 +26,12 @@ class CreatePropertiesTable extends Migration
             $table->string('period')->default('long period');
             $table->string('type');
             $table->string('payment_METHOD');
+            $table->string('contrat_type');
             $table->string('price');
-            $table->string('room');
-            $table->string('living_room');
-            $table->string('kitchen');
-            $table->string('bathroom');
+            $table->string('room')->nullable();
+            $table->string('living_room')->nullable();
+            $table->string('kitchen')->nullable();
+            $table->string('bathroom')->nullable();
             $table->boolean('seal')->default(0);
             $table->boolean('furniture')->default(0);
             $table->boolean('state')->default(0);
