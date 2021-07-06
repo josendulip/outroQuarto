@@ -138,7 +138,7 @@ export default {
         },
         prepareFields() {        
             this.data.append("house_code", this.form.house_code);
-            if (this.attachments.length > 0) {
+            if (this.attachments.length > 0 && this.attachments.length <= 19) {
                 for (var i = 0; i < this.attachments.length; i++) {
                     let attachment = this.attachments[i];
                     this.data.append('attachments[]', attachment);
@@ -163,6 +163,7 @@ export default {
                 alert('File too big > 16MB)');
                 return;
             }else{ */
+
                 for (var i = files.length - 1; i >= 0; i--) {
                     this.attachments.push(files[i]);
                 }

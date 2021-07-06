@@ -1,78 +1,55 @@
 <template>
   <div class="h-100 no-gutters row">
     <div class="d-none d-lg-block col-lg-4">
-      <div
-        id="carousel-example-2"
-        class="carousel slide carousel-fade"
-        data-ride="carousel"
-      >
+      <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-2" data-slide-to="1"></li>
-          <li data-target="#carousel-example-2" data-slide-to="2"></li>
+          <li data-target="#carousel-example-2" data-slide-to="0" class="active" />
+          <li data-target="#carousel-example-2" data-slide-to="1" />
+          <li data-target="#carousel-example-2" data-slide-to="2" />
         </ol>
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
             <div class="view">
-              <img
-                class="d-block w-100"
-                src="images/register_login/1.jpg"
-                alt="First slide"
-              />
-              <div class="mask rgba-black-light"></div>
+              <img class="d-block w-100" src="/images/register_login/1.jpg" alt="First slide">
+              <div class="mask rgba-black-light" />
             </div>
             <div class="carousel-caption">
-              <h3 class="h3-responsive">Light mask</h3>
-              <p>First text</p>
+              <h3 class="h3-responsive">
+                {{ $t('login_slider_1') }}
+              </h3>
             </div>
           </div>
           <div class="carousel-item">
             <!--Mask color-->
             <div class="view">
-              <img
-                class="d-block w-100"
-                src="images/register_login/2.jpg"
-                alt="Second slide"
-              />
-              <div class="mask rgba-black-strong"></div>
+              <img class="d-block w-100" src="/images/register_login/2.jpg" alt="Second slide">
+              <div class="mask rgba-black-strong" />
             </div>
             <div class="carousel-caption">
-              <h3 class="h3-responsive">Strong mask</h3>
-              <p>Secondary text</p>
+              <h3 class="h3-responsive">
+                {{ $t('login_slider_2') }}
+              </h3>
             </div>
           </div>
           <div class="carousel-item">
             <!--Mask color-->
             <div class="view">
-              <img
-                class="d-block w-100"
-                src="images/register_login/3.jpg"
-                alt="Third slide"
-              />
-              <div class="mask rgba-black-slight"></div>
+              <img class="d-block w-100" src="/images/register_login/3.jpg" alt="Third slide">
+              <div class="mask rgba-black-slight" />
             </div>
             <div class="carousel-caption">
-              <h3 class="h3-responsive">Slight mask</h3>
-              <p>Third text</p>
+              <h3 class="h3-responsive">
+                {{ $t('login_slider_3') }}
+              </h3>
             </div>
           </div>
         </div>
-        <a
-          class="carousel-control-prev"
-          href="#carousel-example-2"
-          role="button"
-          data-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true" />
           <span class="sr-only">Previous</span>
         </a>
-        <a
-          class="carousel-control-next"
-          href="#carousel-example-2"
-          role="button"
-          data-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true" />
           <span class="sr-only">Next</span>
         </a>
       </div>
@@ -86,7 +63,7 @@
           <div class="my-lg-5 my-sm-3 py-lg-5">
             <div class="app-logo my-5">
               <router-link to="/" class="navbar-brand">
-                <img src="images/logo/200x48.png" :alt="appName" class="img-fluid" />
+                <img src="images/logo/200x48.png" :alt="appName" class="img-fluid">
               </router-link>
             </div>
             <p
@@ -98,50 +75,35 @@
             </p>
             <h6 class="my-4">
               {{ $t("login_phrase_account") }}
-              <router-link
-                :to="{ name: 'register' }"
-                class="text-primary"
-                active-class="active"
-                >{{ $t("goTo_register_link") }}</router-link
-              >
+              <router-link :to="{ name: 'register' }" class="text-primary" active-class="active">
+                {{ $t("goTo_register_link") }}
+              </router-link>
             </h6>
-            <div class="divider row"></div>
-            <form class="" @submit.prevent="login" @keydown="form.onKeydown($event)">
+            <div class="divider row" />
+            <form @submit.prevent="login" @keydown="form.onKeydown($event)">
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="position-relative form-group">
-                    <label for="email" class="">{{ $t("email") }}</label>
-                    <input
-                      v-model="form.email"
-                      :class="{ 'is-invalid': form.errors.has('email') }"
-                      class="form-control"
-                      type="email"
-                      name="email"
-                    />
+                    <label for="email">{{ $t("email") }}</label>
+                    <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
                     <has-error :form="form" field="email" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="position-relative form-group">
-                    <label for="password" class="">{{ $t("password") }}</label>
-                    <input
-                      v-model="form.password"
-                      :class="{ 'is-invalid': form.errors.has('password') }"
-                      class="form-control"
-                      type="password"
-                      name="password"
-                    />
+                    <label for="password">{{ $t("password") }}</label>
+                    <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
                     <has-error :form="form" field="password" />
                   </div>
                 </div>
               </div>
               <div class="position-relative form-check">
-                <checkbox v-model="remember" name="remember">{{
-                  $t("remember_me")
-                }}</checkbox>
+                <checkbox v-model="remember" name="remember">
+                  {{ $t("remember_me") }}
+                </checkbox>
                 <!--<label for="remember" class="form-check-label">Keep me logged in</label>!-->
               </div>
-              <div class="divider row"></div>
+              <div class="divider row" />
               <div class="d-flex align-items-center">
                 <div class="ml-auto">
                   <router-link
@@ -169,69 +131,69 @@
 </template>
 
 <script>
-import Form from "vform";
-import Cookies from "js-cookie";
-import LoginWithGithub from "~/components/LoginWithGithub";
-import NavOnly from "~/components/NavOnly";
+import Form from 'vform'
+import Cookies from 'js-cookie'
+import LoginWithGithub from '~/components/LoginWithGithub'
+import NavOnly from '~/components/NavOnly'
 
 export default {
   components: {
     LoginWithGithub,
-    NavOnly,
+    NavOnly
   },
 
-  layout: "basic",
-  middleware: "guest",
+  layout: 'basic',
+  middleware: 'guest',
 
-  metaInfo() {
-    return { title: this.$t("login") };
+  metaInfo () {
+    return { title: this.$t('login') }
   },
 
   data: () => ({
     form: new Form({
-      email: "",
-      password: "",
+      email: '',
+      password: ''
     }),
     remember: false,
-    appName: window.config.appName,
+    appName: window.config.appName
   }),
 
   methods: {
-    async login() {
+    async login () {
       // Submit the form.
-      const { data } = await this.form.post("/api/login");
+      const { data } = await this.form.post('/api/login')
 
       // Save the token.
-      this.$store.dispatch("auth/saveToken", {
+      this.$store.dispatch('auth/saveToken', {
         token: data.token,
-        remember: this.remember,
-      });
+        remember: this.remember
+      })
 
       // Fetch the user.
-      await this.$store.dispatch("auth/fetchUser");
+      await this.$store.dispatch('auth/fetchUser')
 
       // Redirect home.
 
-      //setTimeout(() => {
-      await this.redirect();
-      //}, 100)
+      // setTimeout(() => {
+      await this.redirect()
+      // }, 100)
     },
 
-    redirect() {
-      const intendedUrl = Cookies.get("intended_url");
+    redirect () {
+      const intendedUrl = Cookies.get('intended_url')
 
       if (intendedUrl) {
-        Cookies.remove("intended_url");
-        this.$router.push({ path: intendedUrl });
+        Cookies.remove('intended_url')
+        this.$router.push({ path: intendedUrl })
       } else {
-        //location.reload();
-        //setTimeout(() => {
-        this.$router.push({ name: "home" });
-        //}, 100)
+        // location.reload();
+        // setTimeout(() => {
+        this.$router.push({ name: 'home' })
+        // }, 100)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style lang="scss">
 .divider {

@@ -23,7 +23,7 @@
         <sui-table v-else basic="very">
           <sui-table-header>
             <sui-table-row>
-              <sui-table-header-cell>{{ $t('schedulLink') }}</sui-table-header-cell>
+              <sui-table-header-cell>{{ $t('schedulLinked') }}</sui-table-header-cell>
               <sui-table-header-cell>{{ $t('schedule_form_address') }}</sui-table-header-cell>
               <sui-table-header-cell>{{ $t('schedulpayment') }}</sui-table-header-cell>
               <sui-table-header-cell>{{ $t('userpanel_receipt') }} </sui-table-header-cell>
@@ -32,7 +32,7 @@
           </sui-table-header>
           <sui-table-body>
             <sui-table-row v-for="payment in payments.data" :key="payment.id">
-              <sui-table-cell><a href="javascript:void(0)" @click.prevent="viewSchedul(payment.id)">{{ payment.house_code }}</a></sui-table-cell>
+              <sui-table-cell><a href="javascript:void(0)" @click.prevent="viewPayment(payment.id)">{{ payment.house_code }}</a></sui-table-cell>
               <sui-table-cell>{{ payment.house_street }}, {{ payment.house_district }}, {{ payment.house_county }}, {{ payment.house_city }}</sui-table-cell>
               <sui-table-cell>{{ payment.created_at | MultipleLocaleSupport }}</sui-table-cell>
               <sui-table-cell class="text-center">

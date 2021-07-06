@@ -7,6 +7,9 @@ export default [
 
   { path: '/search', name: 'search.house', component: page('search.vue') },
   { path: '/find/:houseKey', name: 'find.houser', component: page('find.vue') },
+  { path: '/about', name: 'about', component: page('about.vue') },
+  { path: '/policy', name: 'policy', component: page('policy.vue') },
+  { path: '/term-condition', name: 'term-condition', component: page('term-condition.vue') },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },

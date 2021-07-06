@@ -29,7 +29,7 @@
     <sui-table basic="very" v-else >
       <sui-table-header>
         <sui-table-row>
-          <sui-table-header-cell>{{ $t('schedulLink') }}</sui-table-header-cell>
+          <sui-table-header-cell>{{ $t('schedulLinked') }}</sui-table-header-cell>
           <sui-table-header-cell>{{ $t('schedule_form_address') }}</sui-table-header-cell>
           <sui-table-header-cell>{{ $t('schedulCreatedAt') }}</sui-table-header-cell>
           <sui-table-header-cell class="text-center">{{ $t('userpanel_receipt') }}</sui-table-header-cell>

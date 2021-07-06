@@ -25,10 +25,7 @@ class PropertyController extends Controller
             'type' => 'required',
             'payment_METHOD' => 'required',
             'price' => 'required',
-            'room' => 'required', 
-            'living_room' => 'required', 
-            'kitchen' => 'required',
-            'bathroom' => 'required',
+            'contrat_type' => 'required', 
         ]);
         
         $user = Auth('api')->user();
@@ -66,7 +63,9 @@ class PropertyController extends Controller
             //'period' => $data['period'],
             'type' => $data['type'],
             'payment_METHOD' => $data['payment_METHOD'],
+            'contrat_type' => $data['contrat_type'],
             'price' => $data['price'],
+            'tax_visit' => $data['tax_visit'],
             'room' => $data['room'], 
             'living_room' => $data['living_room'], 
             'kitchen' => $data['kitchen'],
