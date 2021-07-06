@@ -209,7 +209,7 @@
   "announce_public_at": "Publicado em",
   "announce_form_title": "Anuncio",
   "announce_form_quote": "Temos compradores e inquilinos mais do que temos casas disponiveis",
-  "announce_form_author": "Mercado Imobiliario",
+  "announce_form_author": "Mercado Imobiliário",
   
   "announce_form_city": "Província",
   "announce_form_county": "Município",
@@ -224,6 +224,8 @@
   "announce_form_roomQTD": "Quantas quartos tem?",
   "announce_form_living_room_q": "Quantas salas de estar tem?",
   "announce_form_taxation": "Digite sua taxa de cobrança de visita.",
+  "announce_form_about_tax": "Mais detalhes",
+  "announce_form_about_taxs": "Mais detalhes sobre a taxa",
   "announce_form_kitchen_q": "Quantas cozinhas tem?",
   "announce_form_bathroom_q": "Quantos banheiros tem?",
   "announce_form_living_room": "Sala",
@@ -361,6 +363,16 @@
 
   "appointment_message_suscceful_toastr":"Agendado com sucesso! Esteja lá 10 minutos antes.",
   "appointment_message_error_toastr":"Aconteceu algum erro! Verifique se está logado, por favor.",
+
+  
+  "view_house_info1": "Caro Usuário",
+  "view_house_info2": "Agendamento de visita é um processo simples e rápido que consiste em 3 passos:",
+  "view_house_info3": "1. Preencher as informações necessárias ",
+  "view_house_info4": "2. Efetoar o pagamento e anexar o comprovativo ",
+  "view_house_info5": " 3. Efectivar o agendamento da sua visita",
+  "view_house_info6": "Aguarda a confirmação e para a virificar, acessa menú Minhas actividades - Visitas Agendadas. ",
+  "view_house_info7": "Para efeito do agendamento solicita-se uma taxa de serviço de ",
+  
   
 
   "schedule_form_houseId": "Seleccione ID da casa",

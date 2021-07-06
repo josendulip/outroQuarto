@@ -209,7 +209,7 @@
   "announce_public_at": "Published in",
   "announce_form_title": "Announcement",
   "announce_form_quote": "We have buyers and tenants more than we have available homes",
-  "announce_form_author": "Mercado Imobiliario",
+  "announce_form_author": "Real estate market",
 
   "announce_form_city": "City",
   "announce_form_county": "County",
@@ -223,6 +223,8 @@
   "announce_form_contractOpt_2": "Sale",
   "announce_form_roomQTD": "How many rooms has?",
   "announce_form_taxation": "Enter your tax visit fee.",
+  "announce_form_about_tax": "More details",
+  "announce_form_about_taxs": "More about tax visit fee.",
   "announce_form_living_room": "Living room",
   "announce_form_kitchen": "Kitchen",
   "announce_form_bathroom": "Bathroom",
@@ -343,6 +345,7 @@
   "view_house_details_email": "Email:",
   "view_house_details_distrit": "District:",
   "view_house_details_Street": "Street:",
+  "view_house_details_empty": "No information",
   "view_house_schedule_visit": "Schedule a visit",
   "view_house_schedule_view": "See",
   "view_house_schedule_stay": "Schedule to stay",
@@ -364,6 +367,15 @@
 
   "appointment_message_suscceful_toastr":"Scheduled successfully! Be there 10 minutes before.",
   "appointment_message_error_toastr":"Something went wrong! Make sure you are logged in, please.",
+
+  
+  "view_house_info1": "Dear User",
+   "view_house_info2": "Scheduling a visit is a simple and fast process consisting of 3 steps:",
+   "view_house_info3": "1. Fill in the required information",
+   "view_house_info4": "2. Make payment and attach proof",
+   "view_house_info5": " 3. Schedule your visit",
+   "view_house_info6": "Wait for confirmation and to check it, access the menu My activities - Scheduled Visits.",
+   "view_house_info7": "For the purpose of booking a service fee of ",
   
 
   "schedule_form_houseId": "Select house ID",

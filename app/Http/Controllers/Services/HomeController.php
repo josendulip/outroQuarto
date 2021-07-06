@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index(){
         //return Property::all();
-        return Property::latest()->paginate(12);
+        return Property::paginate(24);
     }
 
     public function getHouse($houseCode)

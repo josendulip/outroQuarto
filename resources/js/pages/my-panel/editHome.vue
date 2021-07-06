@@ -62,7 +62,11 @@
           <sui-table compact celled definition>
             <sui-table-header full-width>
               <sui-table-row>
-                <sui-table-header-cell />
+                <sui-table-header-cell>
+                  <sui-label ribbon data-toggle="modal" data-target="#more-info" :title="$t('announce_form_more-info')" class="pointme">
+                    {{ $t('announce_form_vititfee') }}
+                  </sui-label>
+                </sui-table-header-cell>
                 <sui-table-header-cell>
                   <router-link :to="{'name': 'my-panel.verification'}" class="mini fluid ui button">
                     {{ $t('property_verify') }}
@@ -86,7 +90,8 @@
             <sui-table-body>
               <sui-table-row>
                 <sui-table-cell collapsing>
-                  <sui-checkbox v-model="form.state" toggle :value="form.state" />
+                  <sui-checkbox v-model="form.state" toggle :value="form.state" :title="$t('annou_form_state')" />
+                  <!-- <toggle-button v-model="form.state" class="mt-2" :width="90" :value="form.state.toString()" color="#ff3d47" :labels="{checked: $t('view_house_details_stateUp'), unchecked: $t('annou_form_state')}" /> -->
                 </sui-table-cell>
                 <sui-table-cell>
                   <select v-model="form.city" class="ui dropdown w-100" :class="{ 'is-invalid': form.errors.has('city') }">
@@ -129,7 +134,7 @@
               <!-- Payment Methos, House Type, Price and Contrat -->
               <sui-table-row>
                 <sui-table-cell class="collapsing">
-                  <sui-checkbox v-model="form.seal" toggle :value="form.seal" />
+                  <sui-checkbox v-model="form.seal" toggle :value="form.seal" :title="$t('announce_form_garden')" />
                 </sui-table-cell>
                 <sui-table-cell>
                   <select v-model="form.contrat_type" class="ui dropdown w-100" :class="{ 'is-invalid': form.errors.has('contrat_type') }">
@@ -223,7 +228,7 @@
               <!-- Living room, Kitchen, Bathroom and Room -->
               <sui-table-row>
                 <sui-table-cell collapsing>
-                  <sui-checkbox v-model="form.furniture" toggle :value="form.furniture" />
+                  <sui-checkbox v-model="form.furniture" toggle :value="form.furniture" :title="$t('announce_form_furniture')" />
                 </sui-table-cell>
                 <sui-table-cell>
                   <div class="ui form">
@@ -294,58 +299,20 @@
                 <sui-table-header-cell class="text-center">
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#more-info" :title="$t('announce_form_more-info')">
-                    <i class="info circle icon" />
+                    <i class="info circle icon m-0" />
                   </button>
-
-                  <!-- Modal -->
-                  <div id="more-info" class="modal fade" tabindex="-1" aria-labelledby="more-infoLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 id="more-infoLabel" class="modal-title">
-                            {{ $t('announce_form_moreService') }}
-                          </h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="row align-items-center">
-                            <div class="col-md-4">
-                              {{ $t('announce_form_vititfe') }}
-                            </div>
-                            <div class="col-md-4">
-                              <div class="ui form">
-                                <div class="field">
-                                  <input v-model="form.tax_visit" :class="{ 'is-invalid': form.errors.has('tax_visit') }" :placeholder="$t('announce_form_taxation')" type="number" min="1">
-                                  <has-error :form="form" field="tax_visit" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="ui form">
-                                <div class="field myInput">
-                                  AOA {{ form.tax_visit | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            {{ $t('schedulStatus_cancel_btn') }}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </sui-table-header-cell>
                 <sui-table-header-cell colspan="4">
                   <sui-button floated="right" size="small" primary labeled>
                     <sui-icon name="save" /> {{ $t('mypanel_add_photos_save') }}
                   </sui-button>
-                  <sui-button size="small" data-toggle="modal" data-target="#more-info" @click.prevent="">
-                    {{ $t('announce_form_Fee') }} {{ form.tax_visit | currency(2) }}
+                  <sui-button animated data-toggle="modal" data-target="#more-about" @click.prevent="">
+                    <sui-button-content visible>
+                      {{ form.tax_visit | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}
+                    </sui-button-content>
+                    <sui-button-content hidden>
+                      {{ $t('announce_form_about_tax') }}
+                    </sui-button-content>
                   </sui-button>
                   <sui-button size="small" disabled>
                     {{ form.price | currency("Total", 2, { spaceBetweenAmountAndSymbol: true }) }}
@@ -354,6 +321,113 @@
               </sui-table-row>
             </sui-table-footer>
           </sui-table>
+          <!-- Modal -->
+          <div id="more-info" class="modal fade" tabindex="-1" aria-labelledby="more-infoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 id="more-infoLabel" class="modal-title">
+                    {{ $t('announce_form_moreService') }}
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row align-items-center">
+                    <div class="col-md-4">
+                      {{ $t('announce_form_vititfe') }}
+                    </div>
+                    <div class="col-md-4">
+                      <div class="ui form">
+                        <div class="field">
+                          <input v-model="form.tax_visit" :class="{ 'is-invalid': form.errors.has('tax_visit') }" :placeholder="$t('announce_form_taxation')" type="number" min="1">
+                          <has-error :form="form" field="tax_visit" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="ui form">
+                        <div class="field myInput">
+                          {{ form.tax_visit | currency('KZ', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-lg-between align-items-center">
+                  <sui-label circular color="grey" class="text-center pointme" data-toggle="modal" data-target="#more-about" :title="$t('announce_form_about_taxs')">
+                    <sui-icon name="info" class="m-0" />
+                  </sui-label>
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                    {{ $t('schedulStatus_cancel_btn') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MORE EXPLANATION MODAL -->
+          <div id="more-about" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 id="staticBackdropLabel" class="modal-title text-center">
+                    {{ $t('modal_title') }}
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <div>{{ $t('modal_info_title') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_title_1') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_1') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_title_2') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_2') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_title_3') }}</div>
+                    <div>{{ $t('modal_info_paragph_3') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_title_4') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_4') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_title_5') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_5') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_5_1') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_5_2') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_5_3') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_5_4') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_6') }}</div>
+                    <br>
+                    <div>{{ $t('modal_info_paragph_7') }}</div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                    {{ $t('modal_btn_close') }}
+                  </button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    {{ $t('modal_btn_ok') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -522,7 +596,7 @@
             <has-error :form="form" field="payment_METHOD" />
           </div>
           <div class="col-md-3 mb-2">
-            <span v-if="form.price"> {{ form.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} </span>
+            <!-- <span v-if="form.price"> {{ form.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} </span> -->
             <div class="ui form">
               <div class="field">
                 <input v-model="form.price" :class="{ 'is-invalid': form.errors.has('price') }" :placeholder="$t('announce_form_price')" type="number" min="1">
@@ -582,10 +656,20 @@
           </div>
         </div>
         <div class="text-center my-2">
-          <sui-button type="submit" size="small" fluid class="main-red px-5 badge-pill my-4 d-md-none" labeled :loading="form.busy" :disabled="form.busy">
+          <sui-button size="small" disabled fluid class="d-md-none">
+            {{ form.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}
+          </sui-button>
+          <sui-button animated="vertical" fluid data-toggle="modal" data-target="#more-info" class="d-md-none my-3" @click.prevent="">
+            <sui-button-content hidden>
+              {{ form.tax_visit | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}
+            </sui-button-content>
+            <sui-button-content visible>
+              <sui-icon name="shop" /> {{ $t('announce_form_taxation') }}
+            </sui-button-content>
+          </sui-button>
+          <sui-button type="submit" size="small" fluid class="main-red px-5 badge-pill mb-5 d-md-none" labeled :loading="form.busy" :disabled="form.busy">
             <sui-icon name="save" /> {{ $t("announce_form_btn") }}
           </sui-button>
-
           <router-link :to="{ name: 'my-panel.properties' }" class="d-md-none">
             <sui-button icon="left arrow " fluid>
               {{ $t('mypanel_back') }}

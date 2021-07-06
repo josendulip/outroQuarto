@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <router-link class="navbar-brand" to="/">
-          <img src="/images/logo/200x48.png" alt="logo" class="img-fluid" />
+          <img src="/images/logo/200x48.png" alt="logo" class="img-fluid">
         </router-link>
         <button
           class="navbar-toggler"
@@ -16,7 +16,7 @@
         >
           <span class="navbar-toggler-icon" />
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+        <div id="navbarSupportedContent-7" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link :to="{ name: 'services' }" class="nav-link">{{
@@ -56,12 +56,7 @@
       :playSpeed="2000"
     >
       <slide v-for="(image, index) in photos" :key="index">
-        <img
-          :src="image.src"
-          class="d-block w-100"
-          :alt="image.caption"
-          @click="openGallery(index)"
-        />
+        <img :src="image.src" class="img-fluid d-block"  :alt="image.caption" style="height: 350px; width:700px; object-fit:cover;" @click="openGallery(index)">
       </slide>
       <hooper-pagination slot="hooper-addons" mode="fraction" />
     </hooper>
@@ -201,10 +196,10 @@
               <sui-card-header>{{ $t("view_house_details_contrat") }} </sui-card-header>
               <sui-card-description>
                 <span class="d-block">
-                  {{ $t("view_house_details_type") }} {{ house.period }}
+                    {{ $t("announce_form_vititfee") }} {{ house.tax_visit  | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}
                 </span>
                 <span class="d-block">
-                  {{ $t("view_house_details_pay") }} {{ house.payment_METHOD }}
+                    {{ $t("view_house_details_pay") }} {{ house.payment_METHOD }}
                 </span>
               </sui-card-description>
               <sui-divider section />

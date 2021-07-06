@@ -575,7 +575,7 @@
           </div>
         </div>
         <div class="col-md-12">
-          <div class="row">
+          <div class="row my-4">
             <div v-for="(house, index) in FeedOfHouse" :key="index" class="col-md-3 mb-4">
               <sui-card class="content-house rounded-radius w-100">
                 <sui-image :src="house.profile" class="image-house rounded-top" />
@@ -1444,9 +1444,9 @@ export default {
       if (this.recent) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.hasMainFeed = false
-        if (this.matchedhouse) return this.orderBy(this.matchedhouse, 'created_at', -1)
-      } else {
         if (this.matchedhouse) return this.orderBy(this.matchedhouse, 'created_at')
+      } else {
+        if (this.matchedhouse) return this.orderBy(this.matchedhouse, 'created_at', -1)
       }
     }
   },
