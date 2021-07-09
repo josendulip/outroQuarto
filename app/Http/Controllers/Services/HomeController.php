@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\houseImages;
+use App\Models\History;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,24 @@ class HomeController extends Controller
         //return Property::all();
         return Property::paginate(24);
     }
-
+    public function homeRecentsHouses(){
+        return Property::take(4)->latest()->get();
+    }
+    public function homeMoreVisiblesHouses(){
+        return History::all()->take(4);
+    }
+    public function homeTopFourHouses(){
+        $promo = 1;
+        return Property::where('promo', $promo)->take(4)->get();
+    }
+    public function homeTopFourVeryHouses(){
+        $vefy = 1;
+        return Property::where('verification', $vefy)->take(4)->get();
+    }
+    public function homeRecentLands(){
+        $land = 'Land';
+        return Property::where('type', $land)->take(4)->latest()->get();
+    }
     public function getHouse($houseCode)
     {
         

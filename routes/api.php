@@ -69,9 +69,16 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::apiResources(['request-promo' => PromoteController::class]);
     Route::apiResources(['request-verification' => VerificateController::class]);
+    Route::get('house-verification/{houseCode}', [VerificateController::class, 'vefyHouse']);
+    Route::post('update-request-verification', [VerificateController::class, 'updateRequestVerification']);
 
 
     Route::get('home-houses', [HomeController::class, 'index']);
+    Route::get('home-recents-houses', [HomeController::class, 'homeRecentsHouses']);
+    Route::get('home-more-visibles-houses', [HomeController::class, 'homeMoreVisiblesHouses']);
+    Route::get('home-top-four-houses', [HomeController::class, 'homeTopFourHouses']);
+    Route::get('home-top-four-verify-houses', [HomeController::class, 'homeTopFourVeryHouses']);
+    Route::get('home-recent-lands', [HomeController::class, 'homeRecentLands']);
     Route::get('view/{houseCode}', [HomeController::class, 'getHouse'])->name('view.house');
     Route::get('get-photos/{houseCode}', [HomeController::class, 'getPhotos']);
     Route::get('searched-houser', [HomeController::class, 'searchedhouses'])->name('search');

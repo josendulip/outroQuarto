@@ -231,7 +231,13 @@
                   <sui-checkbox v-model="form.furniture" toggle :value="form.furniture" :title="$t('announce_form_furniture')" />
                 </sui-table-cell>
                 <sui-table-cell>
-                  <div class="ui form">
+                  <div v-if="form.type == 'Land'" class="ui form">
+                    <div class="field">
+                      <input v-model="form.width" :class="{ 'is-invalid': form.errors.has('width') }" :placeholder="$t('announce_form_width')" type="number" min="1">
+                      <has-error :form="form" field="width" />
+                    </div>
+                  </div>
+                  <div v-else class="ui form">
                     <div class="field">
                       <input v-model="form.living_room" :class="{ 'is-invalid': form.errors.has('living_room') }" :placeholder="$t('announce_form_living_room_q')" type="number" min="1">
                       <has-error :form="form" field="living_room" />
@@ -239,7 +245,13 @@
                   </div>
                 </sui-table-cell>
                 <sui-table-cell>
-                  <div class="ui form">
+                  <div v-if="form.type == 'Land'" class="ui form">
+                    <div class="field">
+                      <input v-model="form.length" :class="{ 'is-invalid': form.errors.has('length') }" :placeholder="$t('announce_form_length')" type="number" min="1">
+                      <has-error :form="form" field="length" />
+                    </div>
+                  </div>
+                  <div v-else class="ui form">
                     <div class="field">
                       <input v-model="form.kitchen" :class="{ 'is-invalid': form.errors.has('kitchen') }" :placeholder="$t('announce_form_kitchen_q')" type="number" min="1">
                       <has-error :form="form" field="kitchen" />
@@ -247,7 +259,13 @@
                   </div>
                 </sui-table-cell>
                 <sui-table-cell>
-                  <div class="ui form">
+                  <div v-if="form.type == 'Land'" class="ui form">
+                    <div class="field">
+                      <input v-model="areas" :class="{ 'is-invalid': form.errors.has('area') }" :placeholder="$t('announce_form_area')" type="number" min="1" readonly>
+                      <has-error :form="form" field="area" />
+                    </div>
+                  </div>
+                  <div v-else class="ui form">
                     <div class="field">
                       <input v-model="form.room" :class="{ 'is-invalid': form.errors.has('room') }" :placeholder="$t('announce_form_roomQTD')" type="number" min="1">
                       <has-error :form="form" field="room" />
@@ -255,7 +273,10 @@
                   </div>
                 </sui-table-cell>
                 <sui-table-cell>
-                  <div class="ui form">
+                  <div v-if="form.type == 'Land'" class="myInput">
+                    <span>{{ form.width }} m * {{ form.length }} m  = {{ areas }} m2</span>
+                  </div>
+                  <div v-else class="ui form">
                     <div class="field">
                       <input v-model="form.bathroom" :class="{ 'is-invalid': form.errors.has('bathroom') }" :placeholder="$t('announce_form_bathroom_q')" type="number" min="1">
                       <has-error :form="form" field="bathroom" />
@@ -315,7 +336,7 @@
                     </sui-button-content>
                   </sui-button>
                   <sui-button size="small" disabled>
-                    {{ form.price | currency("Total", 2, { spaceBetweenAmountAndSymbol: true }) }}
+                    {{ form.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}
                   </sui-button>
                 </sui-table-header-cell>
               </sui-table-row>
@@ -349,7 +370,7 @@
                     <div class="col-md-4">
                       <div class="ui form">
                         <div class="field myInput">
-                          {{ form.tax_visit | currency('KZ', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
+                          {{ form.tax_visit | currency('AKZ', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
                         </div>
                       </div>
                     </div>
@@ -608,7 +629,13 @@
         <!-- Living room, Kitchen, Bathroom and Room -->
         <div class="row">
           <div class="col-md-3 mb-2">
-            <div class="ui form">
+            <div v-if="form.type == 'Land'" class="ui form">
+              <div class="field">
+                <input v-model="form.width" :class="{ 'is-invalid': form.errors.has('width') }" :placeholder="$t('announce_form_width')" type="number" min="1">
+                <has-error :form="form" field="width" />
+              </div>
+            </div>
+            <div v-else class="ui form">
               <div class="field">
                 <input v-model="form.living_room" :class="{ 'is-invalid': form.errors.has('living_room') }" :placeholder="$t('announce_form_living_room_q')" type="number" min="1">
                 <has-error :form="form" field="living_room" />
@@ -616,15 +643,30 @@
             </div>
           </div>
           <div class="col-md-3 mb-2">
-            <div class="ui form">
+            <div v-if="form.type == 'Land'" class="ui form">
               <div class="field">
+                <input v-model="form.length" :class="{ 'is-invalid': form.errors.has('length') }" :placeholder="$t('announce_form_length')" type="number" min="1">
+                <has-error :form="form" field="length" />
+              </div>
+            </div>
+            <div v-else class="ui form">
+              <div v-if="form.type == 'Land'" class="ui form">
+                <div class="field">
+                  <input v-model="areas" :class="{ 'is-invalid': form.errors.has('area') }" :placeholder="$t('announce_form_area')" type="number" min="1" readonly>
+                  <has-error :form="form" field="area" />
+                </div>
+              </div>
+              <div v-else class="field">
                 <input v-model="form.kitchen" :class="{ 'is-invalid': form.errors.has('kitchen') }" :placeholder="$t('announce_form_kitchen_q')" type="number" min="1">
                 <has-error :form="form" field="kitchen" />
               </div>
             </div>
           </div>
           <div class="col-md-3 mb-2">
-            <div class="ui form">
+            <div v-if="form.type == 'Land'" class="myInput">
+              <span>{{ form.width }} m * {{ form.length }} m  = {{ areas }} m2</span>
+            </div>
+            <div v-else class="ui form">
               <div class="field">
                 <input v-model="form.room" :class="{ 'is-invalid': form.errors.has('room') }" :placeholder="$t('announce_form_roomQTD')" type="number" min="1">
                 <has-error :form="form" field="room" />
@@ -1417,6 +1459,9 @@ export default {
       seal: false,
       furniture: false,
       state: false,
+      width: 0,
+      length: 0,
+      area: 0,
       description: '',
       profile: '',
       phone: '',
@@ -1456,6 +1501,12 @@ export default {
       return this.cities[this.form.city].map((city) => {
         return city.name
       })
+    },
+    areas: function () {
+      return this.form.width * this.form.length
+    },
+    modifiedDate: function () {
+      return document.write(this.form.state.toString())
     }
   },
   mounted () {
@@ -1621,7 +1672,7 @@ export default {
 .myProfileImage{
     object-fit: cover;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
   /* position: absolute;
   width: 500px;
         height: 300px;
@@ -1689,7 +1740,7 @@ label.radio input:checked + span {
     margin: 0;
     outline: 0;
     -webkit-appearance: none;
-    tap-highlight-color: rgba(255,255,255,0);
+    // tap-highlight-color: rgba(255,255,255,0);
     line-height: 1.21428571em;
     padding: .67857143em 1em;
     font-size: 1em;

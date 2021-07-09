@@ -25,6 +25,7 @@ class VerifyService extends Model
         'receipt',
         'request_type',
         'description',
+        'status'
     ];
 
     public function user()

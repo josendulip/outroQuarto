@@ -99,19 +99,23 @@
                         <a class="nav-link active" aria-current="page" href="#"><i class="map marker alternate icon"></i> {{ house.city }}, {{ house.county }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="home icon"></i> {{ house.type }}</a>
+                        <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="expand icon"></i>  {{ $t("annou_form_land") }}</a>
+                        <a v-else class="nav-link" href="#"><i class="home icon"></i> {{ house.type }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="tv icon"></i> {{ house.living_room }} {{ $t("announce_form_living_room") }}</a>
+                        <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="text height icon"></i> {{ house.width }} {{ $t("announce_form_widthW") }}</a>
+                        <a v-else class="nav-link" href="#"><i class="tv icon"></i> {{ house.living_room }} {{ $t("announce_form_living_room") }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bed icon"></i> {{ house.room }} {{ $t("announce_form_room") }}</a>
+                        <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="text width icon"></i> {{ house.length }} {{ $t("announce_form_lengthL") }}</a>
+                        <a v-else class="nav-link" href="#"><i class="bed icon"></i> {{ house.room }} {{ $t("announce_form_room") }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bath icon"></i> {{ house.bathroom }} {{ $t("announce_form_bathroom") }}</a>
+                        <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="square full icon"></i> {{ house.area }} {{ $t("announce_form_areaA") }}</a>
+                        <a v-else class="nav-link" href="#"><i class="bath icon"></i> {{ house.bathroom }} {{ $t("announce_form_bathroom") }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="box icon"></i> {{ $t("announce_form_furniture") }} (<em>{{ house.furniture }}</em>)</a>
+                        <a v-if="house.type != 'Land'" class="nav-link" href="#"><i class="box icon"></i> {{ $t("announce_form_furniture") }} (<em>{{ house.furniture }}</em>)</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="object group outline icon"></i> {{ $t("announce_form_garden") }} (<em>{{ house.garden }}</em>)</a>
@@ -228,7 +232,6 @@
                             icon="arrow left"
                             @click.prevent="descontinuing()"
                         ></sui-button>
-                        
                         <!-- <label class="btn btn-md badge-pill text-white bg-main radio">
                                 <span
                                 class="text-white"

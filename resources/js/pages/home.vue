@@ -68,87 +68,6 @@
         </div>
       </div>
     </span>
-    <!-- <div class="row">
-      <div class="col-3">
-        <span v-if="province" class="font-weight-bold">
-          <strong><i class="caret right icon"></i>{{ province }}</strong>
-          <small
-            ><i
-              class="times circle outline icon text-muted hover-cursor"
-              @click="uncheckCC"
-            ></i
-          ></small>
-        </span>
-        <span v-if="countyFilter != ''"
-          >:
-          <span v-for="county in countyFilter" :key="county" class="d-inline text-muted"
-            ><em>{{ county }}, </em></span
-          >
-        </span>
-      </div>
-      <div class="col-2">
-        <span v-if="roomFilter != ''">
-          <strong
-            ><i class="caret right icon"></i>{{ $t("announce_form_room") }}
-            <small>(Qtd)</small>
-          </strong>
-          <span v-for="room in roomFilter" :key="room" class="d-inline text-muted"
-            ><em>{{ room }}, </em></span
-          >
-          <small
-            ><i
-              class="times circle outline icon text-muted hover-cursor"
-              @click="UncheckAllRoom"
-            ></i
-          ></small>
-        </span>
-      </div>
-      <div class="col-2">
-        <span v-if="shortAndLongPeriod != ''">
-          <strong
-            ><i class="caret right icon"></i>{{ $t("search_house_period") }}:
-          </strong>
-          <em>{{ shortAndLongPeriod }}, </em>
-          <small
-            ><i
-              class="times circle outline icon text-muted hover-cursor"
-              @click="UncheckAllPeriod"
-            ></i
-          ></small>
-        </span>
-      </div>
-      <div class="col-2">
-        <span v-if="FreeStateOrBusy != ''">
-          <strong
-            ><i class="caret right icon"></i>{{ $t("search_house_state") }}:
-          </strong>
-          <em>{{ FreeStateOrBusy }}, </em>
-          <small
-            ><i
-              class="times circle outline icon text-muted hover-cursor"
-              @click="UncheckAllState"
-            ></i
-          ></small>
-        </span>
-      </div>
-      <div class="col-3">
-        <span v-if="houseTypeFilter != ''">
-          <strong><i class="caret right icon"></i>{{ $t("announce_form_type") }}:</strong>
-          <span
-            v-for="house_type in houseTypeFilter"
-            :key="house_type"
-            class="d-inline text-muted"
-            ><em>{{ house_type }}, </em></span
-          >
-          <small
-            ><i
-              class="times circle outline icon text-muted hover-cursor"
-              @click="UncheckAllType"
-            ></i
-          ></small>
-        </span>
-      </div>
-    </div> -->
 
     <div class="container my-2">
       <div class="row">
@@ -194,7 +113,7 @@
                 </li>
                 <!-- HOUSE TYPE -->
                 <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
-                  <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                  <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ $t("announce_form_type") }}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -575,6 +494,247 @@
           </div>
         </div>
         <div class="col-md-12">
+          <!-- Most recent houses -->
+          <div class="row my-4">
+            <div class="col-md-12">
+              <h3 class="text-muted my-4">
+                {{ $t('home_mostRecent') }}
+              </h3>
+            </div>
+            <div v-for="(house, index) in recentHouses" :key="index" class="col-md-3 mb-4">
+              <sui-card class="content-house rounded-radius w-100">
+                <sui-image :src="house.profile" class="image-house rounded-top" />
+                <p class="title-house">
+                  <!-- {{ house.created_at | OnlyDate }} -->
+                </p>
+                <div class="overlay-house" />
+                <div class="button-house">
+                  <a
+                    href="javascript:void(0)"
+                    @click.prevent="viewHouse(house.house_code)"
+                  >
+                    {{ $t("myPanel_card_footer_view") }}
+                  </a>
+                </div>
+                <sui-card-content>
+                  <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} /{{ house.payment_METHOD }} </sui-card-header>
+                  <sui-card-meta>
+                    {{ $t("announce_public_at") }}
+                    {{ house.created_at | OnlyDate }}
+                  </sui-card-meta>
+                  <sui-card-description class="text-lowercase">
+                    {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+                    {{ house.living_room }} {{ $t("announce_form_living_room") }},
+                    {{ house.bathroom }}
+                    {{ $t("announce_form_bathroom") }}.
+                  </sui-card-description>
+                </sui-card-content>
+                <sui-card-content extra>
+                  <sui-icon name="home" />
+                  <!-- {{ $t("home_form_type") }}:
+                  <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
+                  <span v-else class="font-weight-bold text-lowercase">{{
+                    $t("home_form_type_short")
+                  }}</span> -->
+                  {{ house.county }} - {{ house.city }}
+                </sui-card-content>
+              </sui-card>
+            </div>
+          </div>
+          <!-- Most viewd houses -->
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <h3 class="text-muted mb-4">
+                {{ $t('home_mostViewed') }}
+              </h3>
+            </div>
+            <div v-for="(house, index) in moreVisiblehouses" :key="index" class="col-md-3 mb-4">
+              <sui-card class="content-house rounded-radius w-100">
+                <sui-image :src="house.profile" class="image-house rounded-top" />
+                <p class="title-house">
+                  <!-- {{ house.created_at | OnlyDate }} -->
+                </p>
+                <div class="overlay-house" />
+                <div class="button-house">
+                  <a
+                    href="javascript:void(0)"
+                    @click.prevent="viewHouse(house.house_code)"
+                  >
+                    {{ $t("myPanel_card_footer_view") }}
+                  </a>
+                </div>
+                <sui-card-content>
+                  <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} /{{ house.payment_METHOD }} </sui-card-header>
+                  <sui-card-meta>
+                    {{ $t("announce_public_at") }}
+                    {{ house.created_at | OnlyDate }}
+                  </sui-card-meta>
+                  <sui-card-description class="text-lowercase">
+                    {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+                    {{ house.living_room }} {{ $t("announce_form_living_room") }},
+                    {{ house.bathroom }}
+                    {{ $t("announce_form_bathroom") }}.
+                  </sui-card-description>
+                </sui-card-content>
+                <sui-card-content extra>
+                  <sui-icon name="home" />
+                  <!-- {{ $t("home_form_type") }}:
+                  <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
+                  <span v-else class="font-weight-bold text-lowercase">{{
+                    $t("home_form_type_short")
+                  }}</span> -->
+                  {{ house.county }} - {{ house.city }}
+                </sui-card-content>
+              </sui-card>
+            </div>
+          </div>
+          <!-- Top four houses -->
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <h3 class="text-muted mb-4">
+                {{ $t('home_topFour') }}
+              </h3>
+            </div>
+            <div v-for="(house, index) in topFourHouses" :key="index" class="col-md-3 mb-4">
+              <sui-card class="content-house rounded-radius w-100">
+                <sui-image :src="house.profile" class="image-house rounded-top" />
+                <p class="title-house">
+                  <!-- {{ house.created_at | OnlyDate }} -->
+                </p>
+                <div class="overlay-house" />
+                <div class="button-house">
+                  <a
+                    href="javascript:void(0)"
+                    @click.prevent="viewHouse(house.house_code)"
+                  >
+                    {{ $t("myPanel_card_footer_view") }}
+                  </a>
+                </div>
+                <sui-card-content>
+                  <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} /{{ house.payment_METHOD }} </sui-card-header>
+                  <sui-card-meta>
+                    {{ $t("announce_public_at") }}
+                    {{ house.created_at | OnlyDate }}
+                  </sui-card-meta>
+                  <sui-card-description class="text-lowercase">
+                    {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+                    {{ house.living_room }} {{ $t("announce_form_living_room") }},
+                    {{ house.bathroom }}
+                    {{ $t("announce_form_bathroom") }}.
+                  </sui-card-description>
+                </sui-card-content>
+                <sui-card-content extra>
+                  <sui-icon name="home" />
+                  <!-- {{ $t("home_form_type") }}:
+                  <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
+                  <span v-else class="font-weight-bold text-lowercase">{{
+                    $t("home_form_type_short")
+                  }}</span> -->
+                  {{ house.county }} - {{ house.city }}
+                </sui-card-content>
+              </sui-card>
+            </div>
+          </div>
+          <!-- Most recent Lands -->
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <h3 class="text-muted mb-4">
+                {{ $t('home_mostLand') }}
+              </h3>
+            </div>
+            <div v-for="(house, index) in recentLands" :key="index" class="col-md-3 mb-4">
+              <sui-card class="content-house rounded-radius w-100">
+                <sui-image :src="house.profile" class="image-house rounded-top" />
+                <p class="title-house">
+                  <!-- {{ house.created_at | OnlyDate }} -->
+                </p>
+                <div class="overlay-house" />
+                <div class="button-house">
+                  <a
+                    href="javascript:void(0)"
+                    @click.prevent="viewHouse(house.house_code)"
+                  >
+                    {{ $t("myPanel_card_footer_view") }}
+                  </a>
+                </div>
+                <sui-card-content>
+                  <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} /{{ house.payment_METHOD }} </sui-card-header>
+                  <sui-card-meta>
+                    {{ $t("announce_public_at") }}
+                    {{ house.created_at | OnlyDate }}
+                  </sui-card-meta>
+                  <sui-card-description class="text-lowercase">
+                    {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+                    {{ house.living_room }} {{ $t("announce_form_living_room") }},
+                    {{ house.bathroom }}
+                    {{ $t("announce_form_bathroom") }}.
+                  </sui-card-description>
+                </sui-card-content>
+                <sui-card-content extra>
+                  <sui-icon name="home" />
+                  <!-- {{ $t("home_form_type") }}:
+                  <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
+                  <span v-else class="font-weight-bold text-lowercase">{{
+                    $t("home_form_type_short")
+                  }}</span> -->
+                  {{ house.county }} - {{ house.city }}
+                </sui-card-content>
+              </sui-card>
+            </div>
+          </div>
+          <!-- Most recent verified houses -->
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <h3 class="text-muted mb-4">
+                {{ $t('home_mostVefy') }}
+              </h3>
+            </div>
+            <div v-for="(house, index) in topVefyHouses" :key="index" class="col-md-3 mb-4">
+              <sui-card class="content-house rounded-radius w-100">
+                <!-- <sui-image :src="house.profile" class="image-house rounded-top" /> -->
+                <sui-image :src="house.profile" class="image-house rounded-top">
+                  <a is="sui-label" slot="label" color="black" icon="image" ribbon>
+                    {{ $t('mypanel_verification_5') }}
+                  </a>
+                </sui-image>
+                <p class="title-house">
+                  <!-- {{ house.created_at | OnlyDate }} -->
+                </p>
+                <div class="overlay-house" />
+                <div class="button-house">
+                  <a
+                    href="javascript:void(0)"
+                    @click.prevent="viewHouse(house.house_code)"
+                  >
+                    {{ $t("myPanel_card_footer_view") }}
+                  </a>
+                </div>
+                <sui-card-content>
+                  <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} /{{ house.payment_METHOD }} </sui-card-header>
+                  <sui-card-meta>
+                    {{ $t("announce_public_at") }}
+                    {{ house.created_at | OnlyDate }}
+                  </sui-card-meta>
+                  <sui-card-description class="text-lowercase">
+                    {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+                    {{ house.living_room }} {{ $t("announce_form_living_room") }},
+                    {{ house.bathroom }}
+                    {{ $t("announce_form_bathroom") }}.
+                  </sui-card-description>
+                </sui-card-content>
+                <sui-card-content extra>
+                  <sui-icon name="home" />
+                  <!-- {{ $t("home_form_type") }}:
+                  <span v-if="house.period == 'long period'" class="font-weight-bold text-lowercase">{{ $t("home_form_type_long") }}</span>
+                  <span v-else class="font-weight-bold text-lowercase">{{
+                    $t("home_form_type_short")
+                  }}</span> -->
+                  {{ house.county }} - {{ house.city }}
+                </sui-card-content>
+              </sui-card>
+            </div>
+          </div>
+          <!-- Filtered houses -->
           <div class="row my-4">
             <div v-for="(house, index) in FeedOfHouse" :key="index" class="col-md-3 mb-4">
               <sui-card class="content-house rounded-radius w-100">
@@ -1408,7 +1568,12 @@ export default {
     mainSearchfield: true,
     showMenu: false,
     images: [],
-    mainImageSrc: null
+    mainImageSrc: null,
+    recentHouses: {},
+    moreVisiblehouses: {},
+    topFourHouses: {},
+    topVefyHouses: {},
+    recentLands: {}
   }),
   computed: {
     counties () {
@@ -1452,6 +1617,11 @@ export default {
   },
   mounted () {
     this.loadHouses()
+    this.loadRecentsHouses()
+    this.loadMoreVisiblesHouses()
+    this.loadTopFourHouses()
+    this.loadRecentsLands()
+    this.loadVefyHouses()
   },
   methods: {
     // SEARCH PLACE
@@ -1550,6 +1720,56 @@ export default {
         console.log(error)
       }
     },
+    async loadRecentsHouses () {
+      try {
+        const response = await fetch('/api/home-recents-houses')
+        const result = await response.json()
+        this.recentHouses = result
+        /* console.log(this.houses) */
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async loadMoreVisiblesHouses () {
+      try {
+        const response = await fetch('api/home-more-visibles-houses')
+        const result = await response.json()
+        this.moreVisiblehouses = result
+        /* console.log(this.houses) */
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async loadTopFourHouses () {
+      try {
+        const response = await fetch('api/home-top-four-houses')
+        const result = await response.json()
+        this.topFourHouses = result
+        /* console.log(this.houses) */
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async loadRecentsLands () {
+      try {
+        const response = await fetch('api/home-recent-lands')
+        const result = await response.json()
+        this.recentLands = result
+        /* console.log(this.houses) */
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async loadVefyHouses () {
+      try {
+        const response = await fetch('api/home-top-four-verify-houses')
+        const result = await response.json()
+        this.topVefyHouses = result
+        /* console.log(this.houses) */
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async logout () {
       // Log out the user.
       await this.$store.dispatch('auth/logout')
@@ -1564,6 +1784,7 @@ export default {
       this.mainSearchfield = false
       this.filtering = true
     },
+    // back to home page
     backHome () {
       this.province = this.currentState
       this.mainSearchfield = true
