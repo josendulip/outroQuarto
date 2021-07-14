@@ -41,20 +41,23 @@ Vue.filter('dddd', function (createdDate) {
     return moment(createdDate).format('dddd') 
 }) 
 Vue.filter('MonthDate', function (createdDate) {
-    return moment(createdDate).format('MMMM, YYYY');
+    return moment(createdDate).format('MMMM, YYYY')
 });
 Vue.filter('SomeHoursAgo', function (createdDate) {
-    return moment(createdDate).startOf('day').fromNow();
+    return moment(createdDate).startOf('day').fromNow()
 });
 
 Vue.filter('ExtensoFormato', function (createdDate) {
-    return moment(createdDate).format('ll');
+    return moment(createdDate).format('ll')
 })
 Vue.filter('OnlyYear', function (createdDate) {
-    return moment(createdDate).format('YYYY');
+    return moment(createdDate).format('YYYY')
 });
 Vue.filter('OnlyDate', function (createdDate) {
-    return moment(createdDate).format('l');
+    return moment(createdDate).format('l')
+});
+Vue.filter('MyTime', function (createdTime) {
+    return moment(createdTime).format('LT')
 });
 
 

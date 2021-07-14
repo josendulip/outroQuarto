@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PropertiesController;
 use App\Http\Controllers\Admin\SuggestedPropertyController;
 use App\Http\Controllers\Admin\ScheduleServiceController;
+use App\Http\Controllers\admin\VerificatesController;
 
 use App\Http\Controllers\Services\SuggestController;
 /*
@@ -99,6 +100,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     
     Route::get('my-schedules', [ScheduleController::class, 'mySchedules']);
     Route::get('my-schedules-user', [ScheduleController::class, 'mySchedulesUser']);
+    Route::get('find-owner/{id}', [ScheduleController::class, 'findOwner']);
     Route::get('count-schedules', [ScheduleController::class, 'countSchedules']);
     Route::get('user-count-schedules', [ScheduleController::class, 'userCountSchedules']);
     Route::get('get-schedule/{id}', [ScheduleController::class, 'getSchedule']);
@@ -145,6 +147,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('view-schedule-payment/{id}', [ScheduleServiceController::class, 'viewSchedulePayment']);
     Route::post('approve-schedule/{id}', [ScheduleServiceController::class, 'approveSchedule']);
     Route::post('desapprove-schedule/{id}', [ScheduleServiceController::class, 'desapproveSchedule']);
+    
+    Route::apiResources(['all-request-verification'=> VerificatesController::class]);
     
 
 });

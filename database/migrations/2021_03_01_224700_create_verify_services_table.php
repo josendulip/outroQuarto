@@ -24,10 +24,12 @@ class CreateVerifyServicesTable extends Migration
             $table->string('house_county');
             $table->string('house_district');
             $table->string('house_street');
-            $table->string('price');
-            $table->string('date');
-            $table->string('time');
-            $table->string('receipt');
+            $table->string('price')->nullable();
+            $table->string('date')->nullable();
+            $table->string('time')->nullable();
+            $table->string('hour')->nullable();
+            $table->string('minute')->nullable();
+            $table->string('receipt')->nullable();
             $table->string('request_type');
             $table->text('description')->nullable();
             $table->string('status')->default('pending');

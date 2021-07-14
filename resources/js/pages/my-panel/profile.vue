@@ -113,7 +113,7 @@
                             <!-- address-->
                             <div class="form-group">
                                 <input v-model="form.address" :class="{ 'is-invalid': form.errors.has('address') }" class="form-control" type="text" name="address">
-                                <has-error :form="form" field="address" :placeholder="$t('address')"/>
+                                <has-error :form="form" field="address" :placeholder="$t('address')" />
                             </div>
 
                             <!-- birth & city-->
@@ -130,6 +130,10 @@
                             </div>
                             <!-- Submit Button -->
                             <div class="form-group row">
+                              <div class="col-md-6">
+                                <input v-model="form.iban" :class="{'is-invalid': form.errors.has('iban') }" class="form-control" type="text" name="iban" :placeholder="$t('type_iban')">
+                                <has-error :form="form" field="iban" />
+                              </div>
                                 <div class="col-md-6 ml-md-auto">
                                 <v-button :loading="form.busy" type="danger" class="btn-block">
                                     {{ $t('update') }}
@@ -171,6 +175,7 @@ export default {
       city: '',
       country: '',
       photo: '',
+      iban: '',
     }),
     imagepreview: "",
   }),

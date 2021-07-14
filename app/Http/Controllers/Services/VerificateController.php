@@ -45,7 +45,9 @@ class VerificateController extends Controller
             'house_county' => 'required',
             'house_district' => 'required',
             'house_street' => 'required',
-        ]); */     
+        ]); */
+        $user = Auth('api')->user();
+        $data['user_slug'] = $user->slug;
         if (VerifyService::where('house_code', '=', $request->house_code)->exists()) {
             return "user found";
         }
@@ -54,6 +56,7 @@ class VerificateController extends Controller
         return VerifyService::create([
             'user_id' => $data['user_id'],
             'username' => $data['username'],
+            'user_slug' => $data['user_slug'],
             'house_code' => $data['house_code'],
             'phone' => $data['phone'],
             'email' => $data['email'],

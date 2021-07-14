@@ -97,7 +97,8 @@ export default [
       { path: '/admin/edit/user/:slug', name: 'admin.edit.user', component: page('admin/edit-user.vue') },
       { path: '/admin/properties', name: 'admin.properties', component: page('admin/properties.vue') },
       { path: '/admin/users', name: 'admin.users', component: page('admin/users.vue') },
-      { path: '/admin/user', name: 'admin.see.user', component: page('admin/user.vue') },
+      { path: '/admin/verificate', name: 'admin.verificate', component: page('admin/verificate.vue') },
+      { path: '/admin/verification/:id', name: 'admin.verification', component: page('admin/verification.vue') },
       { path: '/profile', name: 'admin.profile', component: page('admin/profile.vue') },
       { path: '/profile/password', name: 'admin.password', component: page('admin/password.vue') }
     ]

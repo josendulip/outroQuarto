@@ -38,6 +38,8 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         'country',
         'slug',
         'activity',
+        'authorization',
+        'iban',
     ];
 
     /**

@@ -3,13 +3,17 @@
     <a class="nav-link dropdown-toggle" href="#" role="button"
        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
     >
-      {{ locales[locale] }}
+      <span v-if="locales[locale] == 'BR'"><img src="/images/flags/ao.svg" style="width:15px; height:9px; object-fit:cover;"> PT</span>
+      <span v-else><img src="/images/flags/gb.svg" style="width:15px; height:9px; object-fit:cover;"> {{ locales[locale] }}</span>
     </a>
     <div class="dropdown-menu">
       <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
          @click.prevent="setLocale(key)"
       >
-        {{ value }}
+        <span v-if="value == 'EN' || value == 'BR'">
+          <span v-if="value == 'BR'">PT</span>
+          <span v-else>{{ value }}</span>
+        </span>
       </a>
     </div>
   </li>

@@ -161,21 +161,18 @@
                     </sui-card-header>
 
                     <sui-card-description>
-                    <p class="d-block h4">{{ house.price  | currency('AKZ', 2, { spaceBetweenAmountAndSymbol: true })}}/{{
-                        house.payment_METHOD
-                    }}
-                    </p>
+                    <p class="d-block h4">{{ house.price  | currency('AKZ', 2, { spaceBetweenAmountAndSymbol: true })}}</p>
                     </sui-card-description>
                     <sui-divider section />
                     <sui-card-header
                     >{{ $t("view_house_details_contrat") }}
                     </sui-card-header>
                     <sui-card-description>
-                      <span class="d-block">
-                          {{ $t("announce_form_vititfee") }} {{ house.tax_visit  | currency("AKZ", 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
+                      <span v-if="house.payment_METHOD == 'Installment'" class="d-block">
+                          {{ $t("view_house_details_pay") }} <span class="text-lowercase font-weight-bold">{{ $t('annou_form_payment_installment') }}</span>
                       </span>
                       <span class="d-block">
-                          {{ $t("view_house_details_pay") }} {{ house.payment_METHOD }}
+                          {{ $t("announce_form_vititfee") }} {{ house.tax_visit  | currency("AKZ", 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
                       </span>
                     </sui-card-description>
                     <sui-divider section />

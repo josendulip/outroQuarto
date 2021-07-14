@@ -10,7 +10,7 @@
       </span>
     </div>
     <div v-show="cube" class="row cube">
-      <div v-for="house in vefyHouses" :key="house.id" class="col-md-3 mb-4">
+      <div v-for="house in vefyHouses.data" :key="house.id" class="col-md-3 mb-4">
         <sui-card>
           <sui-card-content>
             <sui-card-header>
@@ -23,6 +23,9 @@
               <a is="sui-label" v-if="house.status == 'approved'" tag class="text-primary"> {{ house.status }} </a>
               <a is="sui-label" v-if="house.status == 'pending'" tag class="text-danger"> {{ house.status }} </a>
             </sui-header>
+            <!--
+              sui-feed is not available yet, therefore base semantic ui has been substituted for now
+            -->
             <div class="ui small feed">
               <div class="event">
                 <div class="content">
@@ -34,7 +37,9 @@
               <div class="event">
                 <div class="content">
                   <div class="summary">
-                    <a>{{ $t('mypanel_vefy__table_date') }}</a> <span v-if="house.date">{{ house.date }} {{ $t('mypanel_verif_at') }} {{ house.time }}</span> <span v-else class="text-danger text-lowercase">: {{ $t('mypanel_vefy_nodate') }}</span>
+                    <a>{{ $t('mypanel_vefy__table_date') }}</a>
+                    <span v-if="house.date"> {{ house.date }} {{ $t('mypanel_verif_at') }} {{ house.hour }}h : {{ house.minute }}m </span>
+                    <span v-else class="text-danger text-lowercase">: {{ $t('mypanel_vefy_nodate') }}</span>
                   </div>
                 </div>
               </div>
@@ -49,9 +54,41 @@
             <!-- end of base semantic ui, to be updated in the future with sui-feed -->
           </sui-card-content>
           <sui-card-content extra>
-            <sui-button :content="$t('mypanel_verificate_btn')" basic @click="verification(house.house_code)" />
+            <sui-button :content="$t('mypanel_verificate_btn')" basic @click="verification(house.id)" />
           </sui-card-content>
         </sui-card>
+        <!-- <div class="Mycard">
+          <sui-image :src="'./' + house.profile" class="card-img-top" :alt="house.house_code" fluid />
+          <div class="title-house">
+            <p class="">
+              {{ house.created_at | OnlyDate }}
+            </p>
+            <div>
+              <sui-button color="blue" size="mini" @click.prevent="editHouse(house.house_code)">
+                {{ $t("myPanel_card_footer_edit") }}
+              </sui-button>
+
+              <sui-button color="red" size="mini" @click.prevent="viewHouse(house.house_code)">
+                {{ $t("myPanel_card_footer_view") }}
+              </sui-button>
+            </div>
+          </div>
+          <div class="text-black">
+            <h5 class="pb-0 mb-0">
+              {{ house.city }}, {{ house.county }}
+            </h5>
+            <p class="pt-0 mt-0">
+              {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
+              {{ house.living_room }} {{ $t("announce_form_living_room") }},
+              {{ house.bathroom }}
+              {{ $t("announce_form_bathroom") }}.
+            </p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <sui-button size="mini" :content="$t('mypanel_verificate_btn')" basic @click="verification(house.house_code)" />
+            <sui-button size="mini" :content="$t('mypanel_promotion_btn')" basic @click="promoteHouse(house.house_code)" />
+          </div>
+        </div> -->
       </div>
     </div>
     <div v-show="table" class="row table mx-2">
@@ -63,15 +100,18 @@
             <sui-table-header-cell>{{ $t('mypanel_vefy__table_date') }}</sui-table-header-cell>
             <sui-table-header-cell>{{ $t('mypanel_vefy__table_price') }}</sui-table-header-cell>
             <sui-table-header-cell>{{ $t('mypanel_vefy__table_invoice') }}</sui-table-header-cell>
-            <sui-table-header-cell>{{ $t('mypanel_vefy__table_status') }}</sui-table-header-cell>
+            <sui-table-header-cell class="text-center">
+              {{ $t('mypanel_vefy__table_status') }}
+            </sui-table-header-cell>
           </sui-table-row>
         </sui-table-header>
         <sui-table-body>
-          <sui-table-row v-for="vefyHouse in vefyHouses" :key="vefyHouse.id">
-            <sui-table-cell><a href="javascript:void(0)" @click.prevent="verification(vefyHouse.house_code)">{{ vefyHouse.house_code }}</a></sui-table-cell>
+          <sui-table-row v-for="vefyHouse in vefyHouses.data" :key="vefyHouse.id">
+            <sui-table-cell><a href="javascript:void(0)" @click.prevent="verification(vefyHouse.id)">{{ vefyHouse.house_code }}</a></sui-table-cell>
             <sui-table-cell>{{ vefyHouse.request_type }}</sui-table-cell>
             <sui-table-cell>
-              <span v-if="vefyHouse.date"> {{ vefyHouse.date }} {{ $t('mypanel_verif_at') }} {{ vefyHouse.time }} </span>
+              <span v-if="vefyHouse.date"> {{ vefyHouse.date }} {{ $t('mypanel_verif_at') }} </span>
+              <span v-if="vefyHouse.hour"> {{ vefyHouse.hour }}h : {{ vefyHouse.minute }}m </span>
               <span v-else class="text-muted">{{ $t('mypanel_vefy_nodate') }}</span>
             </sui-table-cell>
             <sui-table-cell>
@@ -98,24 +138,24 @@
         </sui-table-body>
       </sui-table>
     </div>
+    <div class="pagination">
+      <pagination :data="vefyHouses" @pagination-change-page="getResults" />
+    </div>
   </div>
 </template>
 
 <script>
 
+import axios from 'axios'
 export default {
   // eslint-disable-next-line vue/component-definition-name-casing
-  name: 'my-panel.promote',
-  components: {},
-  middleware: 'auth',
+  name: 'admin.verificate',
   data: () => ({
-    myHouses: {},
     vefyHouses: {},
     cube: false,
     table: true
   }),
   mounted () {
-    this.loadMyHouses()
     this.loadVefyHouses()
   },
   methods: {
@@ -133,8 +173,8 @@ export default {
     promoteHouse (houseCode) {
       this.$router.push('/promotion/' + houseCode)
     },
-    verification (houseCode) {
-      this.$router.push('/verification/' + houseCode)
+    verification (id) {
+      this.$router.push('verification/' + id)
     },
     viewHouse (houseCode) {
       this.$router.push('view/' + houseCode)
@@ -146,22 +186,16 @@ export default {
       }
       return photo
     },
-    async loadMyHouses () {
-      try {
-        const response = await fetch('api/my-houses')
-        const result = await response.json()
-        this.myHouses = result
-        // console.log(this.myHouses);
-      } catch (error) {
-        console.log(error)
-      }
+    getResults (page = 1) {
+      axios.get('/api/all-request-verification/?page=' + page).then((response) => {
+        this.vefyHouses = response.data
+      })
     },
     async loadVefyHouses () {
       try {
-        const response = await fetch('/api/request-verification')
+        const response = await fetch('/api/all-request-verification')
         const result = await response.json()
         this.vefyHouses = result
-        // console.log(this.promoHouses);
       } catch (error) {
         console.log(error)
       }

@@ -59,13 +59,13 @@
           {{ $t("mypanel_verification_title4") }}
         </h3>
       </div>
+      <!-- FORMULARIO PARA REQUEST PEDIDO  -->
       <div v-else-if="vefy.status === 'approved'" class="col-md-4 my-4">
         <h3 class="text-center text-uppercase">
           {{ $t("mypanel_verification_title1") }}
         </h3>
         <transition name="fade" mode="out-in">
-          <!-- FORMULARIO PARA REQUEST PEDIDO  -->
-          <sui-card v-if="vefy.status == 'approved'" class="rounded-radius shadow main-red w-100">
+          <sui-card class="rounded-radius shadow main-red w-100">
             <div is="sui-button-group" basic size="small">
               <sui-button v-if="!form_request" :content="$t('mypanel_verif_verification_status')" fluid />
               <sui-button v-else :content="$t('mypanel_verif_verification_congrat')" fluid class="text-warning" />

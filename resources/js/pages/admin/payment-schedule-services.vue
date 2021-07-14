@@ -49,8 +49,10 @@
             </p>
             <p class="">
               <strong>{{ $t('myadmin_schedul_view_item8') }} {{ mySchedule.owner }}</strong> <br>
-              <sui-button :content="$t('myadmin_schedul_view_item12')" size="tiny" basic @click="sendMoney(mySchedule.owner)" />
+              <sui-button :content="$t('myadmin_schedul_view_item12')" size="tiny" basic @click.prevent="findUser(mySchedule.owner)" />
             </p>
+            <span v-if="opens"> {{ owner.name }} </span>
+            
             <p class="">
               <strong>{{ $t('myadmin_schedul_view_item9') }}</strong> <br>{{ mySchedule.created_at | MultipleLocaleSupport }}
             </p>
@@ -58,6 +60,30 @@
             <sui-button v-else :content="$t('myadmin_schedul_view_item11')" color="green" basic @click="desapproveSchedule(mySchedule.id)" />
           </div>
         </sui-segment>
+        <!-- Modal -->
+        <!-- <sui-modal v-model="open">
+          <sui-modal-header>{{ owner.id }}</sui-modal-header>
+          <sui-modal-content image>
+            <sui-image
+              wrapped
+              size="medium"
+              src="static/images/avatar/large/rachel.png"
+            />
+            <sui-modal-description>
+              <sui-header>{{ owner.name }}</sui-header>
+              <p>
+                We've found the following gravatar image associated with your e-mail
+                address.
+              </p>
+              <p>Is it okay to use this photo?</p>
+            </sui-modal-description>
+          </sui-modal-content>
+          <sui-modal-actions>
+            <sui-button positive @click.native="toggle">
+              OK
+            </sui-button>
+          </sui-modal-actions>
+        </sui-modal> -->
       </div>
     </div>
   </div>
@@ -81,19 +107,40 @@ export default {
       countTheSchedules: 0,
       scheduling: false,
       status: '',
-      rescheduleShow: -1
+      rescheduleShow: -1,
+      opens: false,
+      owner: new Form({
+        id: '',
+        name: '',
+        email: '',
+        password: '',
+        identity: '',
+        birth: '',
+        phone: '',
+        address: '',
+        city: '',
+        country: '',
+        photo: ''
+      })
     }
   },
   mounted () {
     this.loadSchedule()
     this.countSchedules()
+    this.findUser()
     // eslint-disable-next-line no-undef
     Fire.$on('after-created', () => {
-      // this.loadschedules()
+      this.findUser()
       this.loadSchedule()
     })
   },
   methods: {
+    findUser (owner) {
+      this.opens = true
+      axios.get('/api/find-owner/' + owner).then((response) => {
+        this.owner.fill(response)
+      })
+    },
     sendMoney (owner) {
       axios.post('api/my-schedules/?page=' + owner).then((response) => {
         this.mySchedules = response.data
@@ -196,4 +243,15 @@ export default {
     line-height: 1.21428571em!important;
     padding: .67857143em 1em!important;
   }
+  .dimmed.dimmable > .ui.animating.dimmer, .dimmed.dimmable > .ui.visible.dimmer, .ui.active.dimmer {
+      display: flex;
+      align-items: center!important;
+      justify-content: center!important;
+      }
+      .ui.modal,
+      .ui.active.modal {
+      left: auto !important;
+      transform-origin: center !important;
+      transition: all ease .5s;
+    }
 </style>

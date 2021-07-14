@@ -38,11 +38,10 @@
             }}</router-link>
           </li>
           <li class="nav-item" v-if="user.role === 'user'">
-            <router-link :to="{ name: 'user.announce' }" class="nav-link">{{
-              $t("home_announce")
-            }}</router-link>
+            <router-link :to="{ name: 'user.announce' }" class="nav-link">
+              {{ $t("home_announce")}}</router-link>
           </li>
-          <li class="nav-item" v-if="user.role === 'user'">
+          <li v-if="user.role === 'user'" class="nav-item">
             <sui-dropdown :text="$t('activities')" item class="simple nav-link">
               <sui-dropdown-menu>
                 <template>
@@ -101,7 +100,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img :src="user.photo_url" class="rounded-circle profile-photo mr-1" />
+              <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
@@ -151,34 +150,34 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import LocaleDropdown from "./LocaleDropdown";
+import { mapGetters } from 'vuex'
+import LocaleDropdown from './LocaleDropdown'
 
 export default {
   components: {
-    LocaleDropdown,
+    LocaleDropdown
   },
 
   data: () => ({
     appName: window.config.appName,
-    src: "/images/logo/200x48.png",
+    src: '/images/logo/200x48.png'
   }),
 
   computed: mapGetters({
-    user: "auth/user",
-    authenticated: "auth/check",
+    user: 'auth/user',
+    authenticated: 'auth/check'
   }),
 
   methods: {
     async logout() {
       // Log out the user.
-      await this.$store.dispatch("auth/logout");
+      await this.$store.dispatch('auth/logout')
 
       // Redirect to login.
-      this.$router.push({ name: "login" });
-    },
-  },
-};
+      this.$router.push({ name: 'login' })
+    }
+  }
+}
 </script>
 
 <style scoped>
