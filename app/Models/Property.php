@@ -63,4 +63,8 @@ class Property extends Model
     {
         return $this->hasMany(History::class); 
     }
+    public function payment()
+    {
+        return $this->hasMany(Payment::class); 
+    }
 }

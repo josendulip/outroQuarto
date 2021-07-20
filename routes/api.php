@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\PropertiesController;
 use App\Http\Controllers\Admin\SuggestedPropertyController;
 use App\Http\Controllers\Admin\ScheduleServiceController;
 use App\Http\Controllers\admin\VerificatesController;
+use App\Http\Controllers\admin\PaymentController;
 
 use App\Http\Controllers\Services\SuggestController;
 /*
@@ -149,7 +150,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('desapprove-schedule/{id}', [ScheduleServiceController::class, 'desapproveSchedule']);
     
     Route::apiResources(['all-request-verification'=> VerificatesController::class]);
-    
+
+
+    Route::apiResources(['payment-proccess'=> PaymentController::class]);
+    Route::get('get-my-payments', [PaymentController::class, 'getOwnerPayment']);    
+    Route::get('get-invoice/{id_transation}', [PaymentController::class, 'getInvoice']);    
 
 });
 

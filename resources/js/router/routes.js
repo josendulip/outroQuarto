@@ -57,6 +57,7 @@ export default [
       { path: '/verificate', name: 'my-panel.verificate', component: page('my-panel/verificate.vue') },
       { path: '/verification/:house_code', name: 'my-panel.verification', component: page('my-panel/verification.vue') },
       { path: '/payments', name: 'my-panel.payments', component: page('my-panel/payments.vue') },
+      { path: '/payment/elect_invoice/:id_trans', name: 'my-panel.payments.invoice', component: page('my-panel/payments_invoice.vue') },
       { path: '/assessments', name: 'my-panel.assessments', component: page('my-panel/assessments.vue') },
       { path: '/new', name: 'my-panel.new.home', component: page('my-panel/newHome.vue') },
       { path: '/edit/:house_code', name: 'my-panel.edit.home', component: page('my-panel/editHome.vue') },

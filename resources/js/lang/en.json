@@ -341,6 +341,7 @@
    
   
   "view_house_details_desc": "HOUSE DESCRIPTION:",
+  "view_house_details_desc2": "Description:",
   "view_house_details_readM": "read more...",
   "view_house_details_readL": "read less...",
   "view_house_availability": "Property Availability",
@@ -414,6 +415,7 @@
   "schedule_form_mgs_name": "You need to fill in your profile your full name",
   "schedule_form_mgs_recept": "Upload the recept of payment",
   "schedule_form_mgs_date": "You need to set the date for us to verify the property",
+  "schedule_form_mgs_percetage": "You need to set the percetage for the company",
   "schedule_form_mgs_time": "You need to set the time to visit the property",  
   "schedule_form_msg_photo_type": "This is not the correct type image in the profile. Please upload the correct type as JPG, PNG ou PDF.",
   "schedule_form_suscceful_toastr": "You schedule was successful saved!\n Thanks so much, <font color='yellow'>We will send you a confirmation in 2 or 4 hours</font>",
@@ -495,6 +497,14 @@
   "mypanel_s": "S",
   "mypanel_action": "Action",
   "mypanel_Download": "Download",
+  "mypanel_duration": "Duration",
+  "mypanel_quantity": "Quantity",
+  "mypanel_status": "Status",
+  "mypanel_subtotal": "Subtotal",
+  "mypanel_staxa": "Fee",
+  "mypanel_total": "Total",
+  "mypanel_downl_pdf": "Download PDF",
+  "mypanel_downl_print": "Print directly",
   
   "mypanel_verification_1": "Amount per day",
   "mypanel_verification_2": "Required days",
@@ -575,6 +585,26 @@
   "mypanel_assestment_assessment": "Assessments",
   "mypanel_assestment_number": "Value",
 
+  "mypanel_payment_transf":"Transfer confirmation",
+  "mypanel_payment_transfs":"Transfer confirmation from OutroQuarto",
+  "mypanel_payment_origInvoice":"Orig. Invoice",
+  "mypanel_payment_date": "Date",
+  "mypanel_payment_from": "From",
+  "mypanel_payment_to": "To",
+  "mypanel_payment_origInvoices": "The receipt that client sent",
+  "mypanel_payment_fact":"Fact amount",
+  "mypanel_payment_orgAmount":"Orig. Amount paid",
+  "mypanel_payment_orgAmounts":"Total amount the client paid",
+  "mypanel_payment_Method":"Method",
+  "mypanel_payment_fee": "Fee",
+  "mypanel_payment_fees": "The estimated amount you'll receive after service fees",
+  "mypanel_payment_status": "Status is the current condition of your money.",
+  "mypanel_payment_id_trans": "Transaction id",
+
+
+
+
+
 
   
   "myadmin": "Admin Panel",
@@ -604,8 +634,11 @@
   "myadmin_user_topMessage4":"Error while you trying to save user info. Try again later, please!",
   "myadmin_user_topMessage5":"Suggest updated with successfull",
   "myadmin_user_topMessage6":"Error while you trying to save suggest info. Try again later, please!",
+  "myadmin_user_topMessage7":"Payment was sent to the Owner",
+  "myadmin_user_topMessage8":"Error! This error can be cause by the missing info of Owner. Ex:. IBAN, ID, etc.\n Please, Check if exist this info and if continue <font color='yellow'>contact the ADMIN</font>",
   "myadmin_user_authorized":"Authorized",
   "myadmin_user_unauthorized":"Unauthorized",
+  "myadmin_user_iban":"User did not type his iban",
   
   "myadmin_suggestor":"Suggestor Data",
   "myadmin_ouner": "Owner Data",
@@ -628,11 +661,25 @@
   "myadmin_schedul_view_item10":"Approve",
   "myadmin_schedul_view_item11":"Dispprove",
   "myadmin_schedul_view_item12":"Send his money",
+  "myadmin_schedul_view_item13":"Owner phone number",
+  "myadmin_schedul_view_item14":"Owner iban number",
+  "myadmin_schedul_view_item15":"Owner city",
+  "myadmin_schedul_view_item16":"Owner email",
+  "myadmin_schedul_view_item17":"OutroQuarto percentage",
+  "myadmin_schedul_view_item18":"By Bank transfer",
+  "myadmin_schedul_view_item19":"By bank reference",
+  "myadmin_schedul_view_item20":"By order deposit",
+  "myadmin_schedul_view_item21":"Transfer by IBAN",
+  "myadmin_schedul_view_item22":"Another method",
+  "myadmin_schedul_view_item23":"Write the description of this payment method you have chosen.",
+  "myadmin_schedul_view_item24":"Comment here...",
+  "myadmin_schedul_view_item25":"Choose the method of payment",
 
   "myadmin_dashboad_user":"Number of Users",
   "myadmin_dashboad_schedulings":"Scheduleds",
   "myadmin_dashboad_properties":"Properties",
   "myadmin_dashboad_suggest":"Suggested Properties",
+
 
 
 
@@ -686,6 +733,11 @@
   "phone_footer": "Tel:",  
   "email_footer": "Email:", 
   "address_footer": "Address:",
+  "manager":"Manager",
+  "b_i_n":"Identity Card Number",
+  "schedule_service":"Visit Service",
+  "schedule_standart":"Standard",
+   "schedule_idenfined":"Undefined",
 
   "menu3_footer": "Follow us",
 
