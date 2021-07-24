@@ -43,7 +43,11 @@
           <sui-table-row v-for="(history, index) in histories.data" :key="history.id">
             <sui-table-cell>{{ index }}</sui-table-cell>
             <sui-table-cell>{{ history.created_at | MultipleLocaleSupport }}</sui-table-cell>
-            <sui-table-cell>{{ history.type }}</sui-table-cell>
+            <sui-table-cell>
+              <span v-if=" history.type === 'Land'">{{ $t('annou_form_land') }}</span>
+              <span v-else-if=" history.type === 'outhouse'">{{ $t('annou_form_type_outhouse') }}</span>
+              <span v-else>{{ history.type }}</span>
+            </sui-table-cell>
             <sui-table-cell><a href="javascript:void(0)" @click.prevent="viewHouse(history.house_code)">{{ history.house_code }}</a></sui-table-cell>
             <sui-table-cell class="text-center">
               <a href="javascript:void(0)" color="red" @click.prevent="deleteHistory(history.id)"><i class="window close icon" :title="$t('property_delete')" /></a>

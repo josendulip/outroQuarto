@@ -1,128 +1,158 @@
 <template>
-  <div class="h-100 no-gutters row">
-    <div class="d-none d-lg-block col-lg-4">
-      <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-example-2" data-slide-to="0" class="active" />
-          <li data-target="#carousel-example-2" data-slide-to="1" />
-          <li data-target="#carousel-example-2" data-slide-to="2" />
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="carousel-item active">
-            <div class="view">
-              <img class="d-block w-100" src="/images/register_login/1.jpg" alt="First slide">
-              <div class="mask rgba-black-light" />
-            </div>
-            <div class="carousel-caption">
-              <h3 class="h3-responsive">
-                {{ $t('login_slider_1') }}
-              </h3>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <!--Mask color-->
-            <div class="view">
-              <img class="d-block w-100" src="/images/register_login/2.jpg" alt="Second slide">
-              <div class="mask rgba-black-strong" />
-            </div>
-            <div class="carousel-caption">
-              <h3 class="h3-responsive">
-                {{ $t('login_slider_2') }}
-              </h3>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <!--Mask color-->
-            <div class="view">
-              <img class="d-block w-100" src="/images/register_login/3.jpg" alt="Third slide">
-              <div class="mask rgba-black-slight" />
-            </div>
-            <div class="carousel-caption">
-              <h3 class="h3-responsive">
-                {{ $t('login_slider_3') }}
-              </h3>
-            </div>
-          </div>
+  <div class="h-100 row">
+    <div class="app-container">
+      <div class="h-100 row">
+        <div class="hidden-xs-down col-md-3 col-lg-4" style="background: url('images/vendor/622523.jpg') no-repeat center center; background-size: cover">
+          <article class="shadow-none">
+            <!-- <aside>
+              <img src="images/vendor/01.jpg" class="h-100" style="object-fit:cover" alt="">
+            </aside> -->
+            <section class="hidden-sm-down hidden-md-down">
+              <h1 class="h1-time">
+                {{ $t('login_slider_title') }}
+              </h1>
+              <div class="teaser">
+                <figure>
+                  <img alt="" src="images/vendor/3.jpg">
+                  <figcaption>
+                    <h3>Lubito</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/announce.jpg">
+                  <figcaption>
+                    <h3>Luena</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/03.jpg">
+                  <figcaption>
+                    <h3>Cabinda</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/2.jfif">
+                  <figcaption>
+                    <h3>Luanda</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/05.jpg">
+                  <figcaption>
+                    <h3>Bengo</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/06.jpg">
+                  <figcaption>
+                    <h3>Lundas</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/1.jfif">
+                  <figcaption>
+                    <h3>Namibe</h3>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img alt="" src="images/vendor/04.jpg">
+                  <figcaption>
+                    <h3>Lubango</h3>
+                  </figcaption>
+                </figure>
+              </div>
+              <p>
+                {{ $t('history_footer') }}
+              </p>
+              <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active">
+                    <h3 class="h3-responsive text-white">
+                      {{ $t('login_slider_1') }}
+                    </h3>
+                  </div>
+                  <div class="carousel-item">
+                    <h3 class="h3-responsive text-white">
+                      {{ $t('login_slider_2') }}
+                    </h3>
+                  </div>
+                  <div class="carousel-item">
+                    <h3 class="h3-responsive text-white">
+                      {{ $t('login_slider_3') }}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </article>
         </div>
-        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true" />
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true" />
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-    <div
-      class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8"
-    >
-      <div class="mx-auto col-12">
-        <NavOnly class="shadow-none" />
-        <div class="mx-auto col-sm-12 col-md-10 col-lg-9">
-          <div class="my-lg-5 my-sm-3 py-lg-5">
-            <div class="app-logo my-5">
-              <router-link to="/" class="navbar-brand">
-                <img src="images/logo/200x48.png" :alt="appName" class="img-fluid">
-              </router-link>
-            </div>
-            <p
-              class="mb-0 text-muted my-3"
-              style="font-family: Arial, Helvetica, sans-serif; font-size: 1.5em"
-            >
-              <span class="d-block">{{ $t("login_head1_phrase") }} </span>
-              <span>{{ $t("login_head2_phrase") }}</span>
-            </p>
-            <h6 class="my-4">
-              {{ $t("login_phrase_account") }}
-              <router-link :to="{ name: 'register' }" class="text-primary" active-class="active">
-                {{ $t("goTo_register_link") }}
-              </router-link>
-            </h6>
-            <div class="divider row" />
-            <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="position-relative form-group">
-                    <label for="email">{{ $t("email") }}</label>
-                    <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-                    <has-error :form="form" field="email" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="position-relative form-group">
-                    <label for="password">{{ $t("password") }}</label>
-                    <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-                    <has-error :form="form" field="password" />
-                  </div>
-                </div>
+        <div class="h-100 col-md-9 col-lg-8">
+          <!-- <NavOnly class="shadow-none" /> -->
+          <div class="h-100 d-flex justify-content-center align-items-center">
+            <div class="col-lg-8 my-lg-5 my-sm-3 py-lg-5">
+              <div class="app-logo my-2">
+                <router-link to="/" class="navbar-brand">
+                  <img src="images/logo/200x48.png" :alt="appName" class="img-fluid ml-n2">
+                </router-link>
+                <ul class="navbar-nav">
+                  <LocaleDropdown />
+                </ul>
               </div>
-              <div class="position-relative form-check">
-                <checkbox v-model="remember" name="remember">
-                  {{ $t("remember_me") }}
-                </checkbox>
-                <!--<label for="remember" class="form-check-label">Keep me logged in</label>!-->
-              </div>
+              <p class="mb-0 text-muted my-3" style="font-family: Arial, Helvetica, sans-serif; font-size: 1.5em">
+                <span class="d-block">{{ $t("login_head1_phrase") }} </span>
+                <span>{{ $t("login_head2_phrase") }}</span>
+              </p>
+              <h6 class="my-4">
+                {{ $t("login_phrase_account") }}
+                <router-link :to="{ name: 'register' }" class="text-primary" active-class="active">
+                  {{ $t("goTo_register_link") }}
+                </router-link>
+              </h6>
               <div class="divider row" />
-              <div class="d-flex align-items-center">
-                <div class="ml-auto">
-                  <router-link
-                    :to="{ name: 'password.request' }"
-                    class="small ml-auto mr-2 my-auto text-uppercase"
-                  >
-                    {{ $t("forgot_password") }}
-                  </router-link>
-
-                  <!-- Submit Button -->
-                  <v-button :loading="form.busy" class="btn-danger">
-                    {{ $t("login") }}
-                  </v-button>
-
-                  <!-- GitHub Login Button -->
-                  <login-with-github />
+              <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="email">{{ $t("email") }}</label>
+                      <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+                      <has-error :form="form" field="email" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="password">{{ $t("password") }}</label>
+                      <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+                      <has-error :form="form" field="password" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </form>
+                <div class="form-check">
+                  <checkbox v-model="remember" name="remember">
+                    {{ $t("remember_me") }}
+                  </checkbox>
+                  <!--<label for="remember" class="form-check-label">Keep me logged in</label>!-->
+                </div>
+                <div class="divider row" />
+                <div class="d-flex align-items-center">
+                  <div class="ml-auto">
+                    <router-link
+                      :to="{ name: 'password.request' }"
+                      class="small ml-auto mr-2 my-auto text-uppercase"
+                    >
+                      {{ $t("forgot_password") }}
+                    </router-link>
+
+                    <!-- Submit Button -->
+                    <v-button :loading="form.busy" class="btn-danger">
+                      {{ $t("login") }}
+                    </v-button>
+
+                    <!-- GitHub Login Button -->
+                    <!-- <login-with-github /> -->
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -133,13 +163,11 @@
 <script>
 import Form from 'vform'
 import Cookies from 'js-cookie'
-import LoginWithGithub from '~/components/LoginWithGithub'
-import NavOnly from '~/components/NavOnly'
+import LocaleDropdown from '~/components/LocaleDropdown'
 
 export default {
   components: {
-    LoginWithGithub,
-    NavOnly
+    LocaleDropdown
   },
 
   layout: 'basic',
@@ -202,5 +230,91 @@ export default {
   height: 1px;
   overflow: hidden;
   background: #e9ecef;
+}
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    margin: 0 15px;
+}
+article {
+  display: flex;
+  height: 100%;
+  position: relative;
+  background: transparent;
+  box-shadow: 0px 0px 50px -10px #9a7289;
+}
+
+aside {
+  width: 30%;
+  background-color: #ccc;
+}
+aside img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+section {
+  width: 100%;
+  overflow: hidden;
+  padding: 2% 5% 0;
+  position: relative;
+}
+section:before {
+  position: absolute;
+  right: 0;
+  width: 5%;
+  top: 0;
+  height: 100%;
+  background: red;
+}
+
+.h1-time {
+  font-family: Montserrat, sans-serif;
+  font-size: 6vw;
+  margin: 0 0 2vw 0;
+  color: rgb(36, 36, 36);
+}
+
+@keyframes move {
+  0% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  100% {
+    transform: translate3d(-1250px, 0px, 0px);
+  }
+}
+.teaser {
+  display: flex;
+  margin: 0 0 3vw 0;
+  animation: move 20s forwards linear;
+}
+.teaser figure {
+  overflow: hidden;
+  margin: 0;
+  width: 250px;
+  min-width: 250px;
+  padding: 0 30px 0 0;
+  position: relative;
+}
+.teaser img {
+  width: 220px;
+  height: 180px;
+  object-fit: cover;
+}
+.teaser figcaption {
+  position: absolute;
+  background-color: #fff;
+  bottom: 0;
+  font-size: 20px;
+  color: #000;
+  mix-blend-mode: screen;
+}
+.teaser figcaption h3 {
+  margin: 0;
+  padding: 3px 5px;
+  width: 100%;
 }
 </style>

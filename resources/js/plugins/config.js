@@ -162,4 +162,47 @@ const Toast = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 })
-window.Toast = Toast;
+window.Toast = Toast
+
+// Print Component
+import VueHtmlToPaper from 'vue-html-to-paper-master';
+
+const options = {
+  name: 'Invoice - OUTROQUARTO',
+  specs: [
+    'fullscreen=yes',
+    'titlebar=yes',
+    'scrollbars=yes'
+  ],
+  styles: [
+    'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
+    '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css',
+    'https://unpkg.com/kidlat-css/css/kidlat.css',
+    '/dist/css/app.css'
+  ],
+  timeout: 1000, // default timeout before the print window appears
+  autoClose: true, // if false, the window will not close after printing
+  windowTitle: 'Invoice - OUTROQUARTO', // override the window title
+}
+
+Vue.use(VueHtmlToPaper, options)
+
+// or, using the defaults with no stylesheet
+Vue.use(VueHtmlToPaper)
+
+import Print from 'vue-print-nb-master'
+// Global instruction
+Vue.use(Print)
+
+
+import VueSocialSharing from 'vue-social-sharing-master'
+
+Vue.use(VueSocialSharing)
+
+///PARA RETIRAR AS TAGS HTML
+Vue.filter('stripHTML', function (value) {
+    const div = document.createElement('div')
+    div.innerHTML = value
+    const text = div.textContent || div.innerText || ''
+    return text
+});

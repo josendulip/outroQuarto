@@ -37,7 +37,8 @@ class Property extends Model
         'email',
         'phone',
         'profile',
-        'add_images'
+        'add_images',
+        'slug'
     ];
 
     public function user()

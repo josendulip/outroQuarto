@@ -10,6 +10,8 @@
   "login_head2_phrase" : "Por favor entre em sua conta.",
   "login_phrase_account" : "Sem conta?",
   "goTo_register_link" : "Inscreva-se agora",
+  "login_slider_title" : "Hora da Mudança",
+  "login_slider_text1" : "Curte a sua Mudança, leva contigo às memórias, escolhe a casa perfeita",
   "login_slider_1" : "Curte a sua Mudança",
   "login_slider_2" : "Escolhe a casa perfeita",
   "login_slider_3" : "Leva contigo às memórias",
@@ -314,6 +316,7 @@
  
 
   "home_form_city": "Província",
+  "home_form_location": "Localização",
   "home_form_type": "Tipo de aluguel",
   "home_form_type_long": "Período longo",
   "home_form_type_short": "Período Curto",

@@ -11,6 +11,8 @@
   "login_head2_phrase" : "Please sign in to your account.",
   "login_phrase_account" : "No account?",
   "goTo_register_link" : "Sign up now",
+  "login_slider_title" : "Time to change",
+  "login_slider_text1" : "Enjoy your change, choose the perfect house, take with you to the memories",
   "login_slider_1" : "Enjoy your change",
   "login_slider_2" : "Choose the perfect house",
   "login_slider_3" : "Take with you to the memories",
@@ -243,7 +245,7 @@
   "announce_form_district": "District",
   "announce_form_street": "Street",
   
-  "annou_form_type_outhouse": "Compartment",
+  "annou_form_type_outhouse": "Outhouse",
   "annou_form_type_apart": "Apartament",
   "annou_form_type_house": "House",
   "annou_form_land": "Land",
@@ -317,6 +319,7 @@
 
   
   "home_form_city": "City",
+  "home_form_location": "Localization",
   "home_form_type":"Type of rent",
   "home_form_type_long":"Long Period",
   "home_form_type_short": "Short Period",

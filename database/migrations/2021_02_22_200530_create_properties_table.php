@@ -28,6 +28,7 @@ class CreatePropertiesTable extends Migration
             $table->string('payment_METHOD');
             $table->string('contrat_type');
             $table->string('price');
+            $table->string('tax_visit')->default(250)->nullable();
             $table->string('room')->nullable();
             $table->string('living_room')->nullable();
             $table->string('kitchen')->nullable();
@@ -35,12 +36,17 @@ class CreatePropertiesTable extends Migration
             $table->boolean('seal')->default(0);
             $table->boolean('furniture')->default(0);
             $table->boolean('state')->default(0);
+            $table->boolean('width')->default(0)->nullable();
+            $table->boolean('length')->default(0)->nullable();
+            $table->boolean('area')->default(0)->nullable();
             $table->boolean('verification')->default(0);
+            $table->boolean('promo')->default(0);
             $table->text('description');
             $table->string('profile')->default('images/property/thumbnail/no-image.png');
             $table->string('username')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('add_images')->default("hasnot")->nullable();
             $table->string('slug')->nullable();
 
             $table->timestamps();

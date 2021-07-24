@@ -1307,7 +1307,7 @@ export default {
       this.countyFilter = []
     },
     UncheckAllRoom: function () {
-      this.roomFilter = []
+      this.roomFilter = ''
     },
     UncheckCostRoom: function () {
       this.customRoom = 1
