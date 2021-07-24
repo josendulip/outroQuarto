@@ -57,6 +57,7 @@ export default [
       { path: '/verificate', name: 'my-panel.verificate', component: page('my-panel/verificate.vue') },
       { path: '/verification/:house_code', name: 'my-panel.verification', component: page('my-panel/verification.vue') },
       { path: '/payments', name: 'my-panel.payments', component: page('my-panel/payments.vue') },
+      { path: '/payment/elect_invoice/:id_trans', name: 'my-panel.payments.invoice', component: page('my-panel/payments_invoice.vue') },
       { path: '/assessments', name: 'my-panel.assessments', component: page('my-panel/assessments.vue') },
       { path: '/new', name: 'my-panel.new.home', component: page('my-panel/newHome.vue') },
       { path: '/edit/:house_code', name: 'my-panel.edit.home', component: page('my-panel/editHome.vue') },
@@ -97,7 +98,8 @@ export default [
       { path: '/admin/edit/user/:slug', name: 'admin.edit.user', component: page('admin/edit-user.vue') },
       { path: '/admin/properties', name: 'admin.properties', component: page('admin/properties.vue') },
       { path: '/admin/users', name: 'admin.users', component: page('admin/users.vue') },
-      { path: '/admin/user', name: 'admin.see.user', component: page('admin/user.vue') },
+      { path: '/admin/verificate', name: 'admin.verificate', component: page('admin/verificate.vue') },
+      { path: '/admin/verification/:id', name: 'admin.verification', component: page('admin/verification.vue') },
       { path: '/profile', name: 'admin.profile', component: page('admin/profile.vue') },
       { path: '/profile/password', name: 'admin.password', component: page('admin/password.vue') }
     ]

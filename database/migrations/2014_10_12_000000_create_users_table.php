@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('slug')->nullable();
             $table->string('activity')->nullable();
             $table->string('authorization')->nullable();
+            $table->string('iban')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

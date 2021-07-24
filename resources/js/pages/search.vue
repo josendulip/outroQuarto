@@ -44,7 +44,7 @@
           </li>
           <!-- HOUSE TYPE -->
           <li class="nav-item dropdown hidden-xs-down hidden-sm-down">
-            <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ $t("announce_form_type") }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -73,6 +73,14 @@
                 </label>
               </a>
               <a class="dropdown-item" href="javascript:void(0)">
+                <label class="custom-control">
+                  <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Land">
+                  <div class="custom-control-label">
+                    {{ $t("annou_form_land") }}
+                  </div>
+                </label>
+              </a>
+              <!-- <a class="dropdown-item" href="javascript:void(0)">
                 <label class="custom-control">
                   <input v-model="houseTypeFilter" type="checkbox" class="custom-control-input" value="Albergue">
                   <div class="custom-control-label">
@@ -127,7 +135,7 @@
                     {{ $t("annou_form_type_pension") }}
                   </div>
                 </label>
-              </a>
+              </a> -->
 
               <div v-if="houseTypeFilter" class="dropdown-divider" />
               <a v-if="houseTypeFilter" class="dropdown-item" href="javascript:(0)" @click.prevent="UncheckAllType()"><i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
@@ -290,6 +298,9 @@
                 <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_albergue')" value="Albergue" />
               </sui-form-field>
               <sui-form-field>
+                <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_land')" value="Land" />
+              </sui-form-field>
+              <!-- <sui-form-field>
                 <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_Hospedaria')" value="guesthouse" />
               </sui-form-field>
               <sui-form-field>
@@ -306,7 +317,7 @@
               </sui-form-field>
               <sui-form-field>
                 <sui-checkbox v-model="houseTypeFilter" :label="$t('annou_form_type_pension')" value="Pension" />
-              </sui-form-field>
+              </sui-form-field> -->
               <sui-form-field v-if="houseTypeFilter">
                 <div class="dropdown-divider" />
                 <a class="dropdown-item" href="javascript:(0)" @click.prevent="UncheckAllType()"><i class="check square outline icon" /> {{ $t("search_uncheck") }}</a>
@@ -367,7 +378,6 @@
         </sui-accordion>
       </div>
     </transition>
-
     <div class="container mt-2">
       <!-- Order button -->
       <div class="row my-0 py-0">
@@ -382,10 +392,10 @@
               </div>
             </div>
             <div class="d-flex justify-content-between align-items-end flex-wrap">
-              <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" :class="{ 'bg-danger': recent }" @click="recent = !recent">
+              <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0" :class="{ 'bg-danger': recent }" :title="$t('search_more_old')" @click="recent = !recent">
                 <i class="mdi mdi-minus text-muted" />
               </button>
-              <button type="button" class="btn btn-light bg-white btn-icon mt-2 mt-xl-0" :class="{ 'bg-danger': recent }" @click="recent = !recent">
+              <button type="button" class="btn btn-light bg-white btn-icon mt-2 mt-xl-0" :class="{ 'bg-danger': recent }" :title="$t('search_more_recent')" @click="recent = !recent">
                 <i class="mdi mdi-plus text-muted" />
               </button>
             </div>
@@ -448,7 +458,10 @@
             <sui-card-content>
               <sui-card-header>{{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }} / {{ house.payment_METHOD }}</sui-card-header>
               <sui-card-meta>{{ $t("announce_public_at") }} {{ house.created_at | OnlyDate }}</sui-card-meta>
-              <sui-card-description class="text-lowercase">
+              <sui-card-description v-if="house.type == 'Land'">
+                {{ $t("annou_form_land") }}
+              </sui-card-description>
+              <sui-card-description v-else class="text-lowercase">
                 {{ house.type }}, {{ house.room }} {{ $t("announce_form_room") }},
                 {{ house.living_room }} {{ $t("announce_form_living_room") }},
                 {{ house.bathroom }}
@@ -1251,9 +1264,7 @@ export default {
       } else if (this.roomFilter.length) {
         return this.roomFilter.length ? this.filterHouseByRange(this.houses.data.filter((house) => this.roomFilter.some((filter) => house.room.match(filter)))) : this.houses.data
       } else if (this.houseTypeFilter.length) {
-        return this.houseTypeFilter.length
-          ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data.filter((house) => this.houseTypeFilter.some((filter) => house.type.match(filter)))))
-          : this.houses
+        return this.houseTypeFilter.length ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data.filter((house) => this.houseTypeFilter.some((filter) => house.type.match(filter))))) : this.houses.data
       } else {
         // if (this.houses.data) //return this.orderBy(this.houses.data, 'created_at', -1);
         return this.houses.data ? this.filterHouseByRange(this.filterCustomRoom(this.houses.data)) : this.houses.data
@@ -1283,11 +1294,9 @@ export default {
     uncheckTypesHouse: function (houseType) {
       this.houseTypeFilter = this.houseTypeFilter.filter(name => name !== houseType)
     },
-
     uncheckRoom: function (room) {
       this.roomFilter = this.roomFilter.filter(name => name !== room)
     },
-
     uncheckCounty: function (checkedCounty) {
       this.countyFilter = this.countyFilter.filter(name => name !== checkedCounty)
     },

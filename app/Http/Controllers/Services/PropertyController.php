@@ -20,6 +20,7 @@ class PropertyController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
+        
         $this->validate($request, [
             'city' => 'required',
             'type' => 'required',
@@ -73,6 +74,9 @@ class PropertyController extends Controller
             'seal' => $data['seal'],
             'furniture' => $data['furniture'],
             'state' => $data['state'],
+            'width' => $data['width'],
+            'length' => $data['length'],
+            'area' => $data['area'],
             'description' => $data['description'],
             'username'  => $user->name,
             'email' => $user->email,

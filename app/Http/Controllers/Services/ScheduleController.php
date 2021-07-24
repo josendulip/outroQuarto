@@ -34,6 +34,16 @@ class ScheduleController extends Controller
         return ScheduleService::where('user_id', $user->id)->where('status','!=', $status)->latest()->paginate(10); */
 
     }
+    ///for owner
+    public function findOwner($id)
+    {
+        $user = User::where('id', $id)->first();
+        return $user;
+        /* $status = "Not approved";
+        $user = auth('api')->user();
+        return ScheduleService::where('user_id', $user->id)->where('status','!=', $status)->latest()->paginate(10); */
+
+    }
 
     public function countSchedules()
     {

@@ -12,7 +12,6 @@
         {'id': 5, 'text': $t('mypanel_sidebar_menu_payments'), 'url': '/payments', 'icon': 'money bill alternate outline icon'},
         {'id': 6, 'text': $t('mypanel_sidebar_menu_assessments'), 'url': '/assessments', 'icon': 'star outline icon'},
         {'id': 7, 'text': $t('mypanel_sidebar_menu_statistics'), 'url': 'statistics', 'icon': 'chart line icon'},
-        
       ]"
       :avatar="user.photo"
       :username="user.name"
@@ -20,6 +19,7 @@
       :city="user.city"
       :country="user.country"
       :profile="user.photo"
+      class="not-print"
     >
     <ul class="">
           <li class="">
@@ -35,7 +35,7 @@
     </ul>
     </sidebar>
     <div class="container my-5">
-        <div class="row">
+        <div class="row not-print">
             <div class="col-md-12 grid-margin">
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
@@ -72,68 +72,27 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Navigator from "../../components/Navigator";
-import Footer from "../../components/Footer";
-import Form from "vform";
+import { mapGetters } from 'vuex'
 
 import Sidebar from '../../components/Sidebar'
 export default {
-  middleware: 'auth',
-  name: "my-panel",
   components: {
-    Navigator,
-    Footer,
-    'sidebar': Sidebar,
+    sidebar: Sidebar
   },
+  middleware: 'auth',
+  // eslint-disable-next-line vue/order-in-components
+  name: 'my-panel',
   data: () => ({
-    myHouses: {},
-    form: new Form({
-      city: "",
-      county: "",
-      district: "",
-      street: "",
-      period: "",
-      type: "",
-      payment_METHOD: "",
-      price: "",
-      room: "",
-      living_room: "",
-      kitchen: "",
-      bathroom: "",
-      garden: "",
-      furniture: "",
-      state: "",
-      description: "<h3>Hi!</h3><p>Write your content here...</p>",
-      profile: "",
-    }),
   }),
-  methods: {
-    editHouse(house_code) {
-      this.$router.push("edit/" + house_code);
-    },
-    viewHouse(house_code) {
-      this.$router.push("view/" + house_code);
-    },
-    async loadMyHouses() {
-      try {
-        const response = await fetch("api/my-houses");
-        const result = await response.json();
-        this.myHouses = result;
-        //console.log(this.myHouses);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  },
   computed: mapGetters({
-    user: "auth/user",
-    authenticated: "auth/check",
+    user: 'auth/user',
+    authenticated: 'auth/check'
   }),
-  mounted() {
-    this.loadMyHouses();
+  mounted () {
   },
-};
+  methods: {
+  }
+}
 </script>
 <style lang="scss">
 .rounded-radius {
@@ -159,4 +118,3 @@ input[type=search]:focus {
 	border: solid 1px #fff;
 }
 </style>
-

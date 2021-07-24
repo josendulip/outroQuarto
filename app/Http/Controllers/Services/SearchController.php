@@ -12,7 +12,7 @@ class SearchController extends Controller
 {
     public function index(){
         ///dd($request->all());
-        return Property::latest()->paginate(12);
+        return Property::paginate(24);
        /*  $state = 'available';
         $jobs = Announce::where('state', $state)->latest()->paginate(8);
        

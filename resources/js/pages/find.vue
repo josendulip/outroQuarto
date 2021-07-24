@@ -1,86 +1,18 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <router-link class="navbar-brand" to="/">
-          <img src="/images/logo/200x48.png" alt="logo" class="img-fluid" />
-        </router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent-7"
-          aria-controls="navbarSupportedContent-7"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon" />
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <router-link :to="{ name: 'services' }" class="nav-link">{{
-                $t("services")
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'collaborate' }" class="nav-link">{{
-                $t("collaborate")
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'advertiser' }" class="nav-link">{{
-                $t("owner_house")
-              }}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'login' }" class="nav-link">
-                {{ $t("login") }}
-              </router-link>
-            </li>
-
-            <ul class="navbar-nav">
-              <locale-dropdown />
-            </ul>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <Navout />
     <!-- Header -->
-    <hooper
-      v-if="photos.length != 0"
-      :infiniteScroll="true"
-      :itemsToShow="3"
-      :progress="true"
-      :autoPlay="true"
-      :playSpeed="2000"
-    >
+    <hooper v-if="photos.length != 0" :infiniteScroll="true" :itemsToShow="3" :progress="true" :autoPlay="true" :playSpeed="2000">
       <slide v-for="(image, index) in photos" :key="index">
-        <img
-          :src="image.src"
-          class="d-block w-100"
-          :alt="image.caption"
-          @click="openGallery(index)"
-        />
+        <img :src="image.src" class="img-fluid d-block" :alt="image.caption" style="height: 350px; width:700px; object-fit:cover;" @click="openGallery(index)">
       </slide>
       <hooper-pagination slot="hooper-addons" mode="fraction" />
     </hooper>
-    <div
-      v-else
-      class="jumbotron jumbotron-fluid"
-      :style="{
-        background: 'url(/' + house.profile + ')',
-        'background-size': 'cover',
-        'background-position': 'center center',
-        'background-repeat': 'no-repeat',
-      }"
-    >
+    <div v-else class="jumbotron jumbotron-fluid" :style="{ background: 'url(/' + house.profile + ')', 'background-size': 'cover', 'background-position': 'center center', 'background-repeat': 'no-repeat',}">
       <div class="container" style="background: rgba(0, 0, 0, 0.5)">
         <div class="row">
           <div class="col-md-8 p-3">
-            <p
-              class="d-flex justify-content-between align-items-center h1 text-white text-uppercase"
-            >
+            <p class="d-flex justify-content-between align-items-center h1 text-white text-uppercase">
               <span>{{ $t("view_house_details_desc") }}</span>
               <sui-menu compact>
                 <a is="sui-menu-item" v-if="house.state == 'available'">
@@ -97,13 +29,10 @@
             </p>
 
             <p class="lead text-white">
-              <span
-                class=""
-                v-if="!readMore"
-                v-html="house.description.slice(0, 150)"
-              ></span>
-              <span v-if="readMore" v-html="house.description"></span>
-              <a class="" @click.prevent="readMore = !readMore" href="#">
+              // eslint-disable-next-line vue/no-v-html
+              <span v-if="!readMore" v-html="house.description.slice(0, 150)" />
+              <span v-if="readMore" v-html="house.description" />
+              <a class="" href="#" @click.prevent="readMore = !readMore">
                 <span v-if="!readMore" class="text-truncate">{{
                   $t("view_house_details_readM")
                 }}</span>
@@ -118,18 +47,15 @@
       <div class="row">
         <div class="col-md-8 my-4">
           <div class="mb-3">
-            <button
-              class="btn btn-lg text-white bg-main mr-2"
-              @click.prevent="seePhoto = !seePhoto"
-            >
-              <i class="image icon"></i> {{ $t("view_photos_btn") }}
+            <button class="btn btn-lg text-white bg-main mr-2" @click.prevent="seePhoto = !seePhoto">
+              <i class="image icon" /> {{ $t("view_photos_btn") }}
             </button>
             <button class="btn btn-lg text-white bg-main mr-2">
-              <i class="map outline icon"></i> {{ $t("view_maps_btn") }}
+              <i class="map outline icon" /> {{ $t("view_maps_btn") }}
             </button>
-            <router-link :to="{ name: 'login' }" class="btn btn-lg text-white bg-main"
-              ><i class="heart icon"></i>{{ $t("view_favourite_btn") }}</router-link
-            >
+            <router-link :to="{ name: 'login' }" class="btn btn-lg text-white bg-main">
+              <i class="heart icon" />{{ $t("view_favourite_btn") }}
+            </router-link>
 
             <!-- <label  class="ui red basic button" for="houseCode"
                 @click="review =! review"> ({{ stars }})<i class="star outline icon"></i>Avaliação
@@ -144,9 +70,9 @@
                 </a>
               </div>
             </label>
-            <sui-button basic color="red"
-              ><i class="share alternate icon" /> {{ $t("view_share_btn") }}</sui-button
-            >
+            <sui-button basic color="red">
+              <i class="share alternate icon" /> {{ $t("view_share_btn") }}
+            </sui-button>
           </div>
           <transition name="fade" mode="out-in">
             <ul v-if="seePhoto" style="margin: 0; padding: 0">
@@ -155,17 +81,43 @@
                 :key="index"
                 style="display: inline-block; margin: 0 5px 5px 0"
               >
-                <img
-                  :src="image.src"
-                  style="height: 100px; cursor: pointer"
-                  @click="openGallery(index)"
-                />
+                <img :src="image.src" style="height: 100px; cursor: pointer" @click="openGallery(index)">
               </li>
               <li v-if="photos.length <= 0">
-                <h4 class="text-danger">{{ $t("view_house_no_photos") }}!</h4>
+                <h4 class="text-danger">
+                  {{ $t("view_house_no_photos") }}!
+                </h4>
               </li>
             </ul>
           </transition>
+          <hr>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"><i class="map marker alternate icon" /> {{ house.city }}, {{ house.county }}</a>
+            </li>
+            <li class="nav-item">
+              <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="expand icon" />  {{ $t("annou_form_land") }}</a>
+              <a v-else class="nav-link" href="#"><i class="home icon" /> {{ house.type }}</a>
+            </li>
+            <li class="nav-item">
+              <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="text height icon" /> {{ house.width }} {{ $t("announce_form_widthW") }}</a>
+              <a v-else class="nav-link" href="#"><i class="tv icon" /> {{ house.living_room }} {{ $t("announce_form_living_room") }}</a>
+            </li>
+            <li class="nav-item">
+              <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="text width icon" /> {{ house.length }} {{ $t("announce_form_lengthL") }}</a>
+              <a v-else class="nav-link" href="#"><i class="bed icon" /> {{ house.room }} {{ $t("announce_form_room") }}</a>
+            </li>
+            <li class="nav-item">
+              <a v-if="house.type == 'Land'" class="nav-link" href="#"><i class="square full icon" /> {{ house.area }} {{ $t("announce_form_areaA") }}</a>
+              <a v-else class="nav-link" href="#"><i class="bath icon" /> {{ house.bathroom }} {{ $t("announce_form_bathroom") }}</a>
+            </li>
+            <li class="nav-item">
+              <a v-if="house.type != 'Land'" class="nav-link" href="#"><i class="box icon" /> {{ $t("announce_form_furniture") }} (<em>{{ house.furniture }}</em>)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="object group outline icon" /> {{ $t("announce_form_garden") }} (<em>{{ house.garden }}</em>)</a>
+            </li>
+          </ul>
         </div>
         <div class="col-md-4 mt-lg-n5">
           <!-- House Information -->
@@ -179,10 +131,10 @@
               >
                 {{ $t("announce_form_price") }}
                 <div>
-                  <a v-if="house.state == 'available'" is="sui-label" color="green" tag>
+                  <a is="sui-label" v-if="house.state == 'available'" color="green" tag>
                     <span>{{ $t("view_house_details_stateUp") }}</span>
                   </a>
-                  <a v-if="house.state == 'occupied'" is="sui-label" color="grey" tag>
+                  <a is="sui-label" v-if="house.state == 'occupied'" color="grey" tag>
                     <span>{{ $t("view_house_details_stateDown") }}</span>
                   </a>
                 </div>
@@ -190,38 +142,31 @@
 
               <sui-card-description>
                 <p class="d-block h4">
-                  {{
-                    house.price
-                      | currency("AKZ", 2, { spaceBetweenAmountAndSymbol: true })
-                  }}
-                  /{{ house.payment_METHOD }}
+                  {{ house.price | currency('AKZ', 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true}) }}
                 </p>
               </sui-card-description>
               <sui-divider section />
               <sui-card-header>{{ $t("view_house_details_contrat") }} </sui-card-header>
               <sui-card-description>
                 <span class="d-block">
-                  {{ $t("view_house_details_type") }} {{ house.period }}
+                  {{ $t("announce_form_vititfee") }} {{ house.tax_visit | currency("KZ", 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
+                </span>
+                <span v-if="house.payment_METHOD == 'Installment'" class="d-block">
+                  {{ $t("view_house_details_pay") }} <span class="text-lowercase font-weight-bold">{{ $t('annou_form_payment_installment') }}</span>
                 </span>
                 <span class="d-block">
-                  {{ $t("view_house_details_pay") }} {{ house.payment_METHOD }}
+                  {{ $t("announce_form_vititfee") }} {{ house.tax_visit | currency("KZ", 2, { symbolOnLeft: false, spaceBetweenAmountAndSymbol: true }) }}
                 </span>
               </sui-card-description>
               <sui-divider section />
               <sui-card-header> {{ $t("view_house_details_owner") }} </sui-card-header>
               <sui-card-description>
                 <span class="d-block">
-                  <span v-if="house.username"
-                    >{{ $t("view_house_details_name") }} {{ house.username }}</span
-                  >
+                  <span v-if="house.username">{{ $t("view_house_details_name") }} {{ house.username }}</span>
                   <del v-else>{{ $t("view_house_details_empty") }}</del>
                 </span>
                 <span class="d-block">
-                  <span
-                    v-if="house.email"
-                    @:mouseover="mouseoverEmail"
-                    @:mouseleave="mouseleaveEmail"
-                  >
+                  <span v-if="house.email" @:mouseover="mouseoverEmail" @:mouseleave="mouseleaveEmail">
                     Email:
                     <router-link :to="{ name: 'login' }" class="text-danger">
                       {{ OnOverMouseEmail }}
@@ -230,11 +175,7 @@
                   <del v-else class="">{{ $t("view_house_details_empty") }}</del>
                 </span>
                 <span class="d-block">
-                  <span
-                    v-if="house.phone"
-                    @:mouseover="mouseover"
-                    @:mouseleave="mouseleave"
-                  >
+                  <span v-if="house.phone" @:mouseover="mouseover" @:mouseleave="mouseleave">
                     Tel.:
                     <router-link :to="{ name: 'login' }">{{ OnOverMouse }} </router-link>
                   </span>
@@ -265,106 +206,101 @@
   </div>
 </template>
 <script>
-const imageDomain = "https://vue-it-bigger.rusiczki.net/";
+import Form from 'vform'
+import axios from 'axios'
+import Navout from '~/components/Navout'
+
+import LightBox from 'vue-it-bigger' // when using webpack
+// HOOPER SLIDE
+import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
+import 'hooper/dist/hooper.css'
+
+import Vue2Filters from 'vue2-filters'
+import('vue-it-bigger/dist/vue-it-bigger.min.css')
+
+const imageDomain = 'https://vue-it-bigger.rusiczki.net/'
 
 const media = [
   {
     thumb:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRx1TQ3PfnhWmLUWcxrGj3atDCZVTVBKetMOWVVQ4ipIStW03pY",
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRx1TQ3PfnhWmLUWcxrGj3atDCZVTVBKetMOWVVQ4ipIStW03pY',
     sources: [
       {
-        src: "https://www.w3schools.com/html/mov_bbb.mp4",
-        type: "video/mp4",
-      },
+        src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+        type: 'video/mp4'
+      }
     ],
-    type: "video",
-    caption: "Monsters Inc.",
+    type: 'video',
+    caption: 'Monsters Inc.',
     width: 800,
-    height: 600,
+    height: 600
   },
   {
-    thumb: imageDomain + "01-zell-am-see-thumbnail.jpg",
-    src: imageDomain + "01-zell-am-see.jpg",
-    caption: "Zell am See, Austria",
+    thumb: imageDomain + '01-zell-am-see-thumbnail.jpg',
+    src: imageDomain + '01-zell-am-see.jpg',
+    caption: 'Zell am See, Austria'
   },
   {
-    thumb: imageDomain + "02-balea-lake-chalet-thumbnail.jpg",
-    src: imageDomain + "02-balea-lake-chalet.jpg",
-    caption: "Balea Lake Chalet, Romania",
+    thumb: imageDomain + '02-balea-lake-chalet-thumbnail.jpg',
+    src: imageDomain + '02-balea-lake-chalet.jpg',
+    caption: 'Balea Lake Chalet, Romania'
   },
   {
-    thumb: imageDomain + "03-maybug-thumbnail.jpg",
-    src: imageDomain + "03-maybug.jpg",
-    caption: "Maybug",
+    thumb: imageDomain + '03-maybug-thumbnail.jpg',
+    src: imageDomain + '03-maybug.jpg',
+    caption: 'Maybug'
   },
   {
-    thumb: imageDomain + "04-rc-car-thumbnail.jpg",
-    src: imageDomain + "04-rc-car.jpg",
-    caption: "An RC Car",
+    thumb: imageDomain + '04-rc-car-thumbnail.jpg',
+    src: imageDomain + '04-rc-car.jpg',
+    caption: 'An RC Car'
   },
   {
-    thumb: imageDomain + "05-tourists-thumbnail.jpg",
-    src: imageDomain + "05-tourists.jpg",
-    caption: "Two tourists on a mountain",
+    thumb: imageDomain + '05-tourists-thumbnail.jpg',
+    src: imageDomain + '05-tourists.jpg',
+    caption: 'Two tourists on a mountain'
   },
   {
-    thumb: imageDomain + "06-dog-thumbnail.jpg",
-    src: imageDomain + "06-dog.jpg",
-    caption: "Dog",
+    thumb: imageDomain + '06-dog-thumbnail.jpg',
+    src: imageDomain + '06-dog.jpg',
+    caption: 'Dog'
   },
   {
-    thumb: imageDomain + "07-beer-thumbnail.jpg",
-    src: imageDomain + "07-beer.jpg",
+    thumb: imageDomain + '07-beer-thumbnail.jpg',
+    src: imageDomain + '07-beer.jpg',
     caption:
-      "Mmm, Beer! - This should be a short description, as it is after all, beer, but let's make it long so that we can test how the footer looks",
+      'Mmm, Beer! - This should be a short description, as it is after all, beer, but lets make it long so that we can test how the footer looks'
   },
   {
-    thumb: imageDomain + "08-roosters-crest-thumbnail.jpg",
-    src: imageDomain + "08-roosters-crest.jpg",
-    caption: "The Rooster's Crest",
-  },
-];
-
-import Footer from "../components/Footer";
-import Form from "vform";
-import axios from "axios";
-import LocaleDropdown from "../components/LocaleDropdown";
-
-import LightBox from "vue-it-bigger";
-import("vue-it-bigger/dist/vue-it-bigger.min.css"); // when using webpack
-//HOOPER SLIDE
-import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
-import "hooper/dist/hooper.css";
-
-import Vue2Filters from "vue2-filters";
-import uniq from "lodash/uniq";
-import sortedLastIndex from "lodash/sortedlastindex";
+    thumb: imageDomain + '08-roosters-crest-thumbnail.jpg',
+    src: imageDomain + '08-roosters-crest.jpg',
+    caption: 'The Roosters Crest'
+  }
+]
 
 export default {
-  middleware: "guest",
   components: {
-    LocaleDropdown,
+    Navout,
     LightBox,
-    Footer,
     Hooper,
     HooperPagination,
-    Slide,
+    Slide
   },
-  layout: "basic",
-  middleware: "guest",
   mixins: [Vue2Filters.mixin],
+  layout: 'basic',
+  middleware: 'guest',
 
-  metaInfo() {
-    return { title: this.$t("find") };
+  metaInfo () {
+    return { title: this.$t('head_form_find_house') }
   },
   data: () => ({
     form: new Form({
-      city: "",
-      type: "",
-      room: "",
-      price: "",
+      city: '',
+      type: '',
+      room: '',
+      price: ''
     }),
-    src: "images/announce/1.jpg",
+    src: 'images/announce/1.jpg',
     mustVerifyEmail: false,
     house: {},
     stars: {},
@@ -376,65 +312,65 @@ export default {
     house_details: true,
     visitComp: false,
     stayComp: false,
-    OnOverMouse: "Hiden!",
-    OnOverMouseEmail: "Hiden!",
+    OnOverMouse: 'Hiden!',
+    OnOverMouseEmail: 'Hiden!'
   }),
+  mounted () {
+    this.loadHouses()
+    this.loadHousesPhotos()
+  },
   methods: {
     mouseoverEmail: function () {
-      this.OnOverMouseEmail = "go to login, to see it! ";
+      this.OnOverMouseEmail = 'go to login, to see it! '
     },
     mouseleaveEmail: function () {
-      this.OnOverMouseEmail = "Hiden!";
+      this.OnOverMouseEmail = 'Hiden!'
     },
     mouseover: function () {
-      this.OnOverMouse = "go to login, to see it! ";
+      this.OnOverMouse = 'go to login, to see it! '
     },
     mouseleave: function () {
-      this.OnOverMouse = "Hiden!";
+      this.OnOverMouse = 'Hiden!'
     },
-    stayComponent() {
-      this.stayComp = false;
-      this.visitComp = false;
+    stayComponent () {
+      this.stayComp = false
+      this.visitComp = false
     },
-    visitComponent(house_code) {
-      console.log(house_code);
-      this.stayComp = false;
-      this.visitComp = false;
+    visitComponent (houseCode) {
+      console.log(houseCode)
+      this.stayComp = false
+      this.visitComp = false
     },
-    getStay(house_code) {
-      this.stayComp = true;
+    getStay (houseCode) {
+      this.stayComp = true
     },
-    getLink(house_code) {
-      console.log(house_code);
-      this.visitComp = true;
+    getLink (houseCode) {
+      console.log(houseCode)
+      this.visitComp = true
     },
-    activateReadMore() {
-      this.readMoreActivated = true;
+    activateReadMore () {
+      this.readMoreActivated = true
     },
-    openGallery(index) {
-      this.$refs.lightbox.showImage(index);
+    openGallery (index) {
+      this.$refs.lightbox.showImage(index)
     },
-    loadHouses() {
+    loadHouses () {
       axios
         .get(`/api/find/${this.$route.params.houseKey}`)
-        .then(({ data }) => (this.house = data));
+        .then(({ data }) => (this.house = data))
     },
-    loadHousesPhotos() {
+    loadHousesPhotos () {
       axios
         .get(`/api/find-photos/${this.$route.params.houseKey}`)
-        .then(({ data }) => (this.photos = data));
+        .then(({ data }) => (this.photos = data))
     },
-    loadStars() {
+    loadStars () {
       axios
         .get(`/api/get-total-stars/${this.$route.params.houseKey}`)
-        .then(({ data }) => (this.stars = data));
-    },
-  },
-  mounted() {
-    this.loadHouses();
-    this.loadHousesPhotos();
-  },
-};
+        .then(({ data }) => (this.stars = data))
+    }
+  }
+}
 </script>
 
 <style lang="scss">

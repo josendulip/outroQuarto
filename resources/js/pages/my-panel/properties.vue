@@ -46,10 +46,15 @@
               <sui-card-header> {{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}/{{ house.payment_METHOD }}</sui-card-header>
               <sui-card-meta> {{ $t("announce_public_at") }} {{ house.created_at | OnlyDate }}</sui-card-meta>
               <sui-card-description class="text-lowercase">
-                <span v-if="house.type">{{ house.type }},</span>
-                <span v-if="house.room">{{ house.room }} {{ $t("announce_form_room") }},</span>
-                <span v-if="house.living_room">{{ house.living_room }} {{ $t("announce_form_living_room") }},</span>
-                <span v-if="house.bathroom">{{ house.bathroom }} {{ $t("announce_form_bathroom") }}</span>
+                <span v-if="house.type">
+                  <span v-if="house.type == 'Land'" class="text-capitalize">
+                    {{ $t("annou_form_land") }}
+                  </span>
+                  <span v-else>{{ house.type }}</span>
+                </span>
+                <span v-if="house.room">, {{ house.room }} {{ $t("announce_form_room") }},</span>
+                <span v-if="house.living_room">, {{ house.living_room }} {{ $t("announce_form_living_room") }},</span>
+                <span v-if="house.bathroom">, {{ house.bathroom }} {{ $t("announce_form_bathroom") }}</span>
               </sui-card-description>
             </sui-card-content>
             <sui-card-content extra>
@@ -132,7 +137,12 @@
               <sui-table-row v-for="house in myHouses.data" :key="house.id">
                 <sui-table-cell><sui-image :src="'./' + house.profile" /></sui-table-cell>
                 <sui-table-cell> <p class="text-muted" v-text="house.status" /> </sui-table-cell>
-                <sui-table-cell>{{ house.type }}</sui-table-cell>
+                <sui-table-cell>
+                  <span v-if="house.type == 'Land'" class="text-capitalize">
+                    {{ $t("annou_form_land") }}
+                  </span>
+                  <span v-else>{{ house.type }}</span>
+                </sui-table-cell>
                 <sui-table-cell> {{ house.price | currency("AOA", 2, { spaceBetweenAmountAndSymbol: true }) }}/{{ house.payment_METHOD }}</sui-table-cell>
                 <sui-table-cell>
                   <span v-if="house.living_room">{{ house.living_room }}</span>
@@ -160,7 +170,7 @@
     <!-- CUBE -->
     <transition name="fade" mode="out-in">
       <div v-if="cube" class="row column">
-        <div  v-for="house in myHouses.data" :key="house.id" class="col-md-3 mb-4 px-1">
+        <div v-for="house in myHouses.data" :key="house.id" class="col-md-3 mb-4 px-1">
           <div class="Mycard">
             <sui-image :src="'./' + house.profile" class="card-img-top myProfileImage" :alt="house.house_code" fluid />
             <div class="title-house">
@@ -181,7 +191,12 @@
                 {{ house.city }}, {{ house.county }}
               </h5>
               <p class="pt-0 mt-0">
-                <span v-if="house.type">{{ house.type }}</span>
+                <span v-if="house.type">
+                  <span v-if="house.type == 'Land'" class="text-capitalize">
+                    {{ $t("annou_form_land") }}
+                  </span>
+                  <span v-else>{{ house.type }}</span>
+                </span>
                 <span v-if="house.room">, {{ house.room }} {{ $t("announce_form_room") }}</span>
                 <span v-if="house.living_room">, {{ house.living_room }} {{ $t("announce_form_living_room") }}</span>
                 <span v-if="house.bathroom">, {{ house.bathroom }} {{ $t("announce_form_bathroom") }}</span>

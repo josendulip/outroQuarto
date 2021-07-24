@@ -38,6 +38,8 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         'country',
         'slug',
         'activity',
+        'authorization',
+        'iban',
     ];
 
     /**
@@ -193,6 +195,10 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
    public function history()
    {
        return $this->hasMany(History::class); 
+   }
+   public function payment()
+   {
+       return $this->hasMany(Payment::class); 
    }
 
 

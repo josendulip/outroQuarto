@@ -29,6 +29,9 @@ class Property extends Model
         'seal',
         'furniture',
         'state',
+        'width',
+        'length',
+        'area',
         'description',
         'username',
         'email',
@@ -59,5 +62,9 @@ class Property extends Model
     public function history()
     {
         return $this->hasMany(History::class); 
+    }
+    public function payment()
+    {
+        return $this->hasMany(Payment::class); 
     }
 }

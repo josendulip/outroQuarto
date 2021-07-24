@@ -22,9 +22,12 @@ class VerifyService extends Model
         'price',
         'date',
         'time',
+        'hour',
+        'minute',
         'receipt',
         'request_type',
         'description',
+        'status'
     ];
 
     public function user()
