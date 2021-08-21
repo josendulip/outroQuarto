@@ -1,5 +1,6 @@
 <template>
-  <div id="my-panel" v-if="user.role === 'owner'">  <!-- style="background-color: #f7f9fb;" -->
+  <div v-if="user.role === 'owner'" id="my-panel">
+    <!-- style="background-color: #f7f9fb;" -->
     <sidebar
       format="push"
       direction="left"
@@ -21,53 +22,66 @@
       :profile="user.photo"
       class="not-print"
     >
-    <ul class="">
-          <li class="">
-            <router-link :to="{ name: 'new_home' }" class="nav-link">{{
-              $t("services")
-            }}</router-link>
-          </li>
-          <li class="">
-            <router-link :to="{ name: 'collaborate' }" class="nav-link">{{
-              $t("")
-            }}</router-link>
-          </li>
-    </ul>
+      <ul class="">
+        <li class="">
+          <router-link :to="{ name: 'new_home' }" class="nav-link">
+            {{ $t("services") }}
+          </router-link>
+        </li>
+        <li class="">
+          <router-link :to="{ name: 'collaborate' }" class="nav-link">
+            {{ $t("") }}
+          </router-link>
+        </li>
+      </ul>
     </sidebar>
     <div class="container my-5">
-        <div class="row not-print">
-            <div class="col-md-12 grid-margin">
-              <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex align-items-end flex-wrap">
-                  <div class="mr-md-3 mr-xl-5">
-                    <h2>{{ $t('mypanel_welcome_message_back') }}</h2>
-                    <p class="mb-md-0">{{ $t('mypanel_welcome_message_') }}</p>
-                  </div>
-                  <div class="d-flex">
-                    <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;<router-link :to="{  name: 'my-panel.welcome' }">{{ $t('mypanel_menu_dashboard') }}</router-link>&nbsp;/&nbsp;</p>
-                    <p class="text-primary mb-0 hover-cursor text-capitalize" v-for="(tag, index) in $route.name.split('.')" :key="tag"> <span v-if="index == 1">{{ tag }}</span></p>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-end flex-wrap hidden-xs-down hidden-sm-down">
-                    <form action="" class="form-inline">
-                      <input class="form-control mr-sm-2 " type="search" :placeholder="$t('search_for')" aria-label="Search">
-                    </form>
-                </div>
+      <div class="row not-print">
+        <div class="col-md-12 grid-margin">
+          <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex align-items-end flex-wrap">
+              <div class="mr-md-3 mr-xl-5">
+                <h2>{{ $t('mypanel_welcome_message_back') }}</h2>
+                <p class="mb-md-0">
+                  {{ $t('mypanel_welcome_message_') }}
+                </p>
+              </div>
+              <div class="d-flex">
+                <i class="mdi mdi-home text-muted hover-cursor" />
+                <p class="text-muted mb-0 hover-cursor">
+                  &nbsp;/&nbsp;
+                  <router-link :to="{ name: 'my-panel.welcome' }">
+                    {{ $t('mypanel_menu_dashboard') }}
+                  </router-link>&nbsp;/&nbsp;
+                </p>
+                <p v-for="(tag, index) in $route.name.split('.')" :key="tag" class="text-primary mb-0 hover-cursor text-capitalize">
+                  <span v-if="index == 1">{{ tag }}</span>
+                </p>
               </div>
             </div>
+            <div class="d-flex justify-content-between align-items-end flex-wrap hidden-xs-down hidden-sm-down">
+              <form action="" class="form-inline">
+                <input class="form-control mr-sm-2 " type="search" :placeholder="$t('search_for')" aria-label="Search">
+              </form>
+            </div>
           </div>
-          <hr class="text-danger">
-        <transition name="fade" mode="out-in">
-            <router-view />
-        </transition>
+        </div>
+      </div>
+      <hr class="text-danger">
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
-  <div v-else  class="d-flex justify-content-center my-5">
-      <div class="text-center">
-        <h1 class="display-1">401</h1>
-        <p class="h1">{{ $t('mypanel_mgs')}}</p>
-      </div>
+  <div v-else class="d-flex justify-content-center my-5">
+    <div class="text-center">
+      <h1 class="display-1">
+        401
+      </h1>
+      <p class="h1">
+        {{ $t('mypanel_mgs') }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -76,12 +90,12 @@ import { mapGetters } from 'vuex'
 
 import Sidebar from '../../components/Sidebar'
 export default {
+  // eslint-disable-next-line vue/component-definition-name-casing
+  name: 'my-panel',
   components: {
     sidebar: Sidebar
   },
   middleware: 'auth',
-  // eslint-disable-next-line vue/order-in-components
-  name: 'my-panel',
   data: () => ({
   }),
   computed: mapGetters({
@@ -106,15 +120,14 @@ export default {
 }
 
 input[type=search] {
-	background: #f8f9fa;
-	border: solid 1px #ccc;
-	padding: 9px 10px 9px 32px;
-	
+background: #f8f9fa;
+border: solid 1px #ccc;
+padding: 9px 10px 9px 32px;
 }
 input[type=search]:focus {
-	width: 300px;
-	background-color: #fff;
-	border-color: #333;
-	border: solid 1px #fff;
+width: 300px;
+background-color: #fff;
+border-color: #333;
+border: solid 1px #fff;
 }
 </style>

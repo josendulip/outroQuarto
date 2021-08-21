@@ -44,6 +44,7 @@
     "vue": "^2.6.12",
     "vue-date-pick": "^1.4.1",
     "vue-datetime-picker": "^0.2.1",
+    "vue-html-to-paper": "^1.4.3",
     "vue-i18n": "^8.22.1",
     "vue-inputmask": "^0.2.1",
     "vue-it-bigger": "^0.1.1",
@@ -57,7 +58,10 @@
     "vue2-filters": "^0.11.1",
     "vue2-timepicker": "^1.1.6",
     "vuex": "^3.5.1",
-    "vuex-router-sync": "^5.0.0"
+    "vuex-router-sync": "^5.0.0",
+    "vue-html-to-paper-master": "^1.4.3",
+    "vue-print-nb-master": "^1.3.4",
+    "vue-social-sharing-master": "^3.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -72,7 +76,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.2",
     "eslint-plugin-vue": "^7.1.0",
-    "laravel-mix": "^5.0.7",
+    "laravel-mix": "^6.0.25",
     "laravel-mix-versionhash": "^1.1.7",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.28.0",

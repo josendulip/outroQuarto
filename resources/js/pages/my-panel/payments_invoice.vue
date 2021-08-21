@@ -1,7 +1,8 @@
 <template>
   <div class="row justify-content-center">
+    <div v-show="printLoading" id="loading" />
     <div class="col-md-8 invoice-data">
-      <div class="card">
+      <div id="printMe" class="card">
         <div class="card-header bg-main text-white d-flex justify-content-between  align-items-center">
           <div class="text-muted">
             <img src="/images/logo/200x48W.png" alt="OutroQuarto" width="180">
@@ -99,8 +100,8 @@
                 <sui-table-cell>1</sui-table-cell>
                 <sui-table-cell>{{ form.paid_amount }}.00</sui-table-cell>
                 <sui-table-cell>{{ form.percentage }}%</sui-table-cell>
-                <sui-table-cell v-if="form.status === 'resolved'">
-                  {{ $t('schedulStatus_confirm') }}
+                <sui-table-cell>
+                  <span v-if="form.status === 'resolved'">{{ $t('schedulStatus_confirm') }}</span>
                 </sui-table-cell>
               </sui-table-row>
             </sui-table-body>
@@ -117,11 +118,11 @@
           </div>
           <div class="text-center">
             <div is="sui-button-group" size="mini">
-              <sui-button color="red">
+              <sui-button v-print="printObj" color="red">
                 {{ $t('mypanel_downl_pdf') }}
               </sui-button>
               <sui-button-or :text="$t('welcome_or')" />
-              <sui-button size="mini" color="red" @click="printInvoice">
+              <sui-button size="mini" color="red" @click="printInvoice()">
                 {{ $t('mypanel_downl_print') }}
               </sui-button>
             </div>
@@ -131,13 +132,10 @@
     </div>
   </div>
 </template>
-
 <script>
 import Form from 'vform'
 import axios from 'axios'
-import printJS from 'print-js'
 export default {
-  components: { printJS },
   data: () => ({
     form: new Form({
       user_id: '',
@@ -175,7 +173,25 @@ export default {
       status: '',
       created_at: ''
     }),
-    invoice: {}
+    invoice: {},
+    printLoading: true,
+    printObj: {
+      id: 'printMe',
+      popTitle: 'Invoice - OUTROQUARTO',
+      extraCss: 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css, //cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css, /dist/css/app.css',
+      extraHead: '<meta http-equiv="Content-Language"content="pt-br"/>',
+      beforeOpenCallback (vue) {
+        vue.printLoading = true
+        console.log('Before opening')
+      },
+      openCallback (vue) {
+        vue.printLoading = false
+        console.log('Printed')
+      },
+      closeCallback (vue) {
+        console.log('Closed the printing tool')
+      }
+    }
   }),
   mounted () {
     this.getInvoice()
@@ -188,13 +204,8 @@ export default {
         .then((data) => { this.form.fill(data); this.invoice = data }) */
         .get('/api/get-invoice/' + this.$route.params.id_trans).then(({ data }) => { this.form.fill(data); this.invoice = data })
     },
-    printInvoice () {
-      printJS({
-        printable: 'printJS-form',
-        type: 'html',
-        // Inherit all the original styles
-        targetStyles: ['*']
-      })
+    async printInvoice () {
+      await this.$htmlToPaper('printMe')
     }
   }
 }
@@ -208,19 +219,8 @@ export default {
   color:black
 }
 @media print {
-  .not-print {
-    display: none;
-  }
-  .background-body-card {
-    background: #f8f9fa;
-  }
-  .card-header{
-    background-color: #FF5859!important;
-  }
-  .printThis{
-    width: 100%;
-    text-align: center;
-    background: #f8f9fa;
+  #printMe{
+    margin: 0;
   }
 }
 </style>

@@ -19,19 +19,27 @@ class History extends Model
         'type',
         'period',
         'payment_METHOD',
+        'contrat_type',
         'price',
+        'tax_visit',
         'room',
         'living_room',
         'kitchen',
         'bathroom',
+        'width',
+        'length',
+        'area',
         'seal',
         'furniture',
         'state',
         'description',
+        'verification',
+        'promo',
         'username',
         'email',
         'phone',
-        'profile'
+        'add_images',
+        'profile',
     ];
 
     public function user()

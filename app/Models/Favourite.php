@@ -19,7 +19,9 @@ class Favourite extends Model
         'type',
         'period',
         'payment_METHOD',
+        'contrat_type',
         'price',
+        'tax_visit',
         'room',
         'living_room',
         'kitchen',
@@ -27,11 +29,18 @@ class Favourite extends Model
         'seal',
         'furniture',
         'state',
+        'width',
+        'length',
+        'area',
         'description',
+        'verification',
+        'promo',
         'username',
         'email',
         'phone',
-        'profile'
+        'add_images',
+        'profile',
+        'slug'
     ];
 
     public function user()

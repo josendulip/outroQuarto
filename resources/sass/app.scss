@@ -449,7 +449,25 @@ border-top: none!important;
     height: 200px;
 }
 
-
+@media print {
+    .not-print {
+      display: none;
+    }
+    .background-body-card {
+      background: #f8f9fa;
+    }
+    .card-header{
+      background-color: #FF5859!important;
+    }
+    .printThis{
+      width: 100%;
+      text-align: center;
+      background: #f8f9fa;
+    }
+    @page {
+      size: landscape
+    }
+}
 
 
     /*\
